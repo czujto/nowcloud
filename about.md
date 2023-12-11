@@ -24,6 +24,7 @@ I am currently a Cloud Solutions Architect working for [HTG - Secure Cloud Exper
 - Microsoft Certified Trainer (MCT)
 - Microsoft Certified: Azure Fundamentals
 - OpenHack: Containers
+- OpenHack: DevOps
 - Citrix Virtual Apps and Desktops Service on Citrix Cloud (CC-VAD-CC)
 - Citrix Virtual Apps and Desktops Service on Microsoft Azure (CC-VAD-MA)
 - ITIL V3
