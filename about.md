@@ -11,7 +11,7 @@ I am Kamil Lygas and I’ve worked in IT for over 14 years. I’ve been a subjec
 
 With over 14 years of experience in analysis, design, implementation, testing, rollout, support, and maintenance of infrastructure across a breadth of industries. I’m a natural problem solver with excellent analytic skills, quickly able to understand customer requirements and break these down into actionable solutions.
 
-I am currently a Cloud Solutions Architect working for [HTG - Secure Cloud Experts](https://htg.co.uk "HTG - Secure Cloud Experts") with offices in Edinburgh, London, Newcastle and Belfast.
+I am currently a Cloud Solutions Architect - Tower Lead, working for [HTG - Secure Cloud Experts](https://htg.co.uk "HTG - Secure Cloud Experts") with offices in Edinburgh, London, Newcastle and Belfast.
 
 #### Certifications ####
 - Microsoft Certified: Azure Solutions Architect Expert
