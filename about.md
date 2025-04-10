@@ -11,7 +11,7 @@ I am Kamil Lygas and I’ve worked in IT for over 19 years, across public, priva
 
 Experienced Microsoft Cloud Solutions Architect with a strong focus on Azure cloud architecture design. I've been working with Microsoft Gold partners since 2014, delivering international projects for customers in the US, India, Singapore, Germany, the UK, and Poland. Skilled in translating business requirements into scalable, secure, and cost-effective Azure solutions, with hands-on experience in end-to-end design, implementation, and management of cloud infrastructure.
 
-With over 15 years of experience across various industries, I combine strong technical expertise with real-world deployment experience, ensuring successful cloud adoption and long-term sustainability for clients.
+With over 19 years of experience across various industries, I combine strong technical expertise with real-world deployment experience, ensuring successful cloud adoption and long-term sustainability for clients.
 
 I am currently self-employed, working as a Cloud Solutions Architect / Consultant at nowcloud.pl
 
