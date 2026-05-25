@@ -4,7 +4,12 @@ title: Platform Engineering
 description: "Platform engineering for secure Azure product teams, multi-tenant services and governed self-service delivery."
 permalink: /platform-engineering/
 show_author: true
+last_modified_at: 2026-05-25
 ---
+
+## Short answer
+
+Platform engineering on Azure delivers governed self-service capabilities so product teams can consume landing zones, identity, connectivity, observability and deployment patterns without rebuilding enterprise foundations for every workload.
 
 ## What This Topic Covers
 
@@ -43,6 +48,8 @@ Useful measures include onboarding time, adoption of supported modules, frequenc
 ## Recommended Next Reading
 
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %}) examines governed self-service foundations for product delivery.
+- [Azure Landing Zones](/azure-landing-zones/) describes the platform control foundation.
+- [Infrastructure as Code](/infrastructure-as-code/) describes the repeatable implementation approach.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) discusses infrastructure and configuration automation.
 - [Building Tuck Shop application using Microsoft Power Apps]({% post_url 2023-03-25-TuckShop %}) is an example of enabling a product outcome with Microsoft platform services.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) connects user platform access with identity security.

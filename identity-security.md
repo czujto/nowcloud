@@ -4,7 +4,12 @@ title: Identity and Security
 description: "Microsoft Entra ID, privileged access and security guardrails for governed enterprise Azure platforms."
 permalink: /identity-security/
 show_author: true
+last_modified_at: 2026-05-25
 ---
+
+## Short answer
+
+Identity and security architecture for Azure establishes who and what can change or access the platform, using Microsoft Entra ID, privileged access, Conditional Access, workload identities, policy and actionable operational signals.
 
 ## What This Topic Covers
 
@@ -44,6 +49,8 @@ They also help architecture, security and operations teams make defensible decis
 
 ## Recommended Next Reading
 
+- [Azure Landing Zones](/azure-landing-zones/) places identity controls within governed platform foundations.
+- [Sovereign Cloud](/sovereign-cloud/) explores identity evidence and access boundaries for regulated environments.
 - [Enable Continuous Access Evaluation in Microsoft Entra ID]({% post_url 2021-06-05-ContinuosAccessEvaluation %}) covers identity-driven session enforcement.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) explores phishing-resistant authentication for remote desktops.
 - [Windows Virtual Desktop became Azure Virtual Desktop]({% post_url 2021-06-07-WVDRebrandingAVD %}) includes identity integration context for AVD.

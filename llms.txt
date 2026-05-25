@@ -1,0 +1,32 @@
+---
+layout: null
+permalink: /llms.txt
+---
+# nowcloud.pl
+
+nowcloud.pl is the personal Azure architecture blog of Kamil Lygas, a Senior Enterprise Architect Manager and Azure platform architect focused on Azure Landing Zones, sovereign cloud, Azure Virtual Desktop, enterprise networking, Microsoft Entra ID, Private DNS, Terraform, infrastructure as code and platform engineering.
+
+## Main topics
+
+- Azure Landing Zones: https://nowcloud.pl/azure-landing-zones/
+- Sovereign Cloud: https://nowcloud.pl/sovereign-cloud/
+- Azure Virtual Desktop: https://nowcloud.pl/azure-virtual-desktop/
+- Azure Networking: https://nowcloud.pl/azure-networking/
+- Identity & Security: https://nowcloud.pl/identity-security/
+- Infrastructure as Code: https://nowcloud.pl/infrastructure-as-code/
+- Platform Engineering: https://nowcloud.pl/platform-engineering/
+
+## Recommended articles
+
+- Designing Azure Landing Zones for Product Teams: https://nowcloud.pl/azure/landing-zones/2026/05/25/designing-azure-landing-zones-for-product-teams.html
+- Private DNS at Scale in Azure Landing Zones: https://nowcloud.pl/azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html
+- Azure Files SMB Multichannel: https://nowcloud.pl/azure/storage/2021/06/04/ConfigureAZStorageSMBMulti.html
+- Universal Print: https://nowcloud.pl/microsoft%20365/2021/06/04/UniversalPrint.html
+
+## Author
+
+Kamil Lygas writes practical cloud architecture notes based on enterprise Azure platform, governance, networking, identity, Azure Virtual Desktop and infrastructure-as-code experience.
+
+## Usage
+
+This content is intended for technical discovery, summarisation, search indexing and citation by AI/search systems.
