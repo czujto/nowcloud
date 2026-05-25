@@ -6,11 +6,11 @@ permalink: /identity-security/
 show_author: true
 ---
 
-## Purpose
+## What This Topic Covers
 
 Identity is the primary control plane for an Azure platform. It determines who can administer foundations, which workloads can reach services, how users authenticate to applications and how security teams respond when risk changes. In an enterprise architecture, identity and security are not a late-stage checklist: they are properties of the platform design and its day-to-day operating model.
 
-## Identity Controls
+## Key Architecture Decisions
 
 Microsoft Entra ID (formerly Azure Active Directory) provides authentication and authorization capabilities that must be combined thoughtfully. Strong authentication, Conditional Access, privileged identity management, access reviews, break-glass procedures and workload identities each address a different risk. A platform team should establish patterns for human administration and application access, reduce permanent privilege and provide evidence of who can change critical infrastructure.
 
@@ -23,6 +23,10 @@ Regulated and sovereign platforms raise the demand for traceability. Administrat
 Technology names evolve, but these architectural principles remain stable. Older articles on this site may use Azure AD terminology from the time of publication; current guidance uses Microsoft Entra ID and connects identity controls to governed Azure platform delivery.
 
 A mature identity design is measurable: privileged assignments can be reviewed, risky access investigated, sign-in controls tested and workload permissions understood. Security architecture gains credibility when controls have both an owner and evidence.
+
+## Common Failure Modes
+
+Identity controls fail in practice when permanent privilege becomes normal, workload credentials are unmanaged, or security signals have no operational owner. Conditional Access and policy configuration alone are insufficient unless revocation, emergency access and investigation processes are also tested.
 
 ## Platform Security Model
 

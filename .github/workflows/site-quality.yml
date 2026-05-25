@@ -1,0 +1,31 @@
+name: Site quality
+
+on:
+  pull_request:
+    branches:
+      - workinprogress
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Jekyll content
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Build site with strict front matter
+        run: bundle exec jekyll build --strict_front_matter
+
+      - name: Run content QA
+        shell: pwsh
+        run: ./scripts/check-content.ps1

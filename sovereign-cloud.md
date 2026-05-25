@@ -6,11 +6,11 @@ permalink: /sovereign-cloud/
 show_author: true
 ---
 
-## Purpose
+## What This Topic Covers
 
 Sovereign cloud architecture addresses the controls an organization needs when its data, operations or regulatory obligations cannot be treated as ordinary public cloud workloads. In Azure this may involve data residency, operational control, personnel access, cryptographic ownership, resilience boundaries and provable governance. The right architecture depends on jurisdiction and risk; the discipline is to translate obligations into controls that can be engineered and evidenced.
 
-## Control Boundaries
+## Key Architecture Decisions
 
 A regulated Azure platform begins with classification. The platform team needs to understand which workloads and data require particular locations, access boundaries or approved service lists. That classification informs management groups, subscriptions, regions, network egress, logging retention and policies that prevent accidental use of non-approved capabilities. Good architecture does not rely on every delivery team remembering every rule at deployment time.
 
@@ -27,6 +27,10 @@ A credible sovereign design documents what is controlled and how it is proven. T
 Recovery requires the same attention. Resilience patterns, backups, keys, operational access and secondary-region choices must align with sovereignty requirements. A recovery design that moves data or administrator control outside an agreed boundary can defeat the stated objective even if normal operation is compliant.
 
 Product teams need usable guidance, not only restrictions. A regulated landing-zone pattern should provide approved service choices, private connectivity, deployment modules and a clear review route for requirements that fall outside the baseline.
+
+## Common Failure Modes
+
+Regulated platforms are weakened when residency requirements are assumed rather than documented, support and privileged-access paths are omitted from the boundary, or recovery arrangements move data outside approved controls. Another failure is requiring manual evidence gathering where platform policy and deployment history could provide repeatable assurance.
 
 ## Architecture Outcome
 

@@ -21,6 +21,8 @@ Product teams may create endpoints for storage, Key Vault, databases, container 
 
 Private DNS is therefore not just a network configuration detail. It is a platform capability that influences security boundaries, reliability and product-team autonomy.
 
+> **Architecture takeaway:** Private DNS must be designed as a shared platform service once workloads consume private endpoints across subscriptions and networks.
+
 ## Private Endpoints and Split-Horizon DNS
 
 A private endpoint maps an Azure service into a virtual network using a private IP address. Public DNS for the service continues to exist, while the private resolution path should return the endpoint address for clients that are intended to reach it privately. This is a split-horizon DNS problem: the correct answer depends on where the query originates and what access path is approved.
@@ -36,6 +38,8 @@ In a multi-subscription estate, Azure Private DNS zones are usually best owned c
 The platform can establish zones for approved Azure Private Link services and control zone links to the networks that require them. Product automation creates private endpoints and associates them with the supported central DNS pattern rather than creating arbitrary local zones.
 
 Centralisation does not mean that the networking team must manually approve every routine endpoint. Terraform modules or deployment workflows can expose supported endpoint types and register them consistently. The division is useful: the platform owns resolution architecture, while the product owns its service instance and justified connectivity request.
+
+> **Architecture takeaway:** Central ownership should be paired with automation, so consistent resolution does not become a manual delivery bottleneck.
 
 Environment separation requires deliberate thought. Some organizations use common central zones across environments where access and routing already provide adequate separation; others require stronger isolation. The decision should follow security and operational requirements rather than happen accidentally through portal defaults.
 
@@ -54,6 +58,8 @@ Azure DNS Private Resolver provides managed inbound and outbound endpoints and f
 An inbound endpoint enables connected networks to send DNS queries into Azure for names that Azure can resolve, including private zones exposed through the intended design. An outbound endpoint and forwarding rulesets allow Azure workloads to resolve specified domains through destinations such as enterprise DNS services.
 
 The resolver belongs in the connectivity architecture: subnets, regional resilience, routing, forwarding rules, diagnostic needs and ownership must be planned. It is not merely a convenience feature added individually by each workload team.
+
+> **Architecture takeaway:** Name resolution is an operational dependency; resolver resilience, monitoring and ownership belong in architecture decisions.
 
 ## Conditional Forwarding from On-Premises
 

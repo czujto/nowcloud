@@ -6,11 +6,11 @@ permalink: /azure-networking/
 show_author: true
 ---
 
-## Purpose
+## What This Topic Covers
 
 Enterprise Azure networking is the connective tissue of a cloud platform. Applications, private services, identity, management traffic, on-premises dependencies and external consumers all depend on predictable connectivity and name resolution. At scale, networking architecture must be designed as a service for product teams: secure by default, observable and consistent enough that a new workload does not require a novel connectivity pattern.
 
-## Connectivity and Name Resolution
+## Key Architecture Decisions
 
 A landing zone network design often balances central capabilities with workload autonomy. Hub-and-spoke or Virtual WAN patterns can provide shared connectivity, inspection, egress controls and hybrid integration, while application teams own their workload virtual networks and private endpoints within established guardrails. Routing intent must be clear. A diagram is not sufficient unless it is backed by route configuration, firewall policy, ownership, monitoring and a way to test changes safely.
 
@@ -23,6 +23,10 @@ For regulated and sovereign platforms, network architecture must also articulate
 This site covers the practical connections between Azure networking, landing zones, private DNS, identity and infrastructure as code.
 
 Architecture must also plan for change: address space growth, merger connectivity, new private endpoint services, disaster recovery and firewall policy evolution. Repeatable changes and observable traffic are central to operating network foundations confidently.
+
+## Common Failure Modes
+
+Enterprise network foundations become unreliable when private endpoints are deployed without a supported DNS path, routing intent is unclear, or firewall and address-space changes cannot be traced. Independent private DNS zones created by workload teams are a frequent cause of inconsistent name resolution at scale.
 
 ## Platform Delivery Model
 

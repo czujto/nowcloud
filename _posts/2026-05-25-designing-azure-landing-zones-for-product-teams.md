@@ -21,6 +21,8 @@ Without a platform approach, projects make local decisions: one chooses its own 
 
 An Azure landing zone is the set of foundational decisions and automated capabilities that product teams consume. It should be opinionated where shared security and operations require consistency, and flexible where workload requirements genuinely differ.
 
+> **Architecture takeaway:** A landing zone is a consumed platform capability, not only an initial subscription and network deployment.
+
 ## Platform Versus Project Mindset
 
 A project mindset builds foundations for a delivery milestone. A platform mindset creates a supported product that must serve multiple workloads over time. The distinction affects priorities:
@@ -63,6 +65,8 @@ A vended subscription might receive:
 
 This process gives product teams a usable starting point and gives platform owners an auditable record of why an environment exists.
 
+> **Architecture takeaway:** Subscription vending should establish ownership, controls and operational visibility at the moment a team receives its environment.
+
 ## Network and DNS Baseline
 
 Networking is where landing zones often succeed or fail in daily use. Product teams require predictable options for inbound access, outbound dependencies, hybrid connectivity and private Azure services. Hub-and-spoke or Azure Virtual WAN can provide shared connectivity and inspection, but the selected model must be supported with routing ownership and monitoring.
@@ -70,6 +74,8 @@ Networking is where landing zones often succeed or fail in daily use. Product te
 Private endpoints make private DNS a platform concern. If every team creates private DNS zones independently, resolution becomes unreliable across spokes and connected on-premises networks. A landing zone should define central private DNS zone ownership, zone-link behavior, Azure DNS Private Resolver or forwarding arrangements where needed, and automation for supported private endpoint types.
 
 The baseline should be documented in consumer terms: how a product requests connectivity, what is centrally managed, which traffic is inspected and how incidents are diagnosed.
+
+> **Architecture takeaway:** Private endpoint adoption makes DNS design and lifecycle automation part of the landing-zone product.
 
 ## Identity and Role Assignment Model
 

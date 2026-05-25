@@ -6,11 +6,11 @@ permalink: /azure-landing-zones/
 show_author: true
 ---
 
-## Purpose
+## What This Topic Covers
 
 An Azure landing zone is the governed foundation on which product teams deploy workloads. It is not simply a collection of subscriptions or a network diagram. A useful landing zone expresses an organization's decisions about identity, connectivity, policy, security operations, resilience, cost ownership and the deployment paths that teams may use safely.
 
-## Platform Capabilities
+## Key Architecture Decisions
 
 For enterprises, the central design question is how to establish guardrails without making the platform a ticket queue. Management group hierarchy, subscription vending, role assignments, diagnostic settings and Azure Policy should work together as a repeatable product. Teams should know what is provided centrally, what they own and how exceptions are reviewed. This becomes especially important for a platform that hosts multiple products, business units or regions.
 
@@ -27,6 +27,10 @@ A landing zone should answer practical onboarding questions before a product tea
 The answers should be expressed through platform documentation and reusable implementation, not personal knowledge held by a few administrators. A product team should be able to deploy an approved service pattern using versioned modules, understand the guardrails that apply and know how a legitimate exception is handled.
 
 Landing zones also need lifecycle management. Policies, supported services, regional restrictions and network patterns will evolve. Platform owners should version baselines, test changes before broad rollout, communicate consumer impact and measure exceptions and policy compliance over time.
+
+## Common Failure Modes
+
+Landing zones commonly fail when subscription design follows changing organization charts, private DNS and network patterns diverge by team, or policy is introduced without an exception and remediation path. A platform also becomes difficult to consume when onboarding depends on informal knowledge instead of documented automation.
 
 ## Architecture Outcome
 
