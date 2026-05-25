@@ -48,8 +48,8 @@
   <text x="503" y="397" class="small" text-anchor="middle">Shared connectivity and resolution ownership</text>
 
   <path d="M 272 178 L 356 218" class="flow"/>
-  <text x="310" y="168" class="arrow-label" text-anchor="middle">conditional</text>
-  <text x="310" y="185" class="arrow-label" text-anchor="middle">forwarding</text>
+  <text x="310" y="150" class="arrow-label" text-anchor="middle">conditional</text>
+  <text x="310" y="167" class="arrow-label" text-anchor="middle">forwarding</text>
 
   <text x="758" y="112" class="heading">Sharded Private DNS Zones</text>
   <rect x="744" y="132" width="640" height="288" class="boundary"/>
@@ -70,15 +70,14 @@
   <text x="1269" y="226" class="label" text-anchor="middle">services shard</text>
   <text x="1269" y="258" class="small" text-anchor="middle">privatelink.vaultcore</text>
   <text x="1269" y="277" class="small" text-anchor="middle">.azure.net</text>
-  <text x="1064" y="382" class="small" text-anchor="middle">Each shard is linked only to networks that require its resolution scope.</text>
 
-  <path d="M 680 236 L 766 236" class="flow"/>
-  <path d="M 680 265 L 970 265" class="flow"/>
-  <path d="M 680 294 L 1174 294" class="flow"/>
-  <text x="719" y="218" class="arrow-label">governed zones</text>
+  <path d="M 680 248 L 744 248" class="flow"/>
+  <text x="711" y="215" class="arrow-label" text-anchor="middle">governed</text>
+  <text x="711" y="232" class="arrow-label" text-anchor="middle">zone shards</text>
 
-  <rect x="744" y="445" width="640" height="53" class="callout"/>
-  <text x="1064" y="478" class="note" text-anchor="middle">Sharding boundary follows ownership, environment, region or workload class</text>
+  <rect x="48" y="450" width="632" height="62" class="callout"/>
+  <text x="364" y="477" class="note" text-anchor="middle">Sharding boundary follows ownership, environment,</text>
+  <text x="364" y="497" class="note" text-anchor="middle">region or workload class</text>
 
   <text x="56" y="540" class="heading">Product Spoke VNets / Landing Zones</text>
   <rect x="48" y="560" width="1336" height="230" class="boundary"/>
@@ -101,12 +100,12 @@
   <text x="1161" y="686" class="small" text-anchor="middle">Private Endpoints</text>
   <path d="M 1161 643 L 1161 657" class="flow"/>
 
-  <path d="M 861 320 L 861 516 L 277 516 L 277 608" class="link"/>
-  <path d="M 1065 320 L 1065 532 L 719 532 L 719 608" class="link"/>
-  <path d="M 1269 320 L 1269 548 L 1161 548 L 1161 608" class="link"/>
-  <text x="514" y="508" class="arrow-label">selective VNet link</text>
-  <text x="764" y="526" class="arrow-label">selective VNet link</text>
-  <text x="1120" y="543" class="arrow-label">selective VNet link</text>
+  <path d="M 861 320 L 861 526 L 277 526 L 277 608" class="link"/>
+  <path d="M 1065 320 L 1065 542 L 719 542 L 719 608" class="link"/>
+  <path d="M 1269 320 L 1269 558 L 1161 558 L 1161 608" class="link"/>
+  <text x="520" y="519" class="arrow-label" text-anchor="middle">selective VNet link</text>
+  <text x="886" y="536" class="arrow-label" text-anchor="middle">selective VNet link</text>
+  <text x="1208" y="552" class="arrow-label" text-anchor="middle">selective VNet link</text>
 
   <rect x="356" y="816" width="728" height="50" class="callout"/>
   <text x="720" y="847" class="note" text-anchor="middle">Selective VNet links reduce DNS blast radius</text>
