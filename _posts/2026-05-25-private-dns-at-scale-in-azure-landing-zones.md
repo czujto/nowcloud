@@ -1,7 +1,6 @@
 ---
 layout: post
 date: 2026-05-25
-published: false
 permalink: /azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html
 title: "Private DNS at Scale in Azure Landing Zones"
 description: "An architecture approach to Azure Private DNS, private endpoints and hybrid name resolution across enterprise landing zones."

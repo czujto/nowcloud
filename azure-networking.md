@@ -38,6 +38,7 @@ A network foundation is working when new workloads consume standard connectivity
 
 ## Recommended Next Reading
 
+- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %}) provides a governed enterprise pattern for private endpoint resolution.
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) discusses networked Azure storage performance and configuration.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) includes Azure Virtual WAN, firewall and virtual network context.
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) is an AVD operational example on an Azure platform.
