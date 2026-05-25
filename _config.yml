@@ -101,4 +101,5 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - _templates
   - "_config - backup.yml"

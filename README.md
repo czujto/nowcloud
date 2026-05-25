@@ -90,3 +90,26 @@ Azure Platform Architecture
 Landing Zones | Sovereign Cloud | AVD | IaC
 Kamil Lygas
 ```
+
+## Publishing Workflow
+
+1. Create a new article using `_templates/article-template.md` as the starting structure.
+2. Add internal links, Microsoft Learn further reading and an explicit permalink where a stable URL is required.
+3. Run content QA:
+
+   ```powershell
+   .\scripts\check-content.ps1
+   ```
+
+4. Build the site:
+
+   ```bash
+   bundle exec jekyll build --strict_front_matter
+   ```
+
+5. Publish through the normal reviewed merge and GitHub Pages deployment process.
+6. Submit the public URL to Google Search Console.
+7. Submit the public URL to Bing Webmaster Tools.
+8. Share the article on LinkedIn using the distribution guidance in `docs/linkedin-distribution.md`.
+9. Add internal links from relevant topic pages and related architecture notes.
+10. Review GA4 and Google Search Console performance after 7 to 14 days.
