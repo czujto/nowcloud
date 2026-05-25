@@ -4,7 +4,12 @@ title: Azure Landing Zones
 description: "Architecture guidance for governed Azure landing zones, subscription design, controls and enterprise platform operations."
 permalink: /azure-landing-zones/
 show_author: true
+last_modified_at: 2026-05-25
 ---
+
+## Short answer
+
+Azure Landing Zones provide a governed, repeatable Azure foundation for product teams by defining subscription boundaries, connectivity, identity, policy, monitoring and operating responsibilities before workloads are deployed.
 
 ## What This Topic Covers
 
@@ -46,6 +51,9 @@ A landing zone is succeeding when teams can obtain compliant environments predic
 
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %}) explains subscription vending, policy baselines and platform ownership.
 - [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %}) addresses private endpoint resolution as a shared platform capability.
+- [Infrastructure as Code](/infrastructure-as-code/) describes repeatable Terraform and policy-as-code delivery.
+- [Azure Networking](/azure-networking/) covers connectivity and private DNS architecture.
+- [Identity & Security](/identity-security/) covers Microsoft Entra ID and platform security controls.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) explores automation following Terraform-provisioned Azure infrastructure.
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) is a workload-level example of capability and connectivity considerations on Azure platforms.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) addresses a key identity control for a hosted user platform.

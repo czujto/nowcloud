@@ -13,6 +13,11 @@ social:
   links:
     - "https://github.com/czujto"
     - "https://www.linkedin.com/in/kamil-lygas-5804528/"
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: "/assets/img/aboutfeature.jpg"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:

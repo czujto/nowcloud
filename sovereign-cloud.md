@@ -4,7 +4,12 @@ title: Sovereign Cloud
 description: "Design considerations for sovereign and regulated Azure platforms, including control boundaries, governance and evidence."
 permalink: /sovereign-cloud/
 show_author: true
+last_modified_at: 2026-05-25
 ---
+
+## Short answer
+
+Sovereign cloud architecture translates residency, access, operational control and assurance obligations into Azure platform controls that teams can consume consistently and auditors can evidence over time.
 
 ## What This Topic Covers
 

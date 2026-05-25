@@ -7,11 +7,24 @@ description: "A platform architecture approach to Azure landing zones that gives
 categories: [Azure, Landing Zones]
 tags: [Azure, Azure Landing Zones, Platform Engineering, Governance, Terraform]
 excerpt_separator: <!--more-->
+last_modified_at: 2026-05-25
 ---
 
 Azure product teams need a platform that removes repeated foundation decisions without removing accountability. An Azure landing zone should make secure delivery the normal path, not become a central queue for every subscription, network or policy change.
 
 <!--more-->
+
+## Short answer
+
+Azure Landing Zones for product teams are governed platform foundations that standardise subscriptions, connectivity, identity, policy and observability while giving application teams a clear, automated route to deploy and operate their workloads.
+
+## Architecture decision
+
+Treat the landing zone as a versioned platform product owned around shared controls and supported patterns, while product teams retain responsibility for workload-specific architecture and operation.
+
+## When to use this pattern
+
+Use this pattern when multiple products or environments require consistent Azure controls, when private connectivity and identity governance must scale beyond one project, or when regulated workloads require traceable policy and operational evidence.
 
 ## Problem Statement
 
@@ -113,13 +126,13 @@ Onboarding should include documentation, sample deployment code and a small numb
 
 Platform support should observe repeated questions and use them to improve documentation, modules or automation rather than accepting permanent manual intervention.
 
-## Common Mistakes
+## Common failure modes
 
 Common landing-zone failures include designing only for one initial workload, using management groups as a static organization chart, allowing uncontrolled private DNS creation, assigning excessive rights to deployment identities, applying policies without consumer guidance and treating operational monitoring as a later project phase.
 
 Another mistake is presenting governance and developer experience as opposites. A well-designed platform creates fast, safe paths for standard delivery and a clear process for assessed exceptions.
 
-## Architecture Checklist
+## Architecture checklist
 
 - Control requirements and workload classifications are understood.
 - Management group scopes and subscription boundaries have clear purposes.
@@ -130,6 +143,18 @@ Another mistake is presenting governance and developer experience as opposites. 
 - Observability and security response have owners.
 - Product onboarding is usable and measurable.
 - Regulated requirements include evidence and recovery design.
+
+## Further reading
+
+- [Azure Landing Zones](/azure-landing-zones/)
+- [Infrastructure as Code](/infrastructure-as-code/)
+- [Azure Networking](/azure-networking/)
+
+## Related architecture notes
+
+- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %})
+- [Identity & Security](/identity-security/)
+- [Platform Engineering](/platform-engineering/)
 
 ## Summary
 

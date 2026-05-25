@@ -7,11 +7,24 @@ description: "An architecture approach to Azure Private DNS, private endpoints a
 categories: [Azure, Networking]
 tags: [Azure, Private DNS, Private Endpoints, Azure Landing Zones, Networking]
 excerpt_separator: <!--more-->
+last_modified_at: 2026-05-25
 ---
 
 Private endpoints are straightforward to demonstrate in one virtual network. Across many subscriptions, products, environments and connected networks, private DNS becomes one of the most important shared services in an Azure platform.
 
 <!--more-->
+
+## Short answer
+
+Private DNS at Azure landing-zone scale is a shared platform capability that ensures private endpoint names resolve consistently from workload, hub and hybrid networks through centrally governed zones and resolution paths.
+
+## Architecture decision
+
+Centralise ownership of approved Azure Private DNS zones and resolver patterns, while enabling product teams to provision supported private endpoints through automated platform interfaces.
+
+## When to use this pattern
+
+Use this pattern when private endpoints span multiple subscriptions or virtual networks, when hybrid systems must resolve Azure private services, or when consistent private connectivity is required for regulated workloads.
 
 ## Why Private DNS Becomes Hard at Scale
 
@@ -80,7 +93,7 @@ Clear responsibility avoids both uncontrolled sprawl and slow manual delivery:
 
 This model can be implemented through a documented module catalogue. A module request may include service type, environment, spoke network, DNS association and ownership metadata, then deploy the endpoint according to the approved platform pattern.
 
-## Common Failure Modes
+## Common failure modes
 
 Frequent causes of trouble include:
 
@@ -102,7 +115,7 @@ Naming and metadata make operations easier. Endpoint resources, associated netwo
 
 Diagnostics should be included for resolver components and relevant networking controls. Review DNS patterns when introducing a new Private Link service type, a new region or a new hybrid-connectivity route.
 
-## Architecture Checklist
+## Architecture checklist
 
 - Private endpoint and DNS provisioning are delivered as one supported pattern.
 - Central zone ownership and subscription placement are defined.
@@ -113,6 +126,18 @@ Diagnostics should be included for resolver components and relevant networking c
 - Automation controls record creation and cleanup.
 - Monitoring and troubleshooting runbooks include DNS-first verification.
 - Recovery-region and regulated-boundary considerations are explicit.
+
+## Further reading
+
+- [Azure Networking](/azure-networking/)
+- [Azure Landing Zones](/azure-landing-zones/)
+- [Azure DNS Private Resolver documentation](https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
+
+## Related architecture notes
+
+- [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
+- [Infrastructure as Code](/infrastructure-as-code/)
+- [Sovereign Cloud](/sovereign-cloud/)
 
 ## Summary
 

@@ -4,7 +4,12 @@ title: Azure Virtual Desktop
 description: "Azure Virtual Desktop architecture for enterprise access, identity, governance, networking and operational automation."
 permalink: /azure-virtual-desktop/
 show_author: true
+last_modified_at: 2026-05-25
 ---
+
+## Short answer
+
+Azure Virtual Desktop is an enterprise user-platform capability that combines desktop delivery with Microsoft Entra ID security, network boundaries, profile storage, operational automation and governed Azure landing zones.
 
 ## What This Topic Covers
 
@@ -42,6 +47,9 @@ An enterprise AVD service should be assessed through user connection quality, im
 
 ## Recommended Next Reading
 
+- [Azure Landing Zones](/azure-landing-zones/) provides the governed foundation for desktop platform subscriptions and controls.
+- [Azure Networking](/azure-networking/) covers connectivity and private access dependencies.
+- [Identity & Security](/identity-security/) covers Microsoft Entra ID and access guardrails.
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) covers a practical session host deployment detail.
 - [Windows Virtual Desktop became Azure Virtual Desktop]({% post_url 2021-06-07-WVDRebrandingAVD %}) records the transition to Azure Virtual Desktop.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) demonstrates strong authentication for the service.

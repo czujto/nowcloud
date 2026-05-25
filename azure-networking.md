@@ -4,7 +4,12 @@ title: Azure Networking
 description: "Enterprise Azure networking and private DNS architecture for secure connected platform environments at scale."
 permalink: /azure-networking/
 show_author: true
+last_modified_at: 2026-05-25
 ---
+
+## Short answer
+
+Enterprise Azure networking provides the controlled connectivity and name-resolution foundation that enables product workloads to use private services reliably across landing zones, hybrid networks and regulated environments.
 
 ## What This Topic Covers
 
@@ -43,6 +48,7 @@ A network foundation is working when new workloads consume standard connectivity
 ## Recommended Next Reading
 
 - [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %}) provides a governed enterprise pattern for private endpoint resolution.
+- [Azure Landing Zones](/azure-landing-zones/) explains the surrounding governance and subscription foundation.
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) discusses networked Azure storage performance and configuration.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) includes Azure Virtual WAN, firewall and virtual network context.
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) is an AVD operational example on an Azure platform.
