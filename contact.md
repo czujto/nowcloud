@@ -17,3 +17,5 @@ My public technical profile and repositories are available on [GitHub](https://g
 This site documents architecture perspectives and technical implementation notes; it is not a channel for sharing confidential project or customer information.
 
 For an overview of the blog focus, see the [author profile](/author/kamil-lygas/) and [topic index](/topics/).
+
+{% include follow-cta.html %}

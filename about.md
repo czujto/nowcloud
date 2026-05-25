@@ -35,6 +35,8 @@ This site is where I document implementation lessons, architecture consideration
 
 You can find my professional profile on [LinkedIn](https://www.linkedin.com/in/kamil-lygas-5804528/) and technical projects on [GitHub](https://github.com/czujto).
 
+Public writing and reference links are collected on the [Featured and Public Activity](/featured/) page.
+
 ## Disclaimer
 
 The material on this site is provided for general information. It is not a substitute for architecture review, security assessment or advice appropriate to a particular organization.
