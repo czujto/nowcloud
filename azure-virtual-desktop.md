@@ -6,7 +6,11 @@ permalink: /azure-virtual-desktop/
 show_author: true
 ---
 
+## Purpose
+
 Azure Virtual Desktop (AVD), formerly Windows Virtual Desktop (WVD), provides desktops and applications from Azure while allowing the platform team to integrate enterprise identity, networking, image management and security controls. It can support hybrid working, privileged administration patterns, partner access and regulated environments, but only when it is treated as a platform workload rather than a collection of session hosts.
+
+## Workload Design
 
 An enterprise AVD architecture starts with personas, applications and data flows. Pooled and personal desktops solve different needs; multi-session hosts improve density but introduce application compatibility and profile considerations. FSLogix profiles, storage performance, image lifecycle, application packaging and session host scaling have a material effect on user experience. These decisions should be captured in reusable host pool patterns rather than repeated manually for each deployment.
 
@@ -20,7 +24,19 @@ I write about AVD through that broader architecture lens: secure access, repeata
 
 Operational quality matters as much as initial deployment. Image updates, drain mode, host replacement, profile capacity, monitoring, troubleshooting and cost management all need ownership and automation if a desktop platform is to stay dependable.
 
-## Related Articles
+## Operating Model
+
+An AVD service needs roles and runbooks around image publishing, patching, application onboarding, host replacement, capacity decisions and service incidents. A platform team may own landing zones, networking and standard host-pool patterns while service teams own application packaging and user support. Making that boundary explicit prevents every desktop environment from developing a different method of operation.
+
+Observability should include connection diagnostics, session host health, profile/storage signals and authentication outcomes. Cost management matters too: unused capacity, inappropriate sizing or unmanaged personal desktops can make an otherwise technically sound service difficult to sustain.
+
+For secure access scenarios, use current Microsoft Entra ID and Conditional Access designs, validate authentication methods and document how user data is protected. When AVD provides access to regulated applications, the desktop platform becomes part of the compliance boundary.
+
+## Measures of Success
+
+An enterprise AVD service should be assessed through user connection quality, image and patch currency, profile reliability, controlled privileged access, recoverability and cost per intended usage pattern. Those measures give platform owners a more useful view than counting deployed session hosts alone.
+
+## Recommended Next Reading
 
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) covers a practical session host deployment detail.
 - [Windows Virtual Desktop became Azure Virtual Desktop]({% post_url 2021-06-07-WVDRebrandingAVD %}) records the transition to Azure Virtual Desktop.

@@ -10,11 +10,17 @@ layout: default
   </div>
   {% endif %}
 
-  <section class="home-intro">
-    {{ content }}
-  </section>
+  {% if paginator.page == 1 %}
+    <section class="home-intro">
+      {{ content }}
+    </section>
 
-  <h2 class="latest-heading" id="latest-articles">Latest articles</h2>
+    <h2 class="latest-heading" id="latest-articles">Latest articles</h2>
+  {% else %}
+    <section class="home-intro">
+      <h1>Articles - Page {{ paginator.page }}</h1>
+    </section>
+  {% endif %}
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
