@@ -6,7 +6,7 @@ categories: [Azure, Identity]
 tags: [Azure, Microsoft Entra ID, Continuous Access Evaluation, Conditional Access]
 excerpt_separator: <!--more-->
 ---
-Continuous Access Evaluation (CAE) allows organizations to monitor near real-time critical events in Microsoft Entra ID (formerly Azure Active Directory). 
+Continuous Access Evaluation (CAE) allows organizations to monitor near real-time critical events in Microsoft Entra ID (formerly Azure Active Directory).
 Learn what the key benefits are and how to enable or disable CAE!
 
 
