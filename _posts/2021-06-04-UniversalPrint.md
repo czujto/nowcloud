@@ -1,7 +1,9 @@
 ---
 layout: post
-tags: [azure,WVD, Windows Virtual Desktop]
 title: Universal Print
+description: "A short introduction to using Microsoft Universal Print for users working from different locations."
+categories: [Microsoft 365]
+tags: [Azure, Universal Print, Microsoft 365]
 excerpt_separator: <!--more-->
 ---
 Did you know that you can allow users to use office printers from anywhere in the world?

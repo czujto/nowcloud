@@ -24,4 +24,4 @@ A mature identity design is measurable: privileged assignments can be reviewed, 
 
 - [Enable Continuous Access Evaluation in Microsoft Entra ID]({% post_url 2021-06-05-ContinuosAccessEvaluation %}) covers identity-driven session enforcement.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) explores phishing-resistant authentication for remote desktops.
-- [Windows Virtual Desktop is rebranding]({% post_url 2021-06-07-WVDRebrandingAVD %}) includes identity integration context for AVD.
+- [Windows Virtual Desktop became Azure Virtual Desktop]({% post_url 2021-06-07-WVDRebrandingAVD %}) includes identity integration context for AVD.

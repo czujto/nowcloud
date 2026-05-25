@@ -23,6 +23,6 @@ Operational quality matters as much as initial deployment. Image updates, drain 
 ## Related Articles
 
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) covers a practical session host deployment detail.
-- [Windows Virtual Desktop is rebranding]({% post_url 2021-06-07-WVDRebrandingAVD %}) records the transition to Azure Virtual Desktop.
-- [Secure access to Windows Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) demonstrates strong authentication for the service.
+- [Windows Virtual Desktop became Azure Virtual Desktop]({% post_url 2021-06-07-WVDRebrandingAVD %}) records the transition to Azure Virtual Desktop.
+- [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) demonstrates strong authentication for the service.
 - [Azure Files SMB Multichannel]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) relates to storage performance scenarios relevant to virtual desktop platforms.

@@ -23,5 +23,5 @@ Platform documentation and architecture decision records are part of that produc
 ## Related Articles
 
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) discusses infrastructure and configuration automation.
-- [Building Tuck Shop application using Microsoft PowerApps]({% post_url 2023-03-25-TuckShop %}) is an example of enabling a product outcome with Microsoft platform services.
+- [Building Tuck Shop application using Microsoft Power Apps]({% post_url 2023-03-25-TuckShop %}) is an example of enabling a product outcome with Microsoft platform services.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) connects user platform access with identity security.
