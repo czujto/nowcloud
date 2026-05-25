@@ -117,6 +117,18 @@ foreach ($pillarPost in $publishedPillarPosts) {
     }
 }
 
+$homePagePath = Join-Path $repositoryRoot "index.html"
+$homePage = Get-Content -LiteralPath $homePagePath -Raw -Encoding UTF8
+if ($homePage -match '(?m)^# Kamil Lygas[ \t]+##') {
+    Add-Failure "Collapsed homepage headings detected: $homePagePath"
+}
+
+foreach ($requiredHeading in "<h1>Kamil Lygas</h1>", "<h2>What I Write About</h2>", "<h2>Featured Topics</h2>") {
+    if ($homePage -notmatch [regex]::Escape($requiredHeading)) {
+        Add-Failure "Missing rendered homepage heading '$requiredHeading': $homePagePath"
+    }
+}
+
 if ($failures.Count -gt 0) {
     $failures | ForEach-Object { Write-Error $_ }
     exit 1

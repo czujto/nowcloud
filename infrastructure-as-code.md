@@ -38,6 +38,7 @@ The signs of mature IaC include reproducible environments, reviewable changes, p
 
 ## Recommended Next Reading
 
+- [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %}) shows how versioned platform foundations support governed product delivery.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) describes Terraform-provisioned Azure infrastructure followed by configuration automation.
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) shows a template-level AVD deployment adjustment.
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) demonstrates configuration of an Azure capability used by workloads.
