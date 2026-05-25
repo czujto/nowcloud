@@ -40,6 +40,8 @@ A landing zone is succeeding when teams can obtain compliant environments predic
 
 ## Recommended Next Reading
 
+- [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %}) explains subscription vending, policy baselines and platform ownership.
+- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %}) addresses private endpoint resolution as a shared platform capability.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) explores automation following Terraform-provisioned Azure infrastructure.
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) is a workload-level example of capability and connectivity considerations on Azure platforms.
 - [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) addresses a key identity control for a hosted user platform.

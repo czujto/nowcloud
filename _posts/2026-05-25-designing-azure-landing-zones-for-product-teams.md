@@ -1,7 +1,6 @@
 ---
 layout: post
 date: 2026-05-25
-published: false
 permalink: /azure/landing-zones/2026/05/25/designing-azure-landing-zones-for-product-teams.html
 title: "Designing Azure Landing Zones for Product Teams"
 description: "A platform architecture approach to Azure landing zones that gives product teams governed, repeatable cloud foundations."
