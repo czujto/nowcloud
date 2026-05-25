@@ -6,11 +6,11 @@ permalink: /infrastructure-as-code/
 show_author: true
 ---
 
-## Purpose
+## What This Topic Covers
 
 Infrastructure as code (IaC) is how an Azure architecture becomes repeatable engineering. A diagram can describe a landing zone or product platform, but code can build it consistently, subject it to review, associate changes with intent and provide an audit trail. Terraform is especially useful for describing Azure platform foundations that must be applied across subscriptions, environments, tenants or regulated regions with controlled variation.
 
-## Ownership and Module Boundaries
+## Key Architecture Decisions
 
 Good IaC begins with architecture boundaries. Management groups, policy assignments, network foundations, private DNS, monitoring and subscription provisioning commonly belong to platform-owned modules and pipelines. Application teams may consume those foundations and own their workload resources through documented interfaces. That division allows teams to move independently while keeping controls and enterprise connectivity coherent.
 
@@ -23,6 +23,10 @@ Configuration automation such as Ansible can complement provisioning. Terraform 
 For secure multi-tenant and sovereign platforms, IaC enables evidence. Code review, deployment history, policy compliance and approved parameters make governance concrete. Automation is not a substitute for design; it is how well-considered design can be deployed reliably and improved over time.
 
 This also means maintaining automation as a product. Provider upgrades, module versions, policy changes, drift detection and recovery exercises require deliberate attention so platform code remains trusted when environments or requirements change.
+
+## Common Failure Modes
+
+Infrastructure-as-code programmes lose trust when state access is poorly protected, deployment identities are over-privileged, modules conceal unsupported choices or teams bypass code for urgent portal changes without reconciliation. Policy-as-code also needs staged testing and an explicit exception process.
 
 ## Delivery Assurance
 

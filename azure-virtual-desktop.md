@@ -6,11 +6,11 @@ permalink: /azure-virtual-desktop/
 show_author: true
 ---
 
-## Purpose
+## What This Topic Covers
 
 Azure Virtual Desktop (AVD), formerly Windows Virtual Desktop (WVD), provides desktops and applications from Azure while allowing the platform team to integrate enterprise identity, networking, image management and security controls. It can support hybrid working, privileged administration patterns, partner access and regulated environments, but only when it is treated as a platform workload rather than a collection of session hosts.
 
-## Workload Design
+## Key Architecture Decisions
 
 An enterprise AVD architecture starts with personas, applications and data flows. Pooled and personal desktops solve different needs; multi-session hosts improve density but introduce application compatibility and profile considerations. FSLogix profiles, storage performance, image lifecycle, application packaging and session host scaling have a material effect on user experience. These decisions should be captured in reusable host pool patterns rather than repeated manually for each deployment.
 
@@ -23,6 +23,10 @@ For sovereign and regulated use cases, architects should consider service availa
 I write about AVD through that broader architecture lens: secure access, repeatable operations, platform governance and the Azure services that make a user environment reliable at enterprise scale.
 
 Operational quality matters as much as initial deployment. Image updates, drain mode, host replacement, profile capacity, monitoring, troubleshooting and cost management all need ownership and automation if a desktop platform is to stay dependable.
+
+## Common Failure Modes
+
+AVD services often underperform when image lifecycle, profile storage, authentication controls or monitoring are considered only after host pools are deployed. Inconsistent host replacement and application packaging also turn an otherwise scalable desktop platform into an operationally fragile service.
 
 ## Operating Model
 
