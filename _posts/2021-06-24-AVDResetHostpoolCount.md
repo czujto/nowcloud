@@ -1,13 +1,14 @@
 ---
 layout: post
+date: 2021-06-24
+permalink: /azure/virtual desktop/2021/06/24/AVDResetHostpoolCount.html
 title: How to reset AVD Host Pool Counter
 description: "Adjusting the starting VM counter while deploying session hosts to an Azure Virtual Desktop host pool."
 categories: [Azure, Virtual Desktop]
 tags: [Azure, Azure Virtual Desktop, Automation]
 excerpt_separator: <!--more-->
 ---
-Do you know how to reset Host Pool counter when adding new VMs to the pool, without deleting existing hosts?
-No? Then this post is for you! 
+This note shows how the starting virtual-machine number was adjusted when adding session hosts to an Azure Virtual Desktop host pool without removing existing hosts.
 
 ![AVD]({{ site.baseurl }}/assets/img/blog/2021-06-24-AVDResetHostpoolCount/hpcounter3.PNG)
 
@@ -33,9 +34,9 @@ Follow the normal process of adding a new host to the host pool but at the very 
 + Change the value from 1, in my case, to 0 or any other number that you want to start VM numbers from.
 + Now click Deploy.
 
-That's it!
+## Summary
 
-IMPORTANT: Remember to copy the Registration Token as you will need it to finish Deployment!
+Changing `vmInitialNumber` allowed an AVD session-host deployment to start at the required naming sequence while preserving existing hosts for rollback. The portal and deployment templates can change over time, so confirm the current session-host registration workflow and securely handle registration tokens before applying this approach in production.
 
-Thanks for reading! 
+For an enterprise platform, naming conventions should be predictable, but host replacement and rollback safety are more important than cosmetic numbering. Automating the host lifecycle through reviewed templates or infrastructure as code provides a more dependable long-term pattern.
 

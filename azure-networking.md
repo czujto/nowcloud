@@ -6,7 +6,11 @@ permalink: /azure-networking/
 show_author: true
 ---
 
+## Purpose
+
 Enterprise Azure networking is the connective tissue of a cloud platform. Applications, private services, identity, management traffic, on-premises dependencies and external consumers all depend on predictable connectivity and name resolution. At scale, networking architecture must be designed as a service for product teams: secure by default, observable and consistent enough that a new workload does not require a novel connectivity pattern.
+
+## Connectivity and Name Resolution
 
 A landing zone network design often balances central capabilities with workload autonomy. Hub-and-spoke or Virtual WAN patterns can provide shared connectivity, inspection, egress controls and hybrid integration, while application teams own their workload virtual networks and private endpoints within established guardrails. Routing intent must be clear. A diagram is not sufficient unless it is backed by route configuration, firewall policy, ownership, monitoring and a way to test changes safely.
 
@@ -20,8 +24,20 @@ This site covers the practical connections between Azure networking, landing zon
 
 Architecture must also plan for change: address space growth, merger connectivity, new private endpoint services, disaster recovery and firewall policy evolution. Repeatable changes and observable traffic are central to operating network foundations confidently.
 
-## Related Articles
+## Platform Delivery Model
 
-- [Azure Files SMB Multichannel]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) discusses networked Azure storage performance and configuration.
+Networking works best as a catalogue of supported patterns: workload virtual-network creation, private endpoint integration, approved ingress and egress, hybrid connectivity and DNS resolution. Product teams should know which inputs they provide and which routes, policies and monitoring are applied automatically.
+
+Private DNS at scale deserves explicit ownership. A team creating a private endpoint cannot independently decide the enterprise resolution path without risking duplicated zones or inconsistent answers. Central zone management, Azure DNS Private Resolver where appropriate, and tested conditional forwarding provide a controlled foundation while automation can attach permitted workload endpoints consistently.
+
+An operating model should include route-change review, firewall rule ownership, address-space allocation, DNS incident troubleshooting, disaster-recovery connectivity and telemetry retention. These are the pieces that turn networking from a deployment prerequisite into a dependable platform service.
+
+## Measures of Success
+
+A network foundation is working when new workloads consume standard connectivity without bespoke intervention, DNS resolution is predictable from all approved locations, traffic paths are observable and incidents can be isolated quickly. Policy compliance and change success rates also reveal whether the network design is genuinely operable at scale.
+
+## Recommended Next Reading
+
+- [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) discusses networked Azure storage performance and configuration.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) includes Azure Virtual WAN, firewall and virtual network context.
 - [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) is an AVD operational example on an Azure platform.

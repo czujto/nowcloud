@@ -1,0 +1,104 @@
+[CmdletBinding()]
+param()
+
+$ErrorActionPreference = "Stop"
+$repositoryRoot = Split-Path -Parent $PSScriptRoot
+$failures = [System.Collections.Generic.List[string]]::new()
+
+function Add-Failure {
+    param([string]$Message)
+    $failures.Add($Message)
+}
+
+function Get-FrontMatter {
+    param([string]$Path)
+
+    $content = Get-Content -LiteralPath $Path -Raw -Encoding UTF8
+    if ($content -notmatch '\A---\r?\n(?<yaml>[\s\S]*?)\r?\n---\r?\n') {
+        Add-Failure "Invalid or compressed front matter: $Path"
+        return $null
+    }
+
+    return @{
+        Content = $content
+        Yaml = $Matches.yaml
+        Body = $content.Substring($Matches[0].Length)
+    }
+}
+
+function Assert-Key {
+    param(
+        [string]$Path,
+        [string]$Yaml,
+        [string]$Key
+    )
+
+    if ($Yaml -notmatch "(?m)^$([regex]::Escape($Key)):\s*\S") {
+        Add-Failure "Missing '$Key' front matter in $Path"
+    }
+}
+
+$textFiles = Get-ChildItem -LiteralPath $repositoryRoot -Recurse -File |
+    Where-Object { $_.Extension -in ".md", ".html", ".yml", ".txt" -and $_.FullName -notmatch '[\\/](?:_site|\.git)[\\/]' }
+
+foreach ($file in $textFiles) {
+    $content = Get-Content -LiteralPath $file.FullName -Raw -Encoding UTF8
+    if ($content -match '(?i)\bTODO\b|\bTBD\b|You Thanks|lorem ipsum') {
+        Add-Failure "Placeholder or unfinished text detected: $($file.FullName)"
+    }
+}
+
+$postsPath = Join-Path $repositoryRoot "_posts"
+foreach ($post in Get-ChildItem -LiteralPath $postsPath -Filter "*.md" -File) {
+    $frontMatter = Get-FrontMatter -Path $post.FullName
+    if ($null -eq $frontMatter) {
+        continue
+    }
+
+    foreach ($key in "title", "description", "date", "categories", "tags") {
+        Assert-Key -Path $post.FullName -Yaml $frontMatter.Yaml -Key $key
+    }
+
+    if ($frontMatter.Yaml -match '(?m)^title:\s*.*Continuos') {
+        Add-Failure "Title contains the 'Continuos' typo: $($post.FullName)"
+    }
+
+    if ($frontMatter.Body -match '(?s)^(?<intro>.+?)\r?\n\s*<!--more-->\s*\r?\n(?<after>[\s\S]*)$') {
+        $intro = ($Matches.intro -replace '\s+', ' ').Trim()
+        $after = ($Matches.after -replace '\s+', ' ').Trim()
+        if ($intro.Length -gt 30 -and $after.StartsWith($intro)) {
+            Add-Failure "Duplicated opening text after excerpt marker: $($post.FullName)"
+        }
+    }
+}
+
+$topicPages = @(
+    "azure-landing-zones.md",
+    "sovereign-cloud.md",
+    "azure-virtual-desktop.md",
+    "azure-networking.md",
+    "identity-security.md",
+    "infrastructure-as-code.md",
+    "platform-engineering.md"
+)
+
+foreach ($topic in $topicPages) {
+    $path = Join-Path $repositoryRoot $topic
+    if (-not (Test-Path -LiteralPath $path)) {
+        Add-Failure "Missing topic page: $path"
+        continue
+    }
+
+    $frontMatter = Get-FrontMatter -Path $path
+    if ($null -ne $frontMatter) {
+        Assert-Key -Path $path -Yaml $frontMatter.Yaml -Key "title"
+        Assert-Key -Path $path -Yaml $frontMatter.Yaml -Key "description"
+    }
+}
+
+if ($failures.Count -gt 0) {
+    $failures | ForEach-Object { Write-Error $_ }
+    exit 1
+}
+
+Write-Host "Content QA passed: front matter, metadata, placeholders and duplicate openings checked."

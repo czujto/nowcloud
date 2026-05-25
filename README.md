@@ -26,6 +26,20 @@ bundle exec jekyll serve
 
 The generated site is written to `_site/` and the local server is available at `http://127.0.0.1:4000/`.
 
+## Content QA
+
+Run the lightweight source-content check from PowerShell:
+
+```powershell
+.\scripts\check-content.ps1
+```
+
+The script validates readable front matter, required post and topic-page metadata, common unfinished placeholders, title spelling and duplicated excerpt openings.
+
+To add a new article, create a dated Markdown file under `_posts/` with `layout`, `date`, `title`, `description`, `categories` and `tags` front matter. Use an explicit `permalink` when a stable public route is required.
+
+Existing published posts must retain their public permalinks. If a title, category or filename changes, preserve the current route with explicit `permalink` front matter before publishing.
+
 ## GitHub Pages Deployment
 
 GitHub Pages builds this Jekyll repository using the `github-pages` gem declared in `Gemfile`. No custom GitHub Actions workflow is currently required.
