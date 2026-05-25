@@ -50,6 +50,10 @@ foreach ($file in $textFiles) {
     if ($content -match '(?m)^---[ \t]+layout:') {
         Add-Failure "Compressed front matter opening detected: $($file.FullName)"
     }
+
+    if ($content -match '\A---(?:\r?\n|[ \t])') {
+        $null = Get-FrontMatter -Path $file.FullName
+    }
 }
 
 $postsPath = Join-Path $repositoryRoot "_posts"
@@ -97,6 +101,19 @@ foreach ($topic in $topicPages) {
     if ($null -ne $frontMatter) {
         Assert-Key -Path $path -Yaml $frontMatter.Yaml -Key "title"
         Assert-Key -Path $path -Yaml $frontMatter.Yaml -Key "description"
+    }
+}
+
+$publishedPillarPosts = @(
+    "2026-05-25-designing-azure-landing-zones-for-product-teams.md",
+    "2026-05-25-private-dns-at-scale-in-azure-landing-zones.md"
+)
+
+foreach ($pillarPost in $publishedPillarPosts) {
+    $path = Join-Path $postsPath $pillarPost
+    $frontMatter = Get-FrontMatter -Path $path
+    if ($null -ne $frontMatter -and $frontMatter.Yaml -match '(?m)^published:\s*false\s*$') {
+        Add-Failure "Published pillar post is marked as draft: $path"
     }
 }
 
