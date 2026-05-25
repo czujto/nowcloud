@@ -4,7 +4,6 @@ title: About
 description: "About Kamil Lygas, Senior Enterprise Architect Manager and Lead Azure Architect focused on enterprise platform architecture."
 permalink: /about/
 image: /assets/img/aboutfeature.jpg
-show_author: true
 ---
 
 ![Kamil Lygas](/assets/img/avatar1.jpg)
