@@ -15,20 +15,14 @@
 	</div>
 	<nav class="site-nav">
 		<ul>
-			{% if site.theme_settings.site_navigation_sort %}
-				{% assign site_pages = site.pages | sort: site.theme_settings.site_navigation_sort %}
-			{% else %}
-				{% assign site_pages = site.pages %}
-			{% endif %}
-			{% for page in site_pages %}
-			{% if page.title and page.hide != true %}
-			<li>
-				<a class="page-link" href="{{ page.url | relative_url }}">
-					{{ page.title }}
-				</a>
-			</li>
-			{% endif %}
-			{% endfor %}
+			<li><a class="page-link" href="{{ "/" | relative_url }}">Home</a></li>
+			<li><a class="page-link" href="{{ "/azure-landing-zones/" | relative_url }}">Azure Landing Zones</a></li>
+			<li><a class="page-link" href="{{ "/sovereign-cloud/" | relative_url }}">Sovereign Cloud</a></li>
+			<li><a class="page-link" href="{{ "/azure-virtual-desktop/" | relative_url }}">AVD</a></li>
+			<li><a class="page-link" href="{{ "/azure-networking/" | relative_url }}">Networking</a></li>
+			<li><a class="page-link" href="{{ "/infrastructure-as-code/" | relative_url }}">IaC</a></li>
+			<li><a class="page-link" href="{{ "/#latest-articles" | relative_url }}">Blog</a></li>
+			<li><a class="page-link" href="{{ "/about/" | relative_url }}">About</a></li>
 			<!-- Social icons from Font Awesome, if enabled  -->
 			{% include icons.html %}
 
