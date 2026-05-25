@@ -56,6 +56,21 @@ Centralisation does not mean that the networking team must manually approve ever
 
 Environment separation requires deliberate thought. Some organizations use common central zones across environments where access and routing already provide adequate separation; others require stronger isolation. The decision should follow security and operational requirements rather than happen accidentally through portal defaults.
 
+## Private DNS Zone Sharding
+
+Central ownership does not always require one flat zone shared across every product and environment. Private DNS zone sharding is an architecture pattern, not an Azure feature toggle: the platform deliberately establishes smaller resolution boundaries based on product or team ownership, environment, region, service type or workload lifecycle.
+
+<figure class="architecture-diagram">
+  <img src="{{ '/assets/img/diagrams/private-dns-zone-sharding.svg' | relative_url }}" alt="Private DNS zone sharding pattern for Azure landing zones with Azure DNS Private Resolver, sharded private DNS zones, selective virtual network links and product spoke networks.">
+  <figcaption>
+    Private DNS zone sharding keeps central DNS governance while reducing change blast radius through selective virtual network links and ownership-based DNS boundaries.
+  </figcaption>
+</figure>
+
+Sharded zones are isolated by default, so cross-zone and hybrid resolution must be designed explicitly. Azure DNS Private Resolver supports hub-and-spoke and hybrid paths across approved DNS boundaries, while selective virtual network links limit which workloads consume each shard. Linking every spoke to every zone removes much of the operational isolation that sharding is intended to provide.
+
+This pattern can improve operational resiliency and change safety by containing the impact of record or link changes. It does not change the underlying availability commitment of the Azure DNS service.
+
 ## Hub-and-Spoke Considerations
 
 Hub-and-spoke landing zones frequently place shared DNS capability in, or reachable from, the hub while workloads deploy in spoke virtual networks. DNS resolution must function from spokes and from any hybrid-connected network permitted to access services.
@@ -132,6 +147,7 @@ Diagnostics should be included for resolver components and relevant networking c
 - [Azure Networking](/azure-networking/)
 - [Azure Landing Zones](/azure-landing-zones/)
 - [Azure DNS Private Resolver documentation](https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
+- [Sharding private DNS zones - Azure DNS](https://learn.microsoft.com/en-us/azure/dns/sharding-private-dns-zones)
 
 ## Related architecture notes
 

@@ -1,0 +1,19 @@
+flowchart LR
+  OnPrem["On-premises DNS / Hybrid clients"]
+  Resolver["Azure DNS Private Resolver\nInbound + Outbound endpoints"]
+  Hub["Connectivity Hub / DNS Platform"]
+  ZoneA["Shard: Product A Production\nprivatelink.database.windows.net"]
+  ZoneB["Shard: Product B Development\nprivatelink.blob.core.windows.net"]
+  ZoneShared["Shard: Shared Platform Services\nprivatelink.vaultcore.azure.net"]
+  SpokeA["Product A Prod Spoke\nPrivate Endpoints"]
+  SpokeB["Product B Dev Spoke\nPrivate Endpoints"]
+  Shared["Shared Services Spoke\nPrivate Endpoints"]
+
+  OnPrem -->|"conditional forwarding"| Resolver
+  Resolver --> Hub
+  Hub --> ZoneA
+  Hub --> ZoneB
+  Hub --> ZoneShared
+  ZoneA -->|"selective VNet link"| SpokeA
+  ZoneB -->|"selective VNet link"| SpokeB
+  ZoneShared -->|"selective VNet link"| Shared
