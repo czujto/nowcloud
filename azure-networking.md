@@ -1,0 +1,27 @@
+---
+layout: page
+title: Azure Networking
+description: "Enterprise Azure networking and private DNS architecture for secure connected platform environments at scale."
+permalink: /azure-networking/
+show_author: true
+---
+
+Enterprise Azure networking is the connective tissue of a cloud platform. Applications, private services, identity, management traffic, on-premises dependencies and external consumers all depend on predictable connectivity and name resolution. At scale, networking architecture must be designed as a service for product teams: secure by default, observable and consistent enough that a new workload does not require a novel connectivity pattern.
+
+A landing zone network design often balances central capabilities with workload autonomy. Hub-and-spoke or Virtual WAN patterns can provide shared connectivity, inspection, egress controls and hybrid integration, while application teams own their workload virtual networks and private endpoints within established guardrails. Routing intent must be clear. A diagram is not sufficient unless it is backed by route configuration, firewall policy, ownership, monitoring and a way to test changes safely.
+
+Private DNS becomes one of the most consequential design topics when private endpoints are widely used. Teams need Azure services to resolve privately from approved networks without creating inconsistent zones, duplicate links or unexpected cross-environment dependencies. A scalable pattern typically defines central private DNS ownership, resolution from hybrid networks, controlled zone linking and how platform automation registers each supported private endpoint service. DNS design is security architecture because incorrect resolution can bypass intended paths or cause production outages.
+
+Network governance should support rather than frustrate delivery. Policy can prevent public access where private connectivity is required, enforce diagnostic settings and control allowed regions or configurations. Terraform modules can make approved networks, subnets, private endpoint associations, routes and monitoring reproducible. Operational telemetry should help teams answer whether a problem is DNS, routing, filtering, service configuration or application behaviour.
+
+For regulated and sovereign platforms, network architecture must also articulate ingress and egress boundaries, cross-region flows, support access and where inspection or logging data travels. A secure multi-tenant platform depends on segmentation and clear ownership every bit as much as it depends on individual firewall rules.
+
+This site covers the practical connections between Azure networking, landing zones, private DNS, identity and infrastructure as code.
+
+Architecture must also plan for change: address space growth, merger connectivity, new private endpoint services, disaster recovery and firewall policy evolution. Repeatable changes and observable traffic are central to operating network foundations confidently.
+
+## Related Articles
+
+- [Azure Files SMB Multichannel]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) discusses networked Azure storage performance and configuration.
+- [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) includes Azure Virtual WAN, firewall and virtual network context.
+- [How to reset AVD Host Pool Counter]({% post_url 2021-06-24-AVDResetHostpoolCount %}) is an AVD operational example on an Azure platform.

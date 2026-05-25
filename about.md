@@ -1,37 +1,41 @@
 ---
 layout: page
 title: About
+description: "About Kamil Lygas, Senior Enterprise Architect Manager and Lead Azure Architect focused on enterprise platform architecture."
 permalink: /about/
-order: 2
+image: /assets/img/aboutfeature.jpg
+show_author: true
 ---
-![czujto](/assets/img/avatar1.jpg)
 
+![Kamil Lygas](/assets/img/avatar1.jpg)
 
-I am Kamil Lygas and I’ve worked in IT for over 19 years, across public, private, and non-profit sectors. I’ve been a subject matter expert in various technologies throughout my career including Microsoft Azure, Microsoft 365, and Citrix Cloud.
+I am Kamil Lygas, a Senior Enterprise Architect Manager with more than 19 years in IT. My background spans Microsoft Azure, Microsoft 365 and Citrix Cloud, with a sustained focus on designing cloud foundations that are secure, supportable and useful to delivery teams.
 
-Experienced Microsoft Cloud Solutions Architect with a strong focus on Azure cloud architecture design. I've been working with Microsoft Gold partners since 2014, delivering international projects for customers in the US, India, Singapore, Germany, the UK, and Poland. Skilled in translating business requirements into scalable, secure, and cost-effective Azure solutions, with hands-on experience in end-to-end design, implementation, and management of cloud infrastructure.
+As a Lead Azure Architect, I have worked on enterprise platform architecture for global, multi-tenant Azure platforms and product environments. That work involves making deliberate decisions about landing zones, subscription and management group design, network connectivity, identity, policy, operational ownership and the boundaries that allow multiple teams to work safely on a shared platform.
 
-With over 19 years of experience across various industries, I combine strong technical expertise with real-world deployment experience, ensuring successful cloud adoption and long-term sustainability for clients.
+My current architectural interests include Azure Landing Zones for sovereign and regulated workloads, platform engineering, enterprise Azure networking and private DNS at scale, Azure Virtual Desktop, and infrastructure as code with Terraform. I am particularly interested in governance that is implemented as repeatable engineering: policy-as-code, automated controls, auditable deployments and clear platform contracts.
 
-I am currently self-employed, working as a Cloud Solutions Architect / Consultant at nowcloud.pl
+Previously, experience across Azure, Microsoft 365 and Citrix Cloud provided a practical view of user services, identity and hybrid enterprise environments. It continues to inform how I approach secure cloud governance and operational reality rather than architecture in isolation.
 
-#### Certifications ####
+This site is where I document implementation lessons, architecture considerations and useful technical details from the Azure platform domain.
+
+## Certifications
+
 - Microsoft Certified: Azure Solutions Architect Expert
 - Microsoft Certified: Azure Security Engineer Associate
 - Microsoft Certified: Azure Administrator Associate
 - Microsoft Certified: Azure Network Engineer Associate
-- Microsoft 365 Certified: Teams Administrator Associate
-- Microsoft Specialist: Architecting Microsoft Azure Solutions
-- Microsoft Speciality: Azure Virtual Desktop
 - Microsoft Certified: Identity and Access Administrator Associate
+- Microsoft Certified: Azure Virtual Desktop Specialty
+- Microsoft 365 Certified: Teams Administrator Associate
 - Microsoft Certified Trainer (MCT)
-- Microsoft Certified: Azure Fundamentals
-- OpenHack: Containers
-- OpenHack: DevOps
-- Citrix Virtual Apps and Desktops Service on Citrix Cloud (CC-VAD-CC)
-- Citrix Virtual Apps and Desktops Service on Microsoft Azure (CC-VAD-MA)
+- Citrix Virtual Apps and Desktops Service on Citrix Cloud and Microsoft Azure
 - ITIL V3
 
-#### Disclaimer ####
+## Connect
 
-The material and information contained on this website are for general information purposes only. You should not rely upon the material or information on the website as a basis for making any business, legal, or any other decisions.
+You can find my professional profile on [LinkedIn](https://www.linkedin.com/in/kamil-lygas-5804528/) and technical projects on [GitHub](https://github.com/czujto).
+
+## Disclaimer
+
+The material on this site is provided for general information. It is not a substitute for architecture review, security assessment or advice appropriate to a particular organization.

@@ -16,6 +16,35 @@
   color: $header-desc-link-color
 }
 // Post listing
+.home-intro {
+  @extend %padding-regular;
+  border-bottom: 1px solid $border-color;
+
+  .hero-lead {
+    font-size: 1.3em;
+    max-width: 50em;
+  }
+
+  .topic-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65em;
+    list-style: none;
+    margin: 1.25em 0 2em;
+
+    a {
+      border: 1px solid $border-color;
+      border-radius: 0.2em;
+      display: inline-block;
+      padding: 0.45em 0.75em;
+    }
+  }
+}
+.latest-heading {
+  @extend %padding-regular;
+  margin: 0;
+  padding-bottom: 0;
+}
 .posts {
   .post-teaser {
     @extend %padding-regular;

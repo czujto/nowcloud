@@ -10,6 +10,11 @@ layout: default
   </div>
   {% endif %}
 
+  <section class="home-intro">
+    {{ content }}
+  </section>
+
+  <h2 class="latest-heading" id="latest-articles">Latest articles</h2>
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
