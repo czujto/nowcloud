@@ -3,9 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{% seo %}
 	{% include schema-person.html %}
-	{% if page.layout == "home" %}
 	{% include schema-website.html %}
-	{% endif %}
 	{% if page.layout == "post" %}
 	{% include schema-blogposting.html %}
 	{% endif %}

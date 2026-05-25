@@ -117,6 +117,93 @@ foreach ($pillarPost in $publishedPillarPosts) {
     }
 }
 
+$requiredDiscoveryFiles = @(
+    "robots.txt",
+    "llms.txt",
+    "llms-full.txt"
+)
+
+foreach ($requiredFile in $requiredDiscoveryFiles) {
+    $path = Join-Path $repositoryRoot $requiredFile
+    if (-not (Test-Path -LiteralPath $path)) {
+        Add-Failure "Missing discovery file: $path"
+        continue
+    }
+
+    $frontMatter = Get-FrontMatter -Path $path
+    if ($null -eq $frontMatter) {
+        continue
+    }
+
+    Assert-Key -Path $path -Yaml $frontMatter.Yaml -Key "layout"
+    Assert-Key -Path $path -Yaml $frontMatter.Yaml -Key "permalink"
+
+    if ([string]::IsNullOrWhiteSpace($frontMatter.Body)) {
+        Add-Failure "Discovery file has no readable body content: $path"
+    }
+}
+
+$schemaIncludes = @(
+    "schema-person.html",
+    "schema-website.html",
+    "schema-blogposting.html"
+)
+
+foreach ($schemaInclude in $schemaIncludes) {
+    $path = Join-Path (Join-Path $repositoryRoot "_includes") $schemaInclude
+    if (-not (Test-Path -LiteralPath $path)) {
+        Add-Failure "Missing schema include: $path"
+        continue
+    }
+
+    $content = Get-Content -LiteralPath $path -Raw -Encoding UTF8
+    if ([string]::IsNullOrWhiteSpace($content) -or $content -notmatch 'application/ld\+json') {
+        Add-Failure "Schema include is empty or does not contain JSON-LD: $path"
+    }
+}
+
+$publicCrawlFiles = [System.Collections.Generic.List[string]]::new()
+foreach ($publicFile in @(
+    "_config.yml",
+    "robots.txt",
+    "index.html",
+    "about.md",
+    "contact.md",
+    "topics.md",
+    "author\kamil-lygas.md"
+) + $topicPages) {
+    $publicCrawlFiles.Add($publicFile)
+}
+
+foreach ($publicDirectory in "_posts", "_includes", "_layouts") {
+    $directoryPath = Join-Path $repositoryRoot $publicDirectory
+    foreach ($file in Get-ChildItem -LiteralPath $directoryPath -File) {
+        $publicCrawlFiles.Add($file.FullName)
+    }
+}
+
+foreach ($publicFile in $publicCrawlFiles) {
+    if ([System.IO.Path]::IsPathRooted($publicFile)) {
+        $path = $publicFile
+    } else {
+        $path = Join-Path $repositoryRoot $publicFile
+    }
+    if (-not (Test-Path -LiteralPath $path)) {
+        continue
+    }
+
+    $content = Get-Content -LiteralPath $path -Raw -Encoding UTF8
+    if ($content -match '(?i)\bnoindex\b|\bnofollow\b') {
+        Add-Failure "Index-blocking directive text detected in public source: $path"
+    }
+}
+
+$robotsPath = Join-Path $repositoryRoot "robots.txt"
+$robots = Get-Content -LiteralPath $robotsPath -Raw -Encoding UTF8
+if ($robots -match '(?im)^\s*Disallow:\s*/\s*$') {
+    Add-Failure "robots.txt blocks public crawling with Disallow: /"
+}
+
 $homePagePath = Join-Path $repositoryRoot "index.html"
 $homePage = Get-Content -LiteralPath $homePagePath -Raw -Encoding UTF8
 if ($homePage -match '(?m)^# Kamil Lygas[ \t]+##') {
