@@ -46,6 +46,10 @@ foreach ($file in $textFiles) {
     if ($content -match '(?i)\bTODO\b|\bTBD\b|You Thanks|lorem ipsum') {
         Add-Failure "Placeholder or unfinished text detected: $($file.FullName)"
     }
+
+    if ($content -match '(?m)^---[ \t]+layout:') {
+        Add-Failure "Compressed front matter opening detected: $($file.FullName)"
+    }
 }
 
 $postsPath = Join-Path $repositoryRoot "_posts"
