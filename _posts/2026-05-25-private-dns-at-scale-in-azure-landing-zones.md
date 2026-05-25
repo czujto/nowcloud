@@ -58,7 +58,7 @@ Environment separation requires deliberate thought. Some organizations use commo
 
 ## Private DNS Zone Sharding
 
-Central ownership does not always require one flat zone shared across every product and environment. Private DNS zone sharding is an architecture pattern, not an Azure feature toggle: the platform deliberately establishes smaller resolution boundaries based on product or team ownership, environment, region, service type or workload lifecycle.
+Central ownership does not always require one flat zone shared across every product and environment. Private DNS zone sharding is an architecture pattern, not an Azure feature toggle: the platform deliberately establishes smaller resolution boundaries based on product or team ownership, environment, lifecycle, region, service type or workload class.
 
 <figure class="architecture-diagram">
   <img src="{{ '/assets/img/diagrams/private-dns-zone-sharding.svg' | relative_url }}" alt="Private DNS zone sharding pattern for Azure landing zones with Azure DNS Private Resolver, sharded private DNS zones, selective virtual network links and product spoke networks.">
@@ -69,7 +69,11 @@ Central ownership does not always require one flat zone shared across every prod
 
 Sharded zones are isolated by default, so cross-zone and hybrid resolution must be designed explicitly. Azure DNS Private Resolver supports hub-and-spoke and hybrid paths across approved DNS boundaries, while selective virtual network links limit which workloads consume each shard. Linking every spoke to every zone removes much of the operational isolation that sharding is intended to provide.
 
+The same boundary should be reflected in Azure role-based access control (RBAC) and Azure Policy: teams should manage only the DNS scope they own, while platform governance retains central oversight. Avoid both extremes: one large flat zone for unrelated products and a proliferation of shards for short-lived workloads without a durable operational reason.
+
 This pattern can improve operational resiliency and change safety by containing the impact of record or link changes. It does not change the underlying availability commitment of the Azure DNS service.
+
+> Architecture takeaway: Use sharding when DNS ownership, change blast radius or environment isolation becomes more important than the simplicity of a single flat private DNS zone.
 
 ## Hub-and-Spoke Considerations
 
@@ -113,6 +117,11 @@ This model can be implemented through a documented module catalogue. A module re
 Frequent causes of trouble include:
 
 - Product subscriptions creating duplicate private DNS zones for the same Azure service.
+- Large flat zones shared by too many products, making routine DNS changes unnecessarily risky.
+- Over-sharding zones for short-lived workloads, creating avoidable operational overhead.
+- Linking too many virtual networks to too many zones, recreating a wide change blast radius.
+- Sharded zones without a documented cross-zone or hybrid resolution path.
+- RBAC that does not match the intended ownership boundary of each DNS shard.
 - Missing virtual-network links, causing Azure-hosted clients to receive public answers or no useful answer.
 - On-premises DNS without the required conditional forwarders.
 - Private endpoint creation separated from DNS record lifecycle.
@@ -133,6 +142,12 @@ Diagnostics should be included for resolver components and relevant networking c
 ## Architecture checklist
 
 - Private endpoint and DNS provisioning are delivered as one supported pattern.
+- The design explicitly states whether Private DNS zones are flat, centralised or sharded.
+- Sharding boundaries are based on ownership, environment, region, service type or lifecycle.
+- RBAC and Azure Policy match the intended DNS ownership model.
+- Virtual network links are selective and do not recreate a broad blast radius.
+- Azure DNS Private Resolver is considered for cross-zone, hub-and-spoke or hybrid resolution.
+- Zone size and record growth are monitored as operational signals.
 - Central zone ownership and subscription placement are defined.
 - Spoke network resolution and segmentation requirements are documented.
 - Hybrid conditional forwarding has been tested from intended source networks.
