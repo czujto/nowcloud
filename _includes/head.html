@@ -1,9 +1,11 @@
-<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{% seo %}
+	{% feed_meta %}
 	{% include schema-person.html %}
+	{% if page.layout == "home" %}
 	{% include schema-website.html %}
+	{% endif %}
 	{% if page.layout == "post" %}
 	{% include schema-blogposting.html %}
 	{% endif %}
@@ -13,9 +15,6 @@
 
 	<!--Favicon-->
 	<link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
-
-	<!-- RSS -->
-	{% feed_meta %}
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
@@ -51,4 +50,3 @@
 		ga('send', 'pageview');
 	</script>
 	{% endif %}
-</head>

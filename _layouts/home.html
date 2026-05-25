@@ -23,24 +23,24 @@ layout: default
   {% endif %}
   <div class="posts">
     {% for post in paginator.posts %}
-    <div class="post-teaser">
+    <article class="post-preview post-teaser">
       <header>
-        <h1>
+        <h2>
           <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title }}
           </a>
-        </h1>
-        <p class="meta">
+        </h2>
+        <p class="post-date meta">
           {{ post.date | date: "%B %-d, %Y" }}
         </p>
       </header>
       <div class="excerpt">
-        {{ post.excerpt }}
+        <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
         <a class="button" href="{{ post.url | relative_url }}">
           {{ site.theme_settings.str_continue_reading }}
         </a>
       </div>
-    </div>
+    </article>
     {% endfor %}
   </div>
 
