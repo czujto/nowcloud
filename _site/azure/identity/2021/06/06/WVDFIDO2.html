@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en-GB" class="no-js">
+<head>
+  	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Secure access to Azure Virtual Desktop with FIDO2 security keys | nowcloud.pl</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Secure access to Azure Virtual Desktop with FIDO2 security keys" />
+<meta name="author" content="Kamil Lygas" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Using FIDO2 security keys with Microsoft Entra ID to strengthen access to Azure Virtual Desktop." />
+<meta property="og:description" content="Using FIDO2 security keys with Microsoft Entra ID to strengthen access to Azure Virtual Desktop." />
+<link rel="canonical" href="http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html" />
+<meta property="og:url" content="http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html" />
+<meta property="og:site_name" content="nowcloud.pl" />
+<meta property="og:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-06T00:00:00+02:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="twitter:title" content="Secure access to Azure Virtual Desktop with FIDO2 security keys" />
+<meta name="twitter:site" content="@czujto" />
+<meta name="twitter:creator" content="@Kamil Lygas" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kamil Lygas"},"dateModified":"2021-06-06T00:00:00+02:00","datePublished":"2021-06-06T00:00:00+02:00","description":"Using FIDO2 security keys with Microsoft Entra ID to strengthen access to Azure Virtual Desktop.","headline":"Secure access to Azure Virtual Desktop with FIDO2 security keys","image":"http://localhost:4000/assets/img/aboutfeature.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/avatar.jpg"},"name":"Kamil Lygas"},"url":"http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+	<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="nowcloud.pl" />
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://nowcloud.pl/#kamil-lygas",
+  "name": "Kamil Lygas",
+  "url": "https://nowcloud.pl/",
+  "jobTitle": "Senior Enterprise Architect Manager",
+  "sameAs": [
+    "https://www.linkedin.com/in/kamil-lygas-5804528",
+    "https://github.com/czujto"
+  ],
+  "knowsAbout": [
+    "Azure Landing Zones",
+    "Sovereign Cloud",
+    "Azure Virtual Desktop",
+    "Microsoft Entra ID",
+    "Azure Networking",
+    "Private DNS",
+    "Terraform",
+    "Infrastructure as Code",
+    "Platform Engineering",
+    "Azure Governance",
+    "Cloud Security"
+  ]
+}
+</script>
+
+	
+	
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": "http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html#article",
+  "headline": "Secure access to Azure Virtual Desktop with FIDO2 security keys",
+  "description": "Using FIDO2 security keys with Microsoft Entra ID to strengthen access to Azure Virtual Desktop.",
+  "author": {
+    "@id": "https://nowcloud.pl/#kamil-lygas"
+  },
+  "datePublished": "2021-06-06T00:00:00+02:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html"
+  },
+  "keywords": "Azure, Azure Virtual Desktop, Microsoft Entra ID, FIDO2",
+  "articleSection": "Azure, Identity"
+}
+</script>
+
+	
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/blog_icon_small.ico" type="image/x-icon">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+
+		gtag('consent', 'default', {
+			'analytics_storage': 'denied',
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied'
+		});
+
+		try {
+			if (window.localStorage.getItem('nowcloud_cookie_consent') === 'accepted') {
+				gtag('consent', 'update', {
+					'analytics_storage': 'granted',
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied'
+				});
+			}
+		} catch (e) {
+			// Storage may be disabled; default consent remains denied.
+		}
+
+		gtag('js', new Date());
+		gtag('config', 'UA-45703203-2');
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45703203-2"></script>
+	
+
+</head>
+<body>
+  <header class="site-header">
+	<div class="header-inner">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpg" alt="Kamil Lygas"/>
+		</a>
+		
+		<div class="site-title">
+			<a href="/">nowcloud.pl</a>
+		</div>
+	</div>
+	<nav class="site-nav" aria-label="Main navigation">
+		<ul>
+			<li><a class="page-link" href="/">Home</a></li>
+			<li><a class="page-link" href="/topics/">Topics</a></li>
+			<li><a class="page-link" href="/#latest-articles">Blog</a></li>
+			<li><a class="page-link" href="/about/">About</a></li>
+			<li><a class="page-link" href="/contact/">Contact</a></li>
+			<li class="nav-divider" aria-hidden="true"></li>
+			
+			<li class="social-link"><a href="/feed.xml" title="Follow RSS feed" aria-label="Follow RSS feed"><i class="fas fa-fw fa-rss"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://github.com/czujto" title="Follow on GitHub" aria-label="Follow on GitHub"><i class="fab fa-fw fa-github"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://www.linkedin.com/in/kamil-lygas-5804528" title="Follow on LinkedIn" aria-label="Follow on LinkedIn"><i class="fab fa-fw fa-linkedin"></i></a></li>
+			
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+	</div>
+</header>
+
+  <main id="main-content" class="content site-content">
+    <article class="post">
+  <header style="background-image: url('/')">
+    <h1 class="title">Secure access to Azure Virtual Desktop with FIDO2 security keys</h1>
+    
+    <p class="post-date meta">
+      June 6, 2021
+      
+    </p>
+  </header>
+  <section class="post-content"><p>Did you know that Microsoft supports FIDO2 security keys in Microsoft Entra ID (formerly Azure Active Directory)?</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/5nfc_hero_2021.png" alt="Error" /></p>
+
+<!--more-->
+
+<blockquote>
+  <p>Updated note (2026): Windows Virtual Desktop is now Azure Virtual Desktop (AVD), and Azure Active Directory is now Microsoft Entra ID. Screenshots retain the names shown when this article was published.</p>
+</blockquote>
+
+<p>Since Azure Virtual Desktop (formerly Windows Virtual Desktop) uses Microsoft Entra ID for authentication, FIDO2 security keys can also be used to secure applications and desktops hosted on Azure Virtual Desktop.</p>
+
+<p>In this post, I will demonstrate how to enable FIDO2 support in Microsoft Entra ID for AVD.</p>
+
+<p>First of all, we need to enable FIDO2 support in Microsoft Entra ID.
+Log in to the Azure portal and then navigate to Microsoft Entra ID Authentication methods.</p>
+
+<p>Under Policies blade, select FIDO2. Now under 1) Enable, click on Yes, next under 2) Target select All users or specific pilot group or individual user. 
+In my demo, I will only target one user. Now under 3) General, Allow self-service setup, this will allow users to register their security keys</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/fido_azuread2.png" alt="Azure AD Authentication methods" /></p>
+
+<p>Now as the Azure part is already configured, we can log in to the Office.com portal and register our security key. 
+Once you are logged in, click on your initials in the top right corner and select View Account</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_1.png" alt="Office Security Info" /></p>
+
+<p>Now click on Security Info on the left-hand side, or in the middle of the screen</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_2.png" alt="Office Security Info" /></p>
+
+<p>Now you should see currently allowed authentication methods. Click Add a method and choose Security Key from the drop-down menu</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_3.png" alt="Office Security Info" /></p>
+
+<p>Select the correct device type you are using. For this demo I used USB Yubikey hence I selected USB Device</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_4.png" alt="Office Security Info" /></p>
+
+<p>Ok, now it’s time to plug the key into the USB port and start the registration</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_5.png" alt="Office Security Info" /></p>
+
+<p>Select PIN for your key</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_6.png" alt="Office Security Info" /></p>
+
+<p>Touch your security key to finish registration</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_7.png" alt="Office Security Info" /></p>
+
+<p>That is the key now registered with my test account and ready to use. Let us try it with Azure Virtual Desktop.</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_8.png" alt="Office Security Info" /></p>
+
+<p>Launch Microsoft Remote Desktop client and hit subscribe. On the Microsoft signing page, click on Sign-in options. 
+You should now see the below options, click on Sign in with Windows Hello or a security key</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/fido2_0.PNG" alt="Remote Desktop Client" /></p>
+
+<p>Now, type in the PIN that we set up earlier on for our key</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/fido2_1.png" alt="Remote Desktop Client" /></p>
+
+<p>Touch the key</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/offixceacc_7.png" alt="Remote Desktop Client" /></p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/fido2_3.jpg" alt="Remote Desktop Client" /></p>
+
+<p>And we are in!</p>
+
+<p><img src="/assets/img/blog/2021-06-04-WVDFIDO2/rdp_in.png" alt="Remote Desktop Client" /></p>
+
+<p>The same process applies when accessing AVD via the web client.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>FIDO2 security keys provide a phishing-resistant authentication option for Azure Virtual Desktop access through Microsoft Entra ID. Before using this approach in production, validate supported clients, authentication-method policy scope, Conditional Access requirements, recovery processes and service-desk support for lost or replaced keys.</p>
+
+<p>The architecture takeaway is that a virtual desktop platform is only as secure as its access path: strong user authentication should be designed alongside session controls, application authorization and operational monitoring.</p>
+</section>
+  <section class="share-links" aria-label="Share this article">
+  <h2>Share this article</h2>
+  <p>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A4000%2Fazure%2Fidentity%2F2021%2F06%2F06%2FWVDFIDO2.html&amp;title=Secure+access+to+Azure+Virtual+Desktop+with+FIDO2+security+keys"
+      aria-label="Share Secure access to Azure Virtual Desktop with FIDO2 security keys on LinkedIn">LinkedIn</a>
+    
+    &middot;
+    <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A4000%2Fazure%2Fidentity%2F2021%2F06%2F06%2FWVDFIDO2.html&amp;text=Secure+access+to+Azure+Virtual+Desktop+with+FIDO2+security+keys"
+      aria-label="Share Secure access to Azure Virtual Desktop with FIDO2 security keys on X">X/Twitter</a>
+    
+  </p>
+  <p>Direct link: <a href="http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html">http://localhost:4000/azure/identity/2021/06/06/WVDFIDO2.html</a></p>
+</section>
+
+  <aside class="author-bio" aria-label="About the author">
+  <h2>About Kamil Lygas</h2>
+  <p>Kamil Lygas is a Senior Enterprise Architect Manager and cloud solution architect focused on Azure landing zones, sovereign cloud, platform engineering, Azure Virtual Desktop, identity, networking and infrastructure as code.</p>
+  <p>
+    <a href="/author/kamil-lygas/">Author profile</a>
+    &middot;
+    <a href="https://www.linkedin.com/in/kamil-lygas-5804528">LinkedIn</a>
+    &middot;
+    <a href="https://github.com/czujto">GitHub</a>
+  </p>
+</aside>
+
+  <section class="follow-cta" aria-label="Follow Azure architecture notes">
+  <h2>Follow Azure architecture notes</h2>
+  <p>
+    Follow new Azure architecture notes via <a href="/feed.xml">RSS</a> or connect with me on <a href="https://www.linkedin.com/in/kamil-lygas-5804528/">LinkedIn</a>.
+    Public technical work is also available on <a href="https://github.com/czujto">GitHub</a>.
+  </p>
+</section>
+
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#Azure">#Azure</a>
+    
+    <a class="tag" href="/tags#Azure+Virtual+Desktop">#Azure Virtual Desktop</a>
+    
+    <a class="tag" href="/tags#Microsoft+Entra+ID">#Microsoft Entra ID</a>
+    
+    <a class="tag" href="/tags#FIDO2">#FIDO2</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'czujtoczujto';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+</div>
+
+
+<!-- Post navigation -->
+
+
+  </main>
+  
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+	<p class="footer-links"><a href="/privacy/">Privacy and Cookies</a></p>
+</footer>
+
+
+  <script src="/assets/js/consent.js"></script>
+</body>
+</html>
