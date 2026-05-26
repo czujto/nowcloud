@@ -244,6 +244,21 @@ Azure spoke
 
 Keep resolver rules explicit. Forward the namespaces that require hybrid handling, and test both directions. If a ruleset forwards a private zone to an inbound endpoint, do not link that same rule back to the VNet containing the inbound endpoint, because that can form a DNS loop.
 
+### Azure Firewall DNS Proxy in the private pod path
+
+Public delegation remains in public DNS; private pod namespaces and `privatelink.*` zones can use Azure Firewall DNS Proxy when spokes query its private IP and upstream DNS resolves zones linked to the hub or DNS platform VNet.
+
+```text
+Spoke workload
+  -> Azure Firewall DNS Proxy
+  -> resolvable upstream DNS
+  -> private endpoint answer
+```
+
+This optional pattern can align client answers with firewall FQDN rules while avoiding a link from every zone to every spoke. In a Virtual WAN secured hub, Private DNS zones cannot link directly to the managed virtual hub, so a DNS extension VNet with a resolver or forwarder may be necessary.
+
+> Architecture takeaway: Azure Firewall DNS Proxy can reduce Private DNS zone link sprawl by making spokes use a central DNS path, but only when the firewall's upstream resolver can actually resolve the linked Private DNS zones.
+
 ### Step 5: Publish public validation records when a service requires them
 
 An application can be reachable privately while still requiring public proof that the organization controls a custom domain. Azure App Service custom-domain mapping is a useful example: validation is performed through public DNS, not an Azure Private DNS zone.
@@ -318,6 +333,7 @@ Infrastructure as code should encode zones, links, endpoints, rules and role ass
 - [Azure Private DNS virtual network links](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
 - [Azure DNS Private Resolver endpoints and rulesets](https://learn.microsoft.com/en-us/azure/dns/private-resolver-endpoints-rulesets)
 - [Azure DNS Private Resolver overview](https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
+- [Azure Firewall DNS settings](https://learn.microsoft.com/en-us/azure/firewall/dns-settings)
 - [Azure Private Endpoint DNS configuration](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns)
 - [Azure App Service custom domain mapping](https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain)
 

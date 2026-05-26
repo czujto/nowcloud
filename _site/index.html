@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en-GB" class="no-js">
+<head>
+  	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Azure Platform Architecture | nowcloud.pl</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Azure Platform Architecture" />
+<meta name="author" content="Kamil Lygas" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Azure platform architecture notes by Kamil Lygas on landing zones, sovereign cloud, networking, AVD, identity and infrastructure as code." />
+<meta property="og:description" content="Azure platform architecture notes by Kamil Lygas on landing zones, sovereign cloud, networking, AVD, identity and infrastructure as code." />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="nowcloud.pl" />
+<meta property="og:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="og:type" content="website" />
+<link rel="next" href="http://localhost:4000/page2" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="twitter:title" content="Azure Platform Architecture" />
+<meta name="twitter:site" content="@czujto" />
+<meta name="twitter:creator" content="@Kamil Lygas" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Kamil Lygas"},"description":"Azure platform architecture notes by Kamil Lygas on landing zones, sovereign cloud, networking, AVD, identity and infrastructure as code.","headline":"Azure Platform Architecture","image":"http://localhost:4000/assets/img/aboutfeature.jpg","name":"Kamil Lygas","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/avatar.jpg"},"name":"Kamil Lygas"},"sameAs":["https://github.com/czujto","https://www.linkedin.com/in/kamil-lygas-5804528"],"url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
+
+	<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="nowcloud.pl" />
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://nowcloud.pl/#kamil-lygas",
+  "name": "Kamil Lygas",
+  "url": "https://nowcloud.pl/",
+  "jobTitle": "Senior Enterprise Architect Manager",
+  "sameAs": [
+    "https://www.linkedin.com/in/kamil-lygas-5804528",
+    "https://github.com/czujto"
+  ],
+  "knowsAbout": [
+    "Azure Landing Zones",
+    "Sovereign Cloud",
+    "Azure Virtual Desktop",
+    "Microsoft Entra ID",
+    "Azure Networking",
+    "Private DNS",
+    "Terraform",
+    "Infrastructure as Code",
+    "Platform Engineering",
+    "Azure Governance",
+    "Cloud Security"
+  ]
+}
+</script>
+
+	
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://nowcloud.pl/#website",
+  "name": "nowcloud.pl",
+  "url": "https://nowcloud.pl/",
+  "author": {
+    "@id": "https://nowcloud.pl/#kamil-lygas"
+  }
+}
+</script>
+
+	
+	
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/blog_icon_small.ico" type="image/x-icon">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+
+		gtag('consent', 'default', {
+			'analytics_storage': 'denied',
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied'
+		});
+
+		try {
+			if (window.localStorage.getItem('nowcloud_cookie_consent') === 'accepted') {
+				gtag('consent', 'update', {
+					'analytics_storage': 'granted',
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied'
+				});
+			}
+		} catch (e) {
+			// Storage may be disabled; default consent remains denied.
+		}
+
+		gtag('js', new Date());
+		gtag('config', 'UA-45703203-2');
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45703203-2"></script>
+	
+
+</head>
+<body>
+  <header class="site-header">
+	<div class="header-inner">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpg" alt="Kamil Lygas"/>
+		</a>
+		
+		<div class="site-title">
+			<a href="/">nowcloud.pl</a>
+		</div>
+	</div>
+	<nav class="site-nav" aria-label="Main navigation">
+		<ul>
+			<li><a class="page-link" href="/">Home</a></li>
+			<li><a class="page-link" href="/topics/">Topics</a></li>
+			<li><a class="page-link" href="/#latest-articles">Blog</a></li>
+			<li><a class="page-link" href="/about/">About</a></li>
+			<li><a class="page-link" href="/contact/">Contact</a></li>
+			<li class="nav-divider" aria-hidden="true"></li>
+			
+			<li class="social-link"><a href="/feed.xml" title="Follow RSS feed" aria-label="Follow RSS feed"><i class="fas fa-fw fa-rss"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://github.com/czujto" title="Follow on GitHub" aria-label="Follow on GitHub"><i class="fab fa-fw fa-github"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://www.linkedin.com/in/kamil-lygas-5804528" title="Follow on LinkedIn" aria-label="Follow on LinkedIn"><i class="fab fa-fw fa-linkedin"></i></a></li>
+			
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+	</div>
+</header>
+
+  <main id="main-content" class="content site-content">
+    <div class="home">
+  
+
+  
+    <section class="home-intro">
+      <section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Azure platform architecture</p>
+    <h1>Kamil Lygas</h1>
+    <p class="hero-subtitle">Senior Enterprise Architect Manager | Azure Landing Zones | Sovereign Cloud | Platform Architecture</p>
+    <p class="hero-lead">I design secure, scalable and governed Azure platforms for enterprise product teams and regulated workloads.</p>
+    <p>This is my architecture blog: practical thinking on platform foundations, controls and operating models that allow teams to deliver safely at enterprise scale.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="/topics/">Read architecture notes</a>
+      <a class="button" href="https://www.linkedin.com/in/kamil-lygas-5804528">Connect on LinkedIn</a>
+    </div>
+  </div>
+  <aside class="hero-panel" aria-label="Architecture focus">
+    <h2>Architecture focus</h2>
+    <ul>
+      <li>Azure Landing Zones</li>
+      <li>Sovereign Cloud</li>
+      <li>Private DNS &amp; Networking</li>
+      <li>Platform Engineering</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="home-section writing-focus">
+  <h2>What I Write About</h2>
+  <p>I focus on Azure landing zones, sovereign and regulated cloud environments, enterprise networking and private DNS, Azure Virtual Desktop, identity controls, Terraform-based infrastructure as code and platform engineering for secure multi-tenant products.</p>
+</section>
+
+<section class="home-section featured-topics">
+  <div class="section-heading">
+    <h2>Featured Topics</h2>
+    <p>Architecture themes for governed, secure Azure delivery.</p>
+  </div>
+  <div class="topic-grid">
+    <article class="topic-card"><h3>Azure Landing Zones</h3><p>Governed foundations for scalable product-team delivery.</p><a href="/azure-landing-zones/">Explore topic</a></article>
+    <article class="topic-card"><h3>Sovereign Cloud</h3><p>Control boundaries and resilience for regulated workloads.</p><a href="/sovereign-cloud/">Explore topic</a></article>
+    <article class="topic-card"><h3>Azure Virtual Desktop</h3><p>Secure enterprise desktop platform architecture.</p><a href="/azure-virtual-desktop/">Explore topic</a></article>
+    <article class="topic-card"><h3>Azure Networking</h3><p>Private connectivity and enterprise name resolution.</p><a href="/azure-networking/">Explore topic</a></article>
+    <article class="topic-card"><h3>Identity &amp; Security</h3><p>Identity-led controls for trusted cloud platforms.</p><a href="/identity-security/">Explore topic</a></article>
+    <article class="topic-card"><h3>Infrastructure as Code</h3><p>Repeatable delivery with Terraform and policy automation.</p><a href="/infrastructure-as-code/">Explore topic</a></article>
+    <article class="topic-card"><h3>Platform Engineering</h3><p>Governed self-service capabilities for product teams.</p><a href="/platform-engineering/">Explore topic</a></article>
+  </div>
+</section>
+
+<section class="home-section recommended-notes" aria-labelledby="recommended-notes-title">
+  <div class="section-heading">
+    <h2 id="recommended-notes-title">Recommended Architecture Notes</h2>
+    <p>Start with the core patterns behind secure Azure platform foundations.</p>
+  </div>
+  <div class="pillar-grid">
+    <article class="pillar-card">
+      <h3>Designing Azure Landing Zones for Product Teams</h3>
+      <p>Build a governed foundation that supports autonomy, repeatability and enterprise controls.</p>
+      <a href="/azure/landing-zones/2026/05/25/designing-azure-landing-zones-for-product-teams.html">Read architecture note</a>
+    </article>
+    <article class="pillar-card">
+      <h3>Private DNS at Scale in Azure Landing Zones</h3>
+      <p>Design private resolution patterns that stay manageable across connected landing zones.</p>
+      <a href="/azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html">Read architecture note</a>
+    </article>
+  </div>
+  <nav class="related-topics" aria-label="Related architecture topics">
+    <span>Related topics</span>
+    <a href="/azure-landing-zones/">Azure Landing Zones</a>
+    <a href="/azure-networking/">Azure Networking</a>
+    <a href="/platform-engineering/">Platform Engineering</a>
+    <a href="/infrastructure-as-code/">Infrastructure as Code</a>
+  </nav>
+</section>
+
+<section class="home-section credibility">
+  <h2>Professional Credibility</h2>
+  <p>I bring more than 19 years in IT and experience spanning Microsoft Azure, Microsoft 365 and Citrix Cloud. My work includes lead Azure architecture for global multi-tenant platforms, governed landing zones and cloud foundations for regulated environments.</p>
+
+  <h2>Connect</h2>
+  <p>Find me on <a href="https://www.linkedin.com/in/kamil-lygas-5804528">LinkedIn</a> and <a href="https://github.com/czujto">GitHub</a>, or read the latest articles below.</p>
+</section>
+
+<section class="follow-cta" aria-label="Follow Azure architecture notes">
+  <h2>Follow Azure architecture notes</h2>
+  <p>
+    Follow new Azure architecture notes via <a href="/feed.xml">RSS</a> or connect with me on <a href="https://www.linkedin.com/in/kamil-lygas-5804528/">LinkedIn</a>.
+    Public technical work is also available on <a href="https://github.com/czujto">GitHub</a>.
+  </p>
+</section>
+
+
+    </section>
+
+    <h2 class="latest-heading" id="latest-articles">Latest articles</h2>
+  
+  <div class="posts">
+    
+    <article class="post-preview post-teaser">
+      <header>
+        <h2>
+          <a class="post-link" href="/azure/networking/2026/05/26/designing-pod-based-global-dns-for-azure-landing-zones.html">
+            Designing Pod-Based Global DNS for Azure Landing Zones
+          </a>
+        </h2>
+        <p class="post-date meta">
+          May 26, 2026
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>As enterprise Azure estates grow, DNS moves from being an application configuration item to being a platform control plane. A useful namespace should express durable ownership and resolution boundaries across public s...</p>
+        <a class="button" href="/azure/networking/2026/05/26/designing-pod-based-global-dns-for-azure-landing-zones.html">
+          Continue reading
+        </a>
+      </div>
+    </article>
+    
+    <article class="post-preview post-teaser">
+      <header>
+        <h2>
+          <a class="post-link" href="/azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html">
+            Private DNS at Scale in Azure Landing Zones
+          </a>
+        </h2>
+        <p class="post-date meta">
+          May 25, 2026
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>Private endpoints are straightforward to demonstrate in one virtual network. Across many subscriptions, products, environments and connected networks, private DNS becomes one of the most important shared services in a...</p>
+        <a class="button" href="/azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html">
+          Continue reading
+        </a>
+      </div>
+    </article>
+    
+    <article class="post-preview post-teaser">
+      <header>
+        <h2>
+          <a class="post-link" href="/azure/landing-zones/2026/05/25/designing-azure-landing-zones-for-product-teams.html">
+            Designing Azure Landing Zones for Product Teams
+          </a>
+        </h2>
+        <p class="post-date meta">
+          May 25, 2026
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>Azure product teams need a platform that removes repeated foundation decisions without removing accountability. An Azure landing zone should make secure delivery the normal path, not become a central queue for every s...</p>
+        <a class="button" href="/azure/landing-zones/2026/05/25/designing-azure-landing-zones-for-product-teams.html">
+          Continue reading
+        </a>
+      </div>
+    </article>
+    
+    <article class="post-preview post-teaser">
+      <header>
+        <h2>
+          <a class="post-link" href="/azure/automation/2023/03/26/Ansible.html">
+            Configuring Infrastructure using Ansible
+          </a>
+        </h2>
+        <p class="post-date meta">
+          March 26, 2023
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>Recently, I invested a lot of time into writing Terraform code to deploy a fairly complex infrastructure in Azure, which included a Virtual WAN, Firewall, Azure Front Door, and multiple virtual networks in two differe...</p>
+        <a class="button" href="/azure/automation/2023/03/26/Ansible.html">
+          Continue reading
+        </a>
+      </div>
+    </article>
+    
+    <article class="post-preview post-teaser">
+      <header>
+        <h2>
+          <a class="post-link" href="/power%20platform/2023/03/25/TuckShop.html">
+            Building Tuck Shop application using Microsoft Power Apps
+          </a>
+        </h2>
+        <p class="post-date meta">
+          March 25, 2023
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>Microsoft Power Apps is a powerful low-code platform that allows users to create custom business applications with ease. Even if you have no experience in app development, Power Apps provides an intuitive interface th...</p>
+        <a class="button" href="/power%20platform/2023/03/25/TuckShop.html">
+          Continue reading
+        </a>
+      </div>
+    </article>
+    
+  </div>
+
+  
+  <div class="pagination">
+    
+    
+    <a href="/page2" class="button" >
+      Next
+      <i class="fa fa-chevron-right"></i>
+    </a>
+    
+  </div>
+  
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+	<p class="footer-links"><a href="/privacy/">Privacy and Cookies</a></p>
+</footer>
+
+
+  <script src="/assets/js/consent.js"></script>
+</body>
+</html>

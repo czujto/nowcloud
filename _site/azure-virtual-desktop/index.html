@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en-GB" class="no-js">
+<head>
+  	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Azure Virtual Desktop | nowcloud.pl</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Azure Virtual Desktop" />
+<meta name="author" content="Kamil Lygas" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Azure Virtual Desktop architecture for enterprise access, identity, governance, networking and operational automation." />
+<meta property="og:description" content="Azure Virtual Desktop architecture for enterprise access, identity, governance, networking and operational automation." />
+<link rel="canonical" href="http://localhost:4000/azure-virtual-desktop/" />
+<meta property="og:url" content="http://localhost:4000/azure-virtual-desktop/" />
+<meta property="og:site_name" content="nowcloud.pl" />
+<meta property="og:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="twitter:title" content="Azure Virtual Desktop" />
+<meta name="twitter:site" content="@czujto" />
+<meta name="twitter:creator" content="@Kamil Lygas" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Kamil Lygas"},"dateModified":"2026-05-25T00:00:00+02:00","description":"Azure Virtual Desktop architecture for enterprise access, identity, governance, networking and operational automation.","headline":"Azure Virtual Desktop","image":"http://localhost:4000/assets/img/aboutfeature.jpg","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/avatar.jpg"},"name":"Kamil Lygas"},"url":"http://localhost:4000/azure-virtual-desktop/"}</script>
+<!-- End Jekyll SEO tag -->
+
+	<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="nowcloud.pl" />
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://nowcloud.pl/#kamil-lygas",
+  "name": "Kamil Lygas",
+  "url": "https://nowcloud.pl/",
+  "jobTitle": "Senior Enterprise Architect Manager",
+  "sameAs": [
+    "https://www.linkedin.com/in/kamil-lygas-5804528",
+    "https://github.com/czujto"
+  ],
+  "knowsAbout": [
+    "Azure Landing Zones",
+    "Sovereign Cloud",
+    "Azure Virtual Desktop",
+    "Microsoft Entra ID",
+    "Azure Networking",
+    "Private DNS",
+    "Terraform",
+    "Infrastructure as Code",
+    "Platform Engineering",
+    "Azure Governance",
+    "Cloud Security"
+  ]
+}
+</script>
+
+	
+	
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/blog_icon_small.ico" type="image/x-icon">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+
+		gtag('consent', 'default', {
+			'analytics_storage': 'denied',
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied'
+		});
+
+		try {
+			if (window.localStorage.getItem('nowcloud_cookie_consent') === 'accepted') {
+				gtag('consent', 'update', {
+					'analytics_storage': 'granted',
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied'
+				});
+			}
+		} catch (e) {
+			// Storage may be disabled; default consent remains denied.
+		}
+
+		gtag('js', new Date());
+		gtag('config', 'UA-45703203-2');
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45703203-2"></script>
+	
+
+</head>
+<body>
+  <header class="site-header">
+	<div class="header-inner">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpg" alt="Kamil Lygas"/>
+		</a>
+		
+		<div class="site-title">
+			<a href="/">nowcloud.pl</a>
+		</div>
+	</div>
+	<nav class="site-nav" aria-label="Main navigation">
+		<ul>
+			<li><a class="page-link" href="/">Home</a></li>
+			<li><a class="page-link" href="/topics/">Topics</a></li>
+			<li><a class="page-link" href="/#latest-articles">Blog</a></li>
+			<li><a class="page-link" href="/about/">About</a></li>
+			<li><a class="page-link" href="/contact/">Contact</a></li>
+			<li class="nav-divider" aria-hidden="true"></li>
+			
+			<li class="social-link"><a href="/feed.xml" title="Follow RSS feed" aria-label="Follow RSS feed"><i class="fas fa-fw fa-rss"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://github.com/czujto" title="Follow on GitHub" aria-label="Follow on GitHub"><i class="fab fa-fw fa-github"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://www.linkedin.com/in/kamil-lygas-5804528" title="Follow on LinkedIn" aria-label="Follow on LinkedIn"><i class="fab fa-fw fa-linkedin"></i></a></li>
+			
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+	</div>
+</header>
+
+  <main id="main-content" class="content site-content">
+    <article class="page">
+  <header style="background-image: url('/')">
+    <h1 class="title">Azure Virtual Desktop</h1>
+    
+  </header>
+  <section class="post-content"><h2 id="short-answer">Short answer</h2>
+
+<p>Azure Virtual Desktop is an enterprise user-platform capability that combines desktop delivery with Microsoft Entra ID security, network boundaries, profile storage, operational automation and governed Azure landing zones.</p>
+
+<h2 id="what-this-topic-covers">What This Topic Covers</h2>
+
+<p>Azure Virtual Desktop (AVD), formerly Windows Virtual Desktop (WVD), provides desktops and applications from Azure while allowing the platform team to integrate enterprise identity, networking, image management and security controls. It can support hybrid working, privileged administration patterns, partner access and regulated environments, but only when it is treated as a platform workload rather than a collection of session hosts.</p>
+
+<h2 id="key-architecture-decisions">Key Architecture Decisions</h2>
+
+<p>An enterprise AVD architecture starts with personas, applications and data flows. Pooled and personal desktops solve different needs; multi-session hosts improve density but introduce application compatibility and profile considerations. FSLogix profiles, storage performance, image lifecycle, application packaging and session host scaling have a material effect on user experience. These decisions should be captured in reusable host pool patterns rather than repeated manually for each deployment.</p>
+
+<p>Security is integral. Authentication should use Microsoft Entra ID capabilities and strong methods such as FIDO2 where appropriate. Conditional Access, administrative separation, endpoint posture, privileged access, logging and data access must align with the sensitivity of the workloads being reached through AVD. Remote access does not remove the need for network segmentation and private access patterns; it often makes clear platform boundaries more important.</p>
+
+<p>AVD also depends on sound Azure foundations. Landing zones provide policy, monitoring, subscription ownership and permitted regions. Enterprise networking and DNS control access to storage, management dependencies and private application endpoints. Infrastructure as code provides consistent host pools and supporting services, while image pipelines and operational automation prevent environments from becoming difficult to patch or reproduce.</p>
+
+<p>For sovereign and regulated use cases, architects should consider service availability by region, administrator paths, diagnostic data, user profile location and business continuity. AVD can be a controlled access layer for sensitive workloads, provided those decisions are traceable and enforced by the surrounding platform.</p>
+
+<p>I write about AVD through that broader architecture lens: secure access, repeatable operations, platform governance and the Azure services that make a user environment reliable at enterprise scale.</p>
+
+<p>Operational quality matters as much as initial deployment. Image updates, drain mode, host replacement, profile capacity, monitoring, troubleshooting and cost management all need ownership and automation if a desktop platform is to stay dependable.</p>
+
+<h2 id="common-failure-modes">Common Failure Modes</h2>
+
+<p>AVD services often underperform when image lifecycle, profile storage, authentication controls or monitoring are considered only after host pools are deployed. Inconsistent host replacement and application packaging also turn an otherwise scalable desktop platform into an operationally fragile service.</p>
+
+<h2 id="operating-model">Operating Model</h2>
+
+<p>An AVD service needs roles and runbooks around image publishing, patching, application onboarding, host replacement, capacity decisions and service incidents. A platform team may own landing zones, networking and standard host-pool patterns while service teams own application packaging and user support. Making that boundary explicit prevents every desktop environment from developing a different method of operation.</p>
+
+<p>Observability should include connection diagnostics, session host health, profile/storage signals and authentication outcomes. Cost management matters too: unused capacity, inappropriate sizing or unmanaged personal desktops can make an otherwise technically sound service difficult to sustain.</p>
+
+<p>For secure access scenarios, use current Microsoft Entra ID and Conditional Access designs, validate authentication methods and document how user data is protected. When AVD provides access to regulated applications, the desktop platform becomes part of the compliance boundary.</p>
+
+<h2 id="measures-of-success">Measures of Success</h2>
+
+<p>An enterprise AVD service should be assessed through user connection quality, image and patch currency, profile reliability, controlled privileged access, recoverability and cost per intended usage pattern. Those measures give platform owners a more useful view than counting deployed session hosts alone.</p>
+
+<h2 id="recommended-next-reading">Recommended Next Reading</h2>
+
+<ul>
+  <li><a href="/azure-landing-zones/">Azure Landing Zones</a> provides the governed foundation for desktop platform subscriptions and controls.</li>
+  <li><a href="/azure-networking/">Azure Networking</a> covers connectivity and private access dependencies.</li>
+  <li><a href="/identity-security/">Identity &amp; Security</a> covers Microsoft Entra ID and access guardrails.</li>
+  <li><a href="/azure/virtual desktop/2021/06/24/AVDResetHostpoolCount.html">How to reset AVD Host Pool Counter</a> covers a practical session host deployment detail.</li>
+  <li><a href="/azure/virtual desktop/2021/06/07/WVDRebrandingAVD.html">Windows Virtual Desktop became Azure Virtual Desktop</a> records the transition to Azure Virtual Desktop.</li>
+  <li><a href="/azure/identity/2021/06/06/WVDFIDO2.html">Secure access to Azure Virtual Desktop with FIDO2 security keys</a> demonstrates strong authentication for the service.</li>
+  <li><a href="/azure/storage/2021/06/04/ConfigureAZStorageSMBMulti.html">Azure Files SMB Multichannel</a> relates to storage performance scenarios relevant to virtual desktop platforms.</li>
+</ul>
+</section>
+  <aside class="author-bio" aria-label="About the author">
+  <h2>About Kamil Lygas</h2>
+  <p>Kamil Lygas is a Senior Enterprise Architect Manager and cloud solution architect focused on Azure landing zones, sovereign cloud, platform engineering, Azure Virtual Desktop, identity, networking and infrastructure as code.</p>
+  <p>
+    <a href="/author/kamil-lygas/">Author profile</a>
+    &middot;
+    <a href="https://www.linkedin.com/in/kamil-lygas-5804528">LinkedIn</a>
+    &middot;
+    <a href="https://github.com/czujto">GitHub</a>
+  </p>
+</aside>
+
+</article>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+	<p class="footer-links"><a href="/privacy/">Privacy and Cookies</a></p>
+</footer>
+
+
+  <script src="/assets/js/consent.js"></script>
+</body>
+</html>

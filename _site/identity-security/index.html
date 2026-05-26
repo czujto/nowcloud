@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en-GB" class="no-js">
+<head>
+  	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Identity and Security | nowcloud.pl</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Identity and Security" />
+<meta name="author" content="Kamil Lygas" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Microsoft Entra ID, privileged access and security guardrails for governed enterprise Azure platforms." />
+<meta property="og:description" content="Microsoft Entra ID, privileged access and security guardrails for governed enterprise Azure platforms." />
+<link rel="canonical" href="http://localhost:4000/identity-security/" />
+<meta property="og:url" content="http://localhost:4000/identity-security/" />
+<meta property="og:site_name" content="nowcloud.pl" />
+<meta property="og:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="twitter:title" content="Identity and Security" />
+<meta name="twitter:site" content="@czujto" />
+<meta name="twitter:creator" content="@Kamil Lygas" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Kamil Lygas"},"dateModified":"2026-05-25T00:00:00+02:00","description":"Microsoft Entra ID, privileged access and security guardrails for governed enterprise Azure platforms.","headline":"Identity and Security","image":"http://localhost:4000/assets/img/aboutfeature.jpg","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/avatar.jpg"},"name":"Kamil Lygas"},"url":"http://localhost:4000/identity-security/"}</script>
+<!-- End Jekyll SEO tag -->
+
+	<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="nowcloud.pl" />
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://nowcloud.pl/#kamil-lygas",
+  "name": "Kamil Lygas",
+  "url": "https://nowcloud.pl/",
+  "jobTitle": "Senior Enterprise Architect Manager",
+  "sameAs": [
+    "https://www.linkedin.com/in/kamil-lygas-5804528",
+    "https://github.com/czujto"
+  ],
+  "knowsAbout": [
+    "Azure Landing Zones",
+    "Sovereign Cloud",
+    "Azure Virtual Desktop",
+    "Microsoft Entra ID",
+    "Azure Networking",
+    "Private DNS",
+    "Terraform",
+    "Infrastructure as Code",
+    "Platform Engineering",
+    "Azure Governance",
+    "Cloud Security"
+  ]
+}
+</script>
+
+	
+	
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/blog_icon_small.ico" type="image/x-icon">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+
+		gtag('consent', 'default', {
+			'analytics_storage': 'denied',
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied'
+		});
+
+		try {
+			if (window.localStorage.getItem('nowcloud_cookie_consent') === 'accepted') {
+				gtag('consent', 'update', {
+					'analytics_storage': 'granted',
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied'
+				});
+			}
+		} catch (e) {
+			// Storage may be disabled; default consent remains denied.
+		}
+
+		gtag('js', new Date());
+		gtag('config', 'UA-45703203-2');
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45703203-2"></script>
+	
+
+</head>
+<body>
+  <header class="site-header">
+	<div class="header-inner">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpg" alt="Kamil Lygas"/>
+		</a>
+		
+		<div class="site-title">
+			<a href="/">nowcloud.pl</a>
+		</div>
+	</div>
+	<nav class="site-nav" aria-label="Main navigation">
+		<ul>
+			<li><a class="page-link" href="/">Home</a></li>
+			<li><a class="page-link" href="/topics/">Topics</a></li>
+			<li><a class="page-link" href="/#latest-articles">Blog</a></li>
+			<li><a class="page-link" href="/about/">About</a></li>
+			<li><a class="page-link" href="/contact/">Contact</a></li>
+			<li class="nav-divider" aria-hidden="true"></li>
+			
+			<li class="social-link"><a href="/feed.xml" title="Follow RSS feed" aria-label="Follow RSS feed"><i class="fas fa-fw fa-rss"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://github.com/czujto" title="Follow on GitHub" aria-label="Follow on GitHub"><i class="fab fa-fw fa-github"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://www.linkedin.com/in/kamil-lygas-5804528" title="Follow on LinkedIn" aria-label="Follow on LinkedIn"><i class="fab fa-fw fa-linkedin"></i></a></li>
+			
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+	</div>
+</header>
+
+  <main id="main-content" class="content site-content">
+    <article class="page">
+  <header style="background-image: url('/')">
+    <h1 class="title">Identity and Security</h1>
+    
+  </header>
+  <section class="post-content"><h2 id="short-answer">Short answer</h2>
+
+<p>Identity and security architecture for Azure establishes who and what can change or access the platform, using Microsoft Entra ID, privileged access, Conditional Access, workload identities, policy and actionable operational signals.</p>
+
+<h2 id="what-this-topic-covers">What This Topic Covers</h2>
+
+<p>Identity is the primary control plane for an Azure platform. It determines who can administer foundations, which workloads can reach services, how users authenticate to applications and how security teams respond when risk changes. In an enterprise architecture, identity and security are not a late-stage checklist: they are properties of the platform design and its day-to-day operating model.</p>
+
+<h2 id="key-architecture-decisions">Key Architecture Decisions</h2>
+
+<p>Microsoft Entra ID (formerly Azure Active Directory) provides authentication and authorization capabilities that must be combined thoughtfully. Strong authentication, Conditional Access, privileged identity management, access reviews, break-glass procedures and workload identities each address a different risk. A platform team should establish patterns for human administration and application access, reduce permanent privilege and provide evidence of who can change critical infrastructure.</p>
+
+<p>Landing zones are where many security intentions become enforceable. Management groups and subscriptions form authorization boundaries. Azure Policy can require diagnostics, prevent disallowed exposure or configurations and guide delivery toward approved services. Defender capabilities, security monitoring and centralized logging need a clear ownership model so findings are actionable rather than merely collected.</p>
+
+<p>Identity is also fundamental to Azure Virtual Desktop and multi-tenant products. Virtual desktops may expose business systems from a flexible user access layer, so authentication strength, session policies and device conditions matter. Product platforms must distinguish tenant boundaries, operational administration and service-to-service access. Managed identities and carefully scoped roles reduce secret handling and clarify trust paths.</p>
+
+<p>Regulated and sovereign platforms raise the demand for traceability. Administrators, deployment identities, external support paths and access from different locations need deliberate controls and auditable records. Policies and privileged workflows should be engineered consistently through infrastructure as code where possible, while exception handling remains explicit and reviewed.</p>
+
+<p>Technology names evolve, but these architectural principles remain stable. Older articles on this site may use Azure AD terminology from the time of publication; current guidance uses Microsoft Entra ID and connects identity controls to governed Azure platform delivery.</p>
+
+<p>A mature identity design is measurable: privileged assignments can be reviewed, risky access investigated, sign-in controls tested and workload permissions understood. Security architecture gains credibility when controls have both an owner and evidence.</p>
+
+<h2 id="common-failure-modes">Common Failure Modes</h2>
+
+<p>Identity controls fail in practice when permanent privilege becomes normal, workload credentials are unmanaged, or security signals have no operational owner. Conditional Access and policy configuration alone are insufficient unless revocation, emergency access and investigation processes are also tested.</p>
+
+<h2 id="platform-security-model">Platform Security Model</h2>
+
+<p>The platform should separate human administration from workload authentication. Human administrators need defined privileged roles, eligibility and approval practices, strong authentication and monitored emergency access. Workloads should use managed identities or other governed service identities with narrowly scoped permissions rather than unmanaged credentials.</p>
+
+<p>Security operations depend on usable signals. Diagnostic settings, activity logs, identity sign-in information, policy compliance and alert handling need destinations and owners. A control that exists in a design document but cannot be investigated during an incident does not provide reliable operational assurance.</p>
+
+<p>For multi-tenant or regulated products, architects should explicitly document tenant isolation assumptions, deployment identities, administrative routes, key management and exception handling. Microsoft Entra ID is a critical foundation, but it must be combined with resource authorization, network boundaries, data controls and deployment governance.</p>
+
+<h2 id="measures-of-success">Measures of Success</h2>
+
+<p>Identity architecture is effective when privileged access is limited and reviewed, application permissions are understood, sign-in and policy outcomes are investigated consistently and critical access can be revoked through tested procedures. These measures turn identity controls from configuration settings into an accountable security capability.</p>
+
+<p>They also help architecture, security and operations teams make defensible decisions when platform requirements or risks change.</p>
+
+<h2 id="recommended-next-reading">Recommended Next Reading</h2>
+
+<ul>
+  <li><a href="/azure-landing-zones/">Azure Landing Zones</a> places identity controls within governed platform foundations.</li>
+  <li><a href="/sovereign-cloud/">Sovereign Cloud</a> explores identity evidence and access boundaries for regulated environments.</li>
+  <li><a href="/azure/identity/2021/06/05/ContinuosAccessEvaluation.html">Enable Continuous Access Evaluation in Microsoft Entra ID</a> covers identity-driven session enforcement.</li>
+  <li><a href="/azure/identity/2021/06/06/WVDFIDO2.html">Secure access to Azure Virtual Desktop with FIDO2 security keys</a> explores phishing-resistant authentication for remote desktops.</li>
+  <li><a href="/azure/virtual desktop/2021/06/07/WVDRebrandingAVD.html">Windows Virtual Desktop became Azure Virtual Desktop</a> includes identity integration context for AVD.</li>
+</ul>
+</section>
+  <aside class="author-bio" aria-label="About the author">
+  <h2>About Kamil Lygas</h2>
+  <p>Kamil Lygas is a Senior Enterprise Architect Manager and cloud solution architect focused on Azure landing zones, sovereign cloud, platform engineering, Azure Virtual Desktop, identity, networking and infrastructure as code.</p>
+  <p>
+    <a href="/author/kamil-lygas/">Author profile</a>
+    &middot;
+    <a href="https://www.linkedin.com/in/kamil-lygas-5804528">LinkedIn</a>
+    &middot;
+    <a href="https://github.com/czujto">GitHub</a>
+  </p>
+</aside>
+
+</article>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+	<p class="footer-links"><a href="/privacy/">Privacy and Cookies</a></p>
+</footer>
+
+
+  <script src="/assets/js/consent.js"></script>
+</body>
+</html>

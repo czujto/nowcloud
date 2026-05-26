@@ -231,6 +231,78 @@ Azure DNS Private Resolver supplies managed inbound and outbound endpoints and f
 
 This does not remove design responsibility. The platform must decide where the resolver is deployed, which networks can reach it, which zones are linked, how forwarding is monitored and how a secondary region or recovery scenario behaves.
 
+## Centralised Private DNS with Azure Firewall DNS Proxy
+
+A Private Endpoint DNS design does not always require linking the `privatelink.*` zone to every spoke VNet. In a classic hub-and-spoke Azure landing zone, one option is to link required Private DNS zones to the hub or DNS platform VNet, configure Azure Firewall as a DNS proxy, and configure spoke VNets to use the Azure Firewall private IP address as their DNS server.
+
+Azure Firewall DNS Proxy acts as an intermediary. A spoke workload sends a DNS query to the firewall private IP, and the firewall forwards that query to its configured upstream DNS server. When the upstream path can resolve the platform-owned Private DNS zones, the product spoke receives the private endpoint answer through one centrally governed DNS path.
+
+Instead of making every spoke a direct resolution link:
+
+```text
+Private DNS zone
+  -> linked to every spoke VNet
+```
+
+The platform can use this pattern where appropriate:
+
+```text
+Spoke VM / workload
+  -> DNS query to Azure Firewall private IP
+  -> Azure Firewall DNS Proxy
+  -> upstream DNS that can resolve Azure Private DNS zones
+  -> private A record / Private Endpoint IP
+```
+
+This option can reduce Private DNS zone virtual network link sprawl, maintain a consistent DNS view between Azure Firewall FQDN rules and clients, simplify platform governance and reduce the temptation for workload subscriptions to create duplicate private zones.
+
+It is not a universal rule. The following constraints are important:
+
+- Spoke workloads must actually use the Azure Firewall private IP as their DNS server.
+- The upstream DNS configured on Azure Firewall must be able to resolve the required Private DNS zones.
+- When Azure Firewall uses Azure-provided DNS upstream, the required zone must be linked to the VNet context from which that Azure DNS query can resolve it.
+- When Azure Firewall uses a custom DNS server upstream, that server must resolve or correctly forward queries toward the Azure Private DNS zones.
+- DNS Proxy does not combine every zone in the tenant. It forwards each client query to the configured upstream DNS path.
+- In an Azure Virtual WAN secured hub design, Microsoft-managed secured virtual hubs cannot be linked directly to Private DNS zones. A DNS extension VNet with a resolver or forwarder pattern may be required.
+- This design centralises DNS dependency on the hub and firewall path, so availability, logging, operations and recovery ownership must be planned.
+
+> Architecture takeaway: Azure Firewall DNS Proxy can reduce Private DNS zone link sprawl by making spokes use a central DNS path, but only when the firewall's upstream resolver can actually resolve the linked Private DNS zones.
+
+### Azure Firewall DNS Proxy implementation pattern
+
+1. Enable DNS Proxy on Azure Firewall.
+2. Configure spoke VNet DNS servers to use the Azure Firewall private IP.
+3. Link required Azure Private DNS zones to the hub or DNS platform VNet.
+4. Ensure Azure Firewall upstream DNS can resolve those zones.
+5. Restart or renew DNS configuration on VMs after VNet DNS server changes.
+6. Verify resolution from a workload VM in a spoke VNet.
+
+The firewall-side configuration is intentionally concise:
+
+```bash
+az network firewall update \
+  --name <firewall-name> \
+  --resource-group <firewall-rg> \
+  --enable-dns-proxy true
+```
+
+Configure the spoke VNet to send DNS queries to the firewall private IP:
+
+```bash
+az network vnet update \
+  --name vnet-product-spoke \
+  --resource-group rg-product-network \
+  --dns-servers <azure-firewall-private-ip>
+```
+
+After the VNet DNS setting is updated, renew the guest network configuration or restart test VMs as required, then validate the storage lookup from the spoke:
+
+```bash
+nslookup <storage-account-name>.blob.core.windows.net
+```
+
+The expected answer remains the private endpoint address, such as `10.40.10.20`. The difference is that the client reaches that answer through Azure Firewall DNS Proxy and its resolvable upstream path instead of through a direct zone link in every spoke.
+
 ## Troubleshooting order
 
 When an application fails after private endpoint deployment, use an order that reflects the architecture:
@@ -272,6 +344,9 @@ Each failure can be prevented through a platform module, policy checks, ownershi
 - [Azure Private Endpoint DNS integration scenarios](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns-integration)
 - [Azure Private DNS virtual network links](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
 - [Azure DNS Private Resolver endpoints and rulesets](https://learn.microsoft.com/en-us/azure/dns/private-resolver-endpoints-rulesets)
+- [Azure Firewall DNS settings](https://learn.microsoft.com/en-us/azure/firewall/dns-settings)
+- [Azure Firewall DNS Proxy details](https://learn.microsoft.com/en-us/azure/firewall/dns-details)
+- [Private endpoint inspection in an Azure Virtual WAN secured hub](https://learn.microsoft.com/en-us/azure/firewall-manager/private-link-inspection-secure-virtual-hub)
 - [Azure CLI private endpoint DNS zone groups](https://learn.microsoft.com/en-us/cli/azure/network/private-endpoint/dns-zone-group)
 
 ## Related architecture notes

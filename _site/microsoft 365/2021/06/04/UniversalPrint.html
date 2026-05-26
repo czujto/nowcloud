@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en-GB" class="no-js">
+<head>
+  	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Universal Print: Cloud Print Management for Microsoft 365 Environments | nowcloud.pl</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Universal Print: Cloud Print Management for Microsoft 365 Environments" />
+<meta name="author" content="Kamil Lygas" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Architecture and deployment considerations for Universal Print in Microsoft 365, hybrid working and Azure Virtual Desktop environments." />
+<meta property="og:description" content="Architecture and deployment considerations for Universal Print in Microsoft 365, hybrid working and Azure Virtual Desktop environments." />
+<link rel="canonical" href="http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html" />
+<meta property="og:url" content="http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html" />
+<meta property="og:site_name" content="nowcloud.pl" />
+<meta property="og:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-04T00:00:00+02:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/img/aboutfeature.jpg" />
+<meta property="twitter:title" content="Universal Print: Cloud Print Management for Microsoft 365 Environments" />
+<meta name="twitter:site" content="@czujto" />
+<meta name="twitter:creator" content="@Kamil Lygas" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kamil Lygas"},"dateModified":"2021-06-04T00:00:00+02:00","datePublished":"2021-06-04T00:00:00+02:00","description":"Architecture and deployment considerations for Universal Print in Microsoft 365, hybrid working and Azure Virtual Desktop environments.","headline":"Universal Print: Cloud Print Management for Microsoft 365 Environments","image":"http://localhost:4000/assets/img/aboutfeature.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/avatar.jpg"},"name":"Kamil Lygas"},"url":"http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+	<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="nowcloud.pl" />
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://nowcloud.pl/#kamil-lygas",
+  "name": "Kamil Lygas",
+  "url": "https://nowcloud.pl/",
+  "jobTitle": "Senior Enterprise Architect Manager",
+  "sameAs": [
+    "https://www.linkedin.com/in/kamil-lygas-5804528",
+    "https://github.com/czujto"
+  ],
+  "knowsAbout": [
+    "Azure Landing Zones",
+    "Sovereign Cloud",
+    "Azure Virtual Desktop",
+    "Microsoft Entra ID",
+    "Azure Networking",
+    "Private DNS",
+    "Terraform",
+    "Infrastructure as Code",
+    "Platform Engineering",
+    "Azure Governance",
+    "Cloud Security"
+  ]
+}
+</script>
+
+	
+	
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": "http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html#article",
+  "headline": "Universal Print: Cloud Print Management for Microsoft 365 Environments",
+  "description": "Architecture and deployment considerations for Universal Print in Microsoft 365, hybrid working and Azure Virtual Desktop environments.",
+  "author": {
+    "@id": "https://nowcloud.pl/#kamil-lygas"
+  },
+  "datePublished": "2021-06-04T00:00:00+02:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html"
+  },
+  "keywords": "Azure, Universal Print, Microsoft 365, Microsoft Entra ID, Intune",
+  "articleSection": "Microsoft 365"
+}
+</script>
+
+	
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/blog_icon_small.ico" type="image/x-icon">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+
+		gtag('consent', 'default', {
+			'analytics_storage': 'denied',
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied'
+		});
+
+		try {
+			if (window.localStorage.getItem('nowcloud_cookie_consent') === 'accepted') {
+				gtag('consent', 'update', {
+					'analytics_storage': 'granted',
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied'
+				});
+			}
+		} catch (e) {
+			// Storage may be disabled; default consent remains denied.
+		}
+
+		gtag('js', new Date());
+		gtag('config', 'UA-45703203-2');
+	</script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45703203-2"></script>
+	
+
+</head>
+<body>
+  <header class="site-header">
+	<div class="header-inner">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpg" alt="Kamil Lygas"/>
+		</a>
+		
+		<div class="site-title">
+			<a href="/">nowcloud.pl</a>
+		</div>
+	</div>
+	<nav class="site-nav" aria-label="Main navigation">
+		<ul>
+			<li><a class="page-link" href="/">Home</a></li>
+			<li><a class="page-link" href="/topics/">Topics</a></li>
+			<li><a class="page-link" href="/#latest-articles">Blog</a></li>
+			<li><a class="page-link" href="/about/">About</a></li>
+			<li><a class="page-link" href="/contact/">Contact</a></li>
+			<li class="nav-divider" aria-hidden="true"></li>
+			
+			<li class="social-link"><a href="/feed.xml" title="Follow RSS feed" aria-label="Follow RSS feed"><i class="fas fa-fw fa-rss"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://github.com/czujto" title="Follow on GitHub" aria-label="Follow on GitHub"><i class="fab fa-fw fa-github"></i></a></li>
+			
+			
+			<li class="social-link"><a href="https://www.linkedin.com/in/kamil-lygas-5804528" title="Follow on LinkedIn" aria-label="Follow on LinkedIn"><i class="fab fa-fw fa-linkedin"></i></a></li>
+			
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+	</div>
+</header>
+
+  <main id="main-content" class="content site-content">
+    <article class="post">
+  <header style="background-image: url('/')">
+    <h1 class="title">Universal Print: Cloud Print Management for Microsoft 365 Environments</h1>
+    
+    <p class="post-date meta">
+      June 4, 2021
+      
+    </p>
+  </header>
+  <section class="post-content"><p>Universal Print provides cloud-managed printing for Microsoft 365 environments without requiring every user device to depend on a traditional print server.</p>
+
+<p><img src="/assets/img/blog/2021-06-06-UniversalPrint/universalPrint.PNG" alt="Universal Print" /></p>
+
+<!--more-->
+
+<blockquote>
+  <p>Updated note (2026): This article has been expanded to reflect the current Universal Print service model and Microsoft Entra ID terminology. Verify licensing, supported clients and printer capabilities in Microsoft documentation before a production rollout.</p>
+</blockquote>
+
+<h2 id="what-universal-print-is">What Universal Print Is</h2>
+
+<p>Universal Print is Microsoft’s cloud print service for organizations using Microsoft 365. Printers are registered in the service, shared to entitled users or groups, and discovered from supported user devices through a familiar print experience. Users do not need to locate an on-premises print server or connect over VPN simply to submit a print job.</p>
+
+<p>The architectural benefit is not that printing disappears. Printing still needs ownership, physical devices, supplies, security controls and support. The benefit is that management moves away from a collection of Windows print servers and device-specific endpoint drivers toward a centrally governed cloud service with identity-based assignment.</p>
+
+<h2 id="when-it-makes-sense">When It Makes Sense</h2>
+
+<p>Universal Print is a good candidate when an organization is adopting Microsoft Entra joined or hybrid joined devices, managing endpoints through Microsoft Intune, supporting remote or mobile workers, or delivering desktops through Azure Virtual Desktop (AVD). In those situations, relying on a traditional office-network print server can force users onto a VPN and make printer discovery dependent on network location.</p>
+
+<p>It is also useful when an enterprise wants a consistent printer inventory and assignment model. An organization can define ownership, location and permitted groups rather than allowing ad hoc queues to accumulate.</p>
+
+<p>Universal Print is not automatically the right replacement for every specialist printing workflow. Devices with finishing features, label production, high-volume batch output, offline requirements or application-specific driver dependencies need validation during a pilot.</p>
+
+<h2 id="architecture-overview">Architecture Overview</h2>
+
+<p>A typical Universal Print design contains four components:</p>
+
+<ol>
+  <li>Microsoft Entra ID identities and groups used to control access to shared printers.</li>
+  <li>Universal Print in Microsoft 365, where printers are registered, shared and monitored.</li>
+  <li>Printers that either connect directly to the service or use a connector.</li>
+  <li>User endpoints, potentially managed by Intune or provided through AVD, from which users discover or receive assigned printers.</li>
+</ol>
+
+<p>Print jobs are submitted through the cloud service. This supports users who are not on the office network, but it means internet connectivity and data-handling considerations should be assessed. Printing may contain commercially sensitive, personal or regulated information; it should be covered by the same information governance conversations as other document workflows.</p>
+
+<h2 id="printer-options">Printer Options</h2>
+
+<h3 id="universal-print-ready-printers">Universal Print-Ready Printers</h3>
+
+<p>Universal Print-ready printers contain firmware or an approved capability that communicates directly with the service. This design removes the need for an intermediary Windows connector host. For new office deployments, native support can simplify operations because there is less server infrastructure to patch and monitor.</p>
+
+<h3 id="connector-based-printers">Connector-Based Printers</h3>
+
+<p>Existing printers that do not connect directly to Universal Print can be exposed using the Universal Print connector. The connector is a Windows application installed on a machine that has direct access to the printers and remains available when users need to print. It registers printers, collects jobs from Universal Print and passes them to the target device.</p>
+
+<p>The connector is a sensible transition mechanism, especially where replacing functioning printer estates would be wasteful. However, it does not eliminate all local dependency: connector hosts need lifecycle management, monitoring, internet access and network connectivity to the printers. For resilient sites, architects should decide whether a failed connector is acceptable or whether connector capacity and recovery require a documented design.</p>
+
+<h2 id="identity-and-access-model">Identity and Access Model</h2>
+
+<p>Printer assignment should be designed with Microsoft Entra ID groups, not individual manual grants. Groups can represent a site, floor, function or permitted use case, for example a controlled finance printer or a general shared printer in a regional office.</p>
+
+<p>A practical naming model includes country or site, building or floor, usage and device identity. Meaningful location fields make discovery usable for employees who do not already know queue names. Access groups should have owners and a review process, especially where printers handle sensitive material.</p>
+
+<p>Separate printer administration from general endpoint administration where operational responsibilities differ. The team managing physical devices may not need broad cloud platform rights, while service administrators should not need unrestricted access to unrelated Microsoft 365 services.</p>
+
+<h2 id="administrator-setup-flow">Administrator Setup Flow</h2>
+
+<p>The exact portal screens evolve, but an enterprise setup normally follows this sequence:</p>
+
+<ol>
+  <li>Confirm service availability, licensing and supported client requirements using current Microsoft documentation.</li>
+  <li>Establish printer naming, location, ownership, support and access-group standards.</li>
+  <li>Register native Universal Print-ready devices, or deploy and configure a connector for existing printers.</li>
+  <li>Share registered printers and grant access to the appropriate Microsoft Entra ID groups.</li>
+  <li>Test discovery, installation, printing and support telemetry with a pilot population.</li>
+  <li>Deploy printers to managed users or devices where automatic provisioning is required.</li>
+  <li>Document operational ownership, incident handling and retirement of replaced queues or print servers.</li>
+</ol>
+
+<h2 id="user-experience">User Experience</h2>
+
+<p>On supported Windows devices, users can discover printers made available to them and print through the usual application workflow. For a user moving between offices or using a remote desktop, identity-based printer access can be much simpler than mapping an old print server share through a corporate network.</p>
+
+<p>For AVD, this can be particularly valuable where desktop access is delivered independently of the office network. The platform team should test printer discovery and document-printing performance from representative AVD sessions, while ensuring the access model does not expose location-specific or sensitive printers to users who do not require them.</p>
+
+<h2 id="intune-deployment-considerations">Intune Deployment Considerations</h2>
+
+<p>Where users need a predictable default set of printers, Intune can deploy Universal Print printers through the settings catalog. Microsoft has deprecated older printer-provisioning tooling in favor of the current Intune policy approach. Automatic deployment should still be selective: assigning every printer to every user creates poor usability and weakens governance.</p>
+
+<p>Endpoint and workplace teams should align Intune assignments with the same Entra groups used for access, and test Windows versions, shared-device behavior and removal of obsolete queues. A migration should deliberately remove replaced print server mappings to avoid confusion and duplicate queues.</p>
+
+<h2 id="security-and-governance-considerations">Security and Governance Considerations</h2>
+
+<p>Printing is a data path. The architecture should identify what information may be printed, who can access particular devices, how abandoned output is handled and whether secure-release or specialized partner features are needed. Access to a printer should follow least privilege and business need.</p>
+
+<p>Operational controls should include:</p>
+
+<ul>
+  <li>Named owners for printers, connector hosts and access groups.</li>
+  <li>Documented naming and location conventions.</li>
+  <li>Monitoring of printer registration, connector health, failed jobs and usage trends.</li>
+  <li>Patch and firmware processes for devices and connector machines.</li>
+  <li>A review of data protection and regulatory requirements for print jobs handled through a cloud service.</li>
+  <li>Controlled retirement of print servers and unused queues after migration.</li>
+</ul>
+
+<h2 id="limitations-and-operational-considerations">Limitations and Operational Considerations</h2>
+
+<p>Universal Print depends on service connectivity. Connector-backed printers also depend on a functioning connector and local network reachability. Specialist device capabilities may need manufacturer support or an additional solution. Printing volume and license entitlements should be assessed against actual workload; verify current licensing and quotas in Microsoft documentation.</p>
+
+<p>A pilot should include ordinary documents, sensitive-output scenarios, remote users, AVD users if relevant, more than one office location and support troubleshooting. Monitoring is not merely a dashboard exercise: support staff need to determine whether a failure occurred at user access, cloud submission, connector processing or the physical printer.</p>
+
+<h2 id="enterprise-architecture-takeaways">Enterprise Architecture Takeaways</h2>
+
+<p>Universal Print can remove an unnecessary dependency on traditional print servers for cloud-oriented users, but its successful adoption depends on service design. Treat printer inventory, location metadata, group assignment, connector resilience and operational monitoring as platform concerns. That approach makes printing a governed capability available to workplace and product teams rather than an exception bound to a legacy network.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Universal Print is most useful when an enterprise already relies on Microsoft Entra ID, Microsoft 365, managed endpoints or Azure Virtual Desktop and wants centrally managed print access for users in different locations. Select native printers where practical, use connectors as a managed transition path, control access with groups and validate specialist needs before migration.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/universal-print/">Universal Print documentation</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/universal-print/fundamentals/universal-print-connector-overview">What is the Universal Print connector?</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/intune/intune-service/configuration/settings-catalog-printer-provisioning">Create a Universal Print policy in Microsoft Intune</a></li>
+</ul>
+</section>
+  <section class="share-links" aria-label="Share this article">
+  <h2>Share this article</h2>
+  <p>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A4000%2Fmicrosoft%2520365%2F2021%2F06%2F04%2FUniversalPrint.html&amp;title=Universal+Print%3A+Cloud+Print+Management+for+Microsoft+365+Environments"
+      aria-label="Share Universal Print: Cloud Print Management for Microsoft 365 Environments on LinkedIn">LinkedIn</a>
+    
+    &middot;
+    <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A4000%2Fmicrosoft%2520365%2F2021%2F06%2F04%2FUniversalPrint.html&amp;text=Universal+Print%3A+Cloud+Print+Management+for+Microsoft+365+Environments"
+      aria-label="Share Universal Print: Cloud Print Management for Microsoft 365 Environments on X">X/Twitter</a>
+    
+  </p>
+  <p>Direct link: <a href="http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html">http://localhost:4000/microsoft%20365/2021/06/04/UniversalPrint.html</a></p>
+</section>
+
+  <aside class="author-bio" aria-label="About the author">
+  <h2>About Kamil Lygas</h2>
+  <p>Kamil Lygas is a Senior Enterprise Architect Manager and cloud solution architect focused on Azure landing zones, sovereign cloud, platform engineering, Azure Virtual Desktop, identity, networking and infrastructure as code.</p>
+  <p>
+    <a href="/author/kamil-lygas/">Author profile</a>
+    &middot;
+    <a href="https://www.linkedin.com/in/kamil-lygas-5804528">LinkedIn</a>
+    &middot;
+    <a href="https://github.com/czujto">GitHub</a>
+  </p>
+</aside>
+
+  <section class="follow-cta" aria-label="Follow Azure architecture notes">
+  <h2>Follow Azure architecture notes</h2>
+  <p>
+    Follow new Azure architecture notes via <a href="/feed.xml">RSS</a> or connect with me on <a href="https://www.linkedin.com/in/kamil-lygas-5804528/">LinkedIn</a>.
+    Public technical work is also available on <a href="https://github.com/czujto">GitHub</a>.
+  </p>
+</section>
+
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#Azure">#Azure</a>
+    
+    <a class="tag" href="/tags#Universal+Print">#Universal Print</a>
+    
+    <a class="tag" href="/tags#Microsoft+365">#Microsoft 365</a>
+    
+    <a class="tag" href="/tags#Microsoft+Entra+ID">#Microsoft Entra ID</a>
+    
+    <a class="tag" href="/tags#Intune">#Intune</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'czujtoczujto';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+</div>
+
+
+<!-- Post navigation -->
+
+
+  </main>
+  
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+	<p class="footer-links"><a href="/privacy/">Privacy and Cookies</a></p>
+</footer>
+
+
+  <script src="/assets/js/consent.js"></script>
+</body>
+</html>
