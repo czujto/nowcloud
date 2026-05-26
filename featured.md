@@ -17,7 +17,7 @@ This page is a lightweight index for public mentions, references and community a
 ## Selected Architecture Notes
 
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
-- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %})
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-27-private-endpoints-need-private-dns-zones %})
 - [Azure Landing Zones](/azure-landing-zones/)
 - [Azure Networking](/azure-networking/)
 - [Platform Engineering](/platform-engineering/)
