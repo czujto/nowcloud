@@ -1,0 +1,21 @@
+flowchart LR
+  External["External DNS provider<br/>nowcloud.pl parent zone"]
+  AzurePublic["Azure DNS public zone<br/>zone1.nowcloud.pl"]
+  PublicApi["Public endpoint<br/>api.app1.zone1.nowcloud.pl"]
+  Zone2["zone2.nowcloud.pl<br/>Additional platform boundary"]
+  Zone3["zone3.nowcloud.pl<br/>Additional platform boundary"]
+  Hybrid["Hybrid DNS clients"]
+  Resolver["Azure DNS Private Resolver<br/>Inbound and outbound endpoints"]
+  PrivateApp["Azure Private DNS zone<br/>app1.zone1.nowcloud.pl"]
+  PrivateLink["Private Link DNS zones<br/>privatelink.*"]
+  Spoke["Application spoke VNet<br/>Private endpoints"]
+
+  External -->|"NS delegation for zone1"| AzurePublic
+  External -.->|"optional delegation"| Zone2
+  External -.->|"optional delegation"| Zone3
+  AzurePublic -->|"public CNAME / A"| PublicApi
+  Hybrid -->|"conditional forwarding"| Resolver
+  Resolver -->|"private resolution path"| PrivateApp
+  Resolver -->|"Azure PaaS resolution"| PrivateLink
+  PrivateApp -->|"VNet link"| Spoke
+  PrivateLink -->|"VNet link / zone group"| Spoke
