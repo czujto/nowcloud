@@ -8,7 +8,7 @@ last_modified_at: 2026-05-25
 
 ## Professional Contact
 
-For conversations about Azure platform architecture, landing zones, sovereign and regulated cloud environments, Azure Virtual Desktop, enterprise networking or infrastructure as code, please contact me through [LinkedIn](https://www.linkedin.com/in/kamil-lygas-5804528/).
+For conversations about Azure platform architecture, landing zones, sovereign and regulated cloud environments, Azure Virtual Desktop, enterprise networking or infrastructure as code, please contact me through [LinkedIn](https://www.linkedin.com/in/kamil-lygas-5804528).
 
 ## Technical Profile
 

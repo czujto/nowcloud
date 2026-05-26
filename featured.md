@@ -11,7 +11,7 @@ This page is a lightweight index for public mentions, references and community a
 
 ## Public Profiles
 
-- [LinkedIn profile](https://www.linkedin.com/in/kamil-lygas-5804528/)
+- [LinkedIn profile](https://www.linkedin.com/in/kamil-lygas-5804528)
 - [GitHub profile](https://github.com/czujto)
 
 ## Selected Architecture Notes

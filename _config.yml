@@ -12,7 +12,7 @@ social:
   name: "Kamil Lygas"
   links:
     - "https://github.com/czujto"
-    - "https://www.linkedin.com/in/kamil-lygas-5804528/"
+    - "https://www.linkedin.com/in/kamil-lygas-5804528"
 defaults:
   - scope:
       path: ""
@@ -47,7 +47,7 @@ theme_settings:
   gitter:
   google_plus:
   instagram:
-  linkedin: "https://www.linkedin.com/in/kamil-lygas-5804528/"
+  linkedin: "https://www.linkedin.com/in/kamil-lygas-5804528"
   pinterest:
   reddit:
   soundcloud:
