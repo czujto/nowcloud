@@ -3,20 +3,25 @@ $font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif !default;
 $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif !default;
 $font-size: 1.10em !default;
 
-// Padding
-$padding-large: 20% !default;
-$padding-small: 5% !default;
-$padding-x-small: 3% !default;
+// Layout
+$site-width: 1160px !default;
+$article-width: 900px !default;
+$padding-large: 2.5rem !default;
+$padding-small: 1.5rem !default;
+$padding-x-small: 1rem !default;
 
 // Brand colours
-$brand-color: #f5f5f5 !default;
-$background-color: #f5f5f5 !default;
-$border-color: rgba(0, 0, 0, 0.1) !default; // rgba recommended if using feature images
+$brand-color: #ffffff !default;
+$background-color: #f8fafc !default;
+$surface-color: #ffffff !default;
+$border-color: #e2e8f0 !default;
+$border-strong-color: #cbd5e1 !default;
 
 // Typography colours
-$text-color: #383838 !default;
-$link-color: #1ABC9C !default;
-$selection-color: #D4D4D4 !default; // visible when highlighting text
+$text-color: #1e293b !default;
+$muted-text-color: #64748b !default;
+$link-color: #2563eb !default;
+$selection-color: #dbeafe !default; // visible when highlighting text
 
 // Tags color
 $tags-color: #b0b0b0 !default;
@@ -25,7 +30,7 @@ $tags-color: #b0b0b0 !default;
 $search-color: #999 !default;
 
 // Header colours
-$header-link-color: #383838 !default;
+$header-link-color: #1e293b !default;
 
 // Feature image for articles
 $feature-image-text-color: #f5f5f5 !default;

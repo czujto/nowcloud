@@ -1,4 +1,5 @@
 <header class="site-header">
+	<div class="header-inner">
 	<div class="branding">
 		{% if site.theme_settings.gravatar %}
 		<a href="{{ site.baseurl }}/">
@@ -20,8 +21,16 @@
 			<li><a class="page-link" href="{{ "/#latest-articles" | relative_url }}">Blog</a></li>
 			<li><a class="page-link" href="{{ "/about/" | relative_url }}">About</a></li>
 			<li><a class="page-link" href="{{ "/contact/" | relative_url }}">Contact</a></li>
-			<!-- Social icons from Font Awesome, if enabled  -->
-			{% include icons.html %}
+			<li class="nav-divider" aria-hidden="true"></li>
+			{% if site.theme_settings.rss %}
+			<li class="social-link"><a href="{{ "/feed.xml" | relative_url }}" title="{{ site.theme_settings.str_rss_follow }}" aria-label="{{ site.theme_settings.str_rss_follow }}"><i class="fas fa-fw fa-rss"></i></a></li>
+			{% endif %}
+			{% if site.theme_settings.github %}
+			<li class="social-link"><a href="https://github.com/{{ site.theme_settings.github }}" title="{{ site.theme_settings.str_follow_on }} GitHub" aria-label="{{ site.theme_settings.str_follow_on }} GitHub"><i class="fab fa-fw fa-github"></i></a></li>
+			{% endif %}
+			{% if site.theme_settings.linkedin %}
+			<li class="social-link"><a href="{{ site.theme_settings.linkedin }}" title="{{ site.theme_settings.str_follow_on }} LinkedIn" aria-label="{{ site.theme_settings.str_follow_on }} LinkedIn"><i class="fab fa-fw fa-linkedin"></i></a></li>
+			{% endif %}
 
             <!-- Search bar -->
             {% if site.theme_settings.search %}
@@ -36,5 +45,5 @@
             {% endif %}
 		</ul>
 	</nav>
-
+	</div>
 </header>
