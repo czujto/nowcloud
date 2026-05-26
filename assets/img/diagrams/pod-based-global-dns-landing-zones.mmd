@@ -1,12 +1,12 @@
 flowchart LR
-  External["External DNS provider<br/>nowcloud.pl parent zone"]
-  AzurePublic["Azure DNS public zone<br/>zone1.nowcloud.pl"]
-  PublicApi["Public endpoint<br/>api.app1.zone1.nowcloud.pl"]
-  Zone2["zone2.nowcloud.pl<br/>Additional platform boundary"]
-  Zone3["zone3.nowcloud.pl<br/>Additional platform boundary"]
+  External["External DNS provider<br/>example.com parent zone"]
+  AzurePublic["Azure DNS public zone<br/>zone1.example.com"]
+  PublicApi["Public endpoint<br/>api.app1.zone1.example.com"]
+  Zone2["zone2.example.com<br/>Additional platform boundary"]
+  Zone3["zone3.example.com<br/>Additional platform boundary"]
   Hybrid["Hybrid DNS clients"]
   Resolver["Azure DNS Private Resolver<br/>Inbound and outbound endpoints"]
-  PrivateApp["Azure Private DNS zone<br/>app1.zone1.nowcloud.pl"]
+  PrivateApp["Azure Private DNS zone<br/>app1.zone1.example.com"]
   PrivateLink["Private Link DNS zones<br/>privatelink.*"]
   Spoke["Application spoke VNet<br/>Private endpoints"]
 
