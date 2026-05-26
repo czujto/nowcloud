@@ -1,0 +1,20 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": "{{ page.url | absolute_url }}#article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | default: site.description | jsonify }},
+  "author": {
+    "@id": "https://nowcloud.pl/#kamil-lygas"
+  },
+  "datePublished": "{{ page.date | date_to_xmlschema }}"{% if page.last_modified_at %},
+  "dateModified": "{{ page.last_modified_at | date_to_xmlschema }}"{% endif %},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }{% if page.tags %},
+  "keywords": {{ page.tags | join: ", " | jsonify }}{% endif %}{% if page.categories %},
+  "articleSection": {{ page.categories | join: ", " | jsonify }}{% endif %}
+}
+</script>

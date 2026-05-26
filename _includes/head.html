@@ -1,22 +1,20 @@
-<head>
 	<meta charset="utf-8">
-	<title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
-	<meta name="description"
-		content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% seo %}
+	{% feed_meta %}
+	{% include schema-person.html %}
+	{% if page.layout == "home" %}
+	{% include schema-website.html %}
+	{% endif %}
+	{% if page.layout == "post" %}
+	{% include schema-blogposting.html %}
+	{% endif %}
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
 
 	<!--Favicon-->
 	<link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
-
-	<!-- Canonical -->
-	<link rel="canonical" href="{{ page.url | replace:'index.html','' | relative_url }}">
-
-	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}"
-		href="{{ "/feed.xml" | relative_url }}" />
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
@@ -52,4 +50,3 @@
 		ga('send', 'pageview');
 	</script>
 	{% endif %}
-</head>

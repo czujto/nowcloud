@@ -1,17 +1,32 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://www.nowcloud.co.uk"
+url: "https://nowcloud.pl"
+title: "nowcloud.pl"
+author: "Kamil Lygas"
+description: "Azure platform architecture insights on landing zones, sovereign cloud, Azure Virtual Desktop, identity, security and infrastructure as code."
+lang: "en-GB"
+logo: "/assets/img/avatar.jpg"
+twitter:
+  username: "czujto"
+social:
+  name: "Kamil Lygas"
+  links:
+    - "https://github.com/czujto"
+    - "https://www.linkedin.com/in/kamil-lygas-5804528"
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: "/assets/img/aboutfeature.jpg"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: |+
-      nowcloud.co.uk | 
-      A blog by Kamil Lygas
+  title: "nowcloud.pl"
   avatar: assets/img/avatar.jpg
   favicon: assets/blog_icon_small.ico
   gravatar: # Email MD5 hash
-  description: "Kamil Lygas" # used by search engines
+  description: "Azure platform architecture insights on landing zones, sovereign cloud, Azure Virtual Desktop, identity, security and infrastructure as code."
 
   # Header and footer text
   header_text: 
@@ -32,7 +47,7 @@ theme_settings:
   gitter:
   google_plus:
   instagram:
-  linkedin: "https://www.linkedin.com/in/kamil-lygas-5804528/"
+  linkedin: "https://www.linkedin.com/in/kamil-lygas-5804528"
   pinterest:
   reddit:
   soundcloud:
@@ -77,8 +92,14 @@ markdown: kramdown
 highlighter: rouge
 sass:
   sass_dir: _sass
-  style: :compressed
-plugins: [jekyll-paginate]
+  style: compressed
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
 exclude:
   - Gemfile
   - Gemfile.lock
+  - _templates
+  - "_config - backup.yml"

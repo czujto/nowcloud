@@ -1,0 +1,56 @@
+---
+layout: page
+title: Identity and Security
+description: "Microsoft Entra ID, privileged access and security guardrails for governed enterprise Azure platforms."
+permalink: /identity-security/
+show_author: true
+last_modified_at: 2026-05-25
+---
+
+## Short answer
+
+Identity and security architecture for Azure establishes who and what can change or access the platform, using Microsoft Entra ID, privileged access, Conditional Access, workload identities, policy and actionable operational signals.
+
+## What This Topic Covers
+
+Identity is the primary control plane for an Azure platform. It determines who can administer foundations, which workloads can reach services, how users authenticate to applications and how security teams respond when risk changes. In an enterprise architecture, identity and security are not a late-stage checklist: they are properties of the platform design and its day-to-day operating model.
+
+## Key Architecture Decisions
+
+Microsoft Entra ID (formerly Azure Active Directory) provides authentication and authorization capabilities that must be combined thoughtfully. Strong authentication, Conditional Access, privileged identity management, access reviews, break-glass procedures and workload identities each address a different risk. A platform team should establish patterns for human administration and application access, reduce permanent privilege and provide evidence of who can change critical infrastructure.
+
+Landing zones are where many security intentions become enforceable. Management groups and subscriptions form authorization boundaries. Azure Policy can require diagnostics, prevent disallowed exposure or configurations and guide delivery toward approved services. Defender capabilities, security monitoring and centralized logging need a clear ownership model so findings are actionable rather than merely collected.
+
+Identity is also fundamental to Azure Virtual Desktop and multi-tenant products. Virtual desktops may expose business systems from a flexible user access layer, so authentication strength, session policies and device conditions matter. Product platforms must distinguish tenant boundaries, operational administration and service-to-service access. Managed identities and carefully scoped roles reduce secret handling and clarify trust paths.
+
+Regulated and sovereign platforms raise the demand for traceability. Administrators, deployment identities, external support paths and access from different locations need deliberate controls and auditable records. Policies and privileged workflows should be engineered consistently through infrastructure as code where possible, while exception handling remains explicit and reviewed.
+
+Technology names evolve, but these architectural principles remain stable. Older articles on this site may use Azure AD terminology from the time of publication; current guidance uses Microsoft Entra ID and connects identity controls to governed Azure platform delivery.
+
+A mature identity design is measurable: privileged assignments can be reviewed, risky access investigated, sign-in controls tested and workload permissions understood. Security architecture gains credibility when controls have both an owner and evidence.
+
+## Common Failure Modes
+
+Identity controls fail in practice when permanent privilege becomes normal, workload credentials are unmanaged, or security signals have no operational owner. Conditional Access and policy configuration alone are insufficient unless revocation, emergency access and investigation processes are also tested.
+
+## Platform Security Model
+
+The platform should separate human administration from workload authentication. Human administrators need defined privileged roles, eligibility and approval practices, strong authentication and monitored emergency access. Workloads should use managed identities or other governed service identities with narrowly scoped permissions rather than unmanaged credentials.
+
+Security operations depend on usable signals. Diagnostic settings, activity logs, identity sign-in information, policy compliance and alert handling need destinations and owners. A control that exists in a design document but cannot be investigated during an incident does not provide reliable operational assurance.
+
+For multi-tenant or regulated products, architects should explicitly document tenant isolation assumptions, deployment identities, administrative routes, key management and exception handling. Microsoft Entra ID is a critical foundation, but it must be combined with resource authorization, network boundaries, data controls and deployment governance.
+
+## Measures of Success
+
+Identity architecture is effective when privileged access is limited and reviewed, application permissions are understood, sign-in and policy outcomes are investigated consistently and critical access can be revoked through tested procedures. These measures turn identity controls from configuration settings into an accountable security capability.
+
+They also help architecture, security and operations teams make defensible decisions when platform requirements or risks change.
+
+## Recommended Next Reading
+
+- [Azure Landing Zones](/azure-landing-zones/) places identity controls within governed platform foundations.
+- [Sovereign Cloud](/sovereign-cloud/) explores identity evidence and access boundaries for regulated environments.
+- [Enable Continuous Access Evaluation in Microsoft Entra ID]({% post_url 2021-06-05-ContinuosAccessEvaluation %}) covers identity-driven session enforcement.
+- [Secure access to Azure Virtual Desktop with FIDO2 security keys]({% post_url 2021-06-06-WVDFIDO2 %}) explores phishing-resistant authentication for remote desktops.
+- [Windows Virtual Desktop became Azure Virtual Desktop]({% post_url 2021-06-07-WVDRebrandingAVD %}) includes identity integration context for AVD.

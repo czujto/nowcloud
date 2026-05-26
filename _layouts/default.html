@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html class="no-js">
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-GB' }}" class="no-js">
+<head>
   {% include head.html %}
-  <body>
-    {% include header.html %}
-    <div class="content">
-      {{ content }}
-    </div>
-    {% include footer.html %}
-  </body>
+</head>
+<body>
+  {% include header.html %}
+  <main id="main-content" class="content site-content">
+    {{ content }}
+  </main>
+  {% include footer.html %}
+</body>
 </html>
