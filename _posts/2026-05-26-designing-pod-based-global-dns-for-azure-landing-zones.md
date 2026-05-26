@@ -113,6 +113,13 @@ Custom platform names and the Microsoft-recommended `privatelink.*` zones addres
 
 Do not replace the required Azure Private Link service-zone pattern with a custom alias; applications often connect using the Azure service hostname.
 
+<figure class="architecture-diagram">
+  <img src="{{ '/assets/img/diagrams/pod-based-global-dns-landing-zones.svg' | relative_url }}" alt="Pod-based DNS architecture showing nowcloud.pl delegated to Azure DNS and private resolution through Azure DNS Private Resolver.">
+  <figcaption>
+    Public NS delegation and private resolution paths remain separate controls within a neutral pod-based namespace.
+  </figcaption>
+</figure>
+
 ## Hands-on implementation pattern
 
 This is a reference implementation, not a copy-paste production design. It shows where public zones, private zones, resolver paths and validation records fit.
@@ -145,9 +152,9 @@ az network dns record-set ns show \
   --name @
 ```
 
-Record the returned Azure name servers in the change request for the parent zone and delegate `zone1.nowcloud.pl` from `nowcloud.pl`. Do not copy sample Azure name-server values from a document; each created zone receives its authoritative values.
+Delegate `zone1.nowcloud.pl` using the returned Azure name servers; each created zone receives its own authoritative values.
 
-At the external DNS provider that hosts the parent `nowcloud.pl` zone, the delegation would look like this:
+In the external parent `nowcloud.pl` zone, the delegation looks like this:
 
 | Record name in `nowcloud.pl` | Type | Value supplied by Azure DNS |
 | --- | --- | --- |
