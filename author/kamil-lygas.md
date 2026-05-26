@@ -41,6 +41,6 @@ Kamil Lygas is an Azure platform architect focused on designing secure, scalable
 
 ## Public Profiles
 
-Connect with Kamil on [LinkedIn](https://www.linkedin.com/in/kamil-lygas-5804528/) or view technical projects on [GitHub](https://github.com/czujto).
+Connect with Kamil on [LinkedIn](https://www.linkedin.com/in/kamil-lygas-5804528) or view technical projects on [GitHub](https://github.com/czujto).
 
 Public references and selected external activity are collected on [Featured and Public Activity](/featured/).
