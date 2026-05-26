@@ -83,6 +83,24 @@ Virtual network links, routing, DNS server settings and firewall behavior need c
 
 When workloads are segmented or have different regulatory boundaries, link and forwarding design should reflect those boundaries. Central service does not justify unnecessary cross-workload reachability.
 
+## Centralised Private DNS with Azure Firewall DNS Proxy
+
+In a classic hub-and-spoke landing zone, Azure Firewall DNS Proxy can be one central resolution path for spokes. A workload uses the firewall private IP as its DNS server; the firewall then forwards the query to an upstream DNS server that can resolve the centrally governed Private DNS zones.
+
+```text
+Spoke VM / workload
+  -> DNS query to Azure Firewall private IP
+  -> Azure Firewall DNS Proxy
+  -> upstream DNS with access to linked Private DNS zones
+  -> private A record / Private Endpoint IP
+```
+
+This can reduce the need to link every Private DNS zone to every spoke VNet, and it can keep the DNS answer used by clients aligned with DNS observed by firewall FQDN rules. The pattern is optional: the upstream DNS must resolve the required zones, and the spoke workloads must actually use the firewall proxy. DNS Proxy forwards queries; it does not make unlinked or unreachable private zones resolvable by itself.
+
+For Azure Virtual WAN secured hubs, Private DNS zones cannot be linked directly to the Microsoft-managed virtual hub. A DNS extension VNet using Azure DNS Private Resolver or an approved forwarder pattern may be required. As with any central DNS dependency, availability, logging and operational ownership need explicit design.
+
+> Architecture takeaway: Azure Firewall DNS Proxy can reduce Private DNS zone link sprawl by making spokes use a central DNS path, but only when the firewall's upstream resolver can actually resolve the linked Private DNS zones.
+
 ## Azure DNS Private Resolver
 
 Azure DNS Private Resolver provides managed inbound and outbound endpoints and forwarding rulesets for hybrid name-resolution patterns, reducing the need to operate custom DNS forwarder virtual machines for many scenarios.
@@ -162,6 +180,7 @@ Diagnostics should be included for resolver components and relevant networking c
 - [Azure Networking](/azure-networking/)
 - [Azure Landing Zones](/azure-landing-zones/)
 - [Azure DNS Private Resolver documentation](https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
+- [Azure Firewall DNS settings](https://learn.microsoft.com/en-us/azure/firewall/dns-settings)
 - [Sharding private DNS zones - Azure DNS](https://learn.microsoft.com/en-us/azure/dns/sharding-private-dns-zones)
 
 ## Related architecture notes

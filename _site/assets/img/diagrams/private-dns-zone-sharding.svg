@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">Private DNS Zone Sharding in Azure Landing Zones</title>
+  <desc id="diagram-description">Hub-and-spoke architecture diagram showing hybrid clients forwarding DNS queries to Azure DNS Private Resolver in a connectivity hub, centrally governed private DNS zone shards linked selectively to product and shared-services spokes, and private endpoints in each spoke.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 15px Arial, sans-serif; fill: #475569; }
+      .heading { font: 700 18px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 15px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 400 13px Arial, sans-serif; fill: #334155; }
+      .arrow-label { font: 600 13px Arial, sans-serif; fill: #334155; }
+      .note { font: 600 14px Arial, sans-serif; fill: #0f172a; }
+      .boundary { fill: #f8fafc; stroke: #64748b; stroke-width: 2; stroke-dasharray: 8 5; rx: 12; }
+      .external { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 12; }
+      .hub { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 12; }
+      .resolver { fill: #ffffff; stroke: #2563eb; stroke-width: 2; rx: 10; }
+      .zone { fill: #ecfeff; stroke: #0891b2; stroke-width: 2; rx: 10; }
+      .spoke { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 10; }
+      .endpoint { fill: #ffffff; stroke: #7c3aed; stroke-width: 1.5; rx: 8; }
+      .callout { fill: #fff7ed; stroke: #c2410c; stroke-width: 1.5; rx: 9; }
+      .flow { fill: none; stroke: #334155; stroke-width: 2; marker-end: url(#arrow); }
+      .link { fill: none; stroke: #0891b2; stroke-width: 2; stroke-dasharray: 7 4; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1440" height="900" fill="#ffffff"/>
+  <text x="720" y="42" class="title" text-anchor="middle">Private DNS Zone Sharding in Azure Landing Zones</text>
+  <text x="720" y="68" class="subtitle" text-anchor="middle">Central resolution with selectively linked DNS ownership boundaries</text>
+
+  <text x="58" y="112" class="heading">Hybrid clients</text>
+  <rect x="48" y="132" width="224" height="94" class="external"/>
+  <text x="160" y="169" class="label" text-anchor="middle">On-premises DNS /</text>
+  <text x="160" y="193" class="label" text-anchor="middle">Hybrid clients</text>
+
+  <text x="338" y="112" class="heading">Connectivity Hub / DNS Platform</text>
+  <rect x="326" y="132" width="354" height="288" class="hub"/>
+  <text x="503" y="164" class="label" text-anchor="middle">Azure DNS Private Resolver</text>
+  <rect x="356" y="188" width="294" height="70" class="resolver"/>
+  <text x="503" y="216" class="label" text-anchor="middle">Inbound endpoint</text>
+  <text x="503" y="240" class="small" text-anchor="middle">queries from approved hybrid paths</text>
+  <rect x="356" y="276" width="294" height="88" class="resolver"/>
+  <text x="503" y="305" class="label" text-anchor="middle">Outbound endpoint /</text>
+  <text x="503" y="327" class="label" text-anchor="middle">Forwarding ruleset</text>
+  <text x="503" y="349" class="small" text-anchor="middle">controlled DNS routing</text>
+  <text x="503" y="397" class="small" text-anchor="middle">Shared connectivity and resolution ownership</text>
+
+  <path d="M 272 178 L 356 218" class="flow"/>
+  <text x="310" y="150" class="arrow-label" text-anchor="middle">conditional</text>
+  <text x="310" y="167" class="arrow-label" text-anchor="middle">forwarding</text>
+
+  <text x="758" y="112" class="heading">Sharded Private DNS Zones</text>
+  <rect x="744" y="132" width="640" height="288" class="boundary"/>
+  <rect x="766" y="178" width="190" height="142" class="zone"/>
+  <text x="861" y="205" class="label" text-anchor="middle">Product A /</text>
+  <text x="861" y="226" class="label" text-anchor="middle">Production shard</text>
+  <text x="861" y="258" class="small" text-anchor="middle">privatelink.database</text>
+  <text x="861" y="277" class="small" text-anchor="middle">.windows.net</text>
+
+  <rect x="970" y="178" width="190" height="142" class="zone"/>
+  <text x="1065" y="205" class="label" text-anchor="middle">Product B /</text>
+  <text x="1065" y="226" class="label" text-anchor="middle">Development shard</text>
+  <text x="1065" y="258" class="small" text-anchor="middle">privatelink.blob</text>
+  <text x="1065" y="277" class="small" text-anchor="middle">.core.windows.net</text>
+
+  <rect x="1174" y="178" width="190" height="142" class="zone"/>
+  <text x="1269" y="205" class="label" text-anchor="middle">Shared platform</text>
+  <text x="1269" y="226" class="label" text-anchor="middle">services shard</text>
+  <text x="1269" y="258" class="small" text-anchor="middle">privatelink.vaultcore</text>
+  <text x="1269" y="277" class="small" text-anchor="middle">.azure.net</text>
+
+  <path d="M 680 248 L 744 248" class="flow"/>
+  <text x="711" y="215" class="arrow-label" text-anchor="middle">governed</text>
+  <text x="711" y="232" class="arrow-label" text-anchor="middle">zone shards</text>
+
+  <rect x="48" y="450" width="632" height="62" class="callout"/>
+  <text x="364" y="477" class="note" text-anchor="middle">Sharding boundary follows ownership, environment,</text>
+  <text x="364" y="497" class="note" text-anchor="middle">region or workload class</text>
+
+  <text x="56" y="540" class="heading">Product Spoke VNets / Landing Zones</text>
+  <rect x="48" y="560" width="1336" height="230" class="boundary"/>
+
+  <rect x="128" y="608" width="298" height="120" class="spoke"/>
+  <text x="277" y="637" class="label" text-anchor="middle">Product A Prod Spoke</text>
+  <rect x="173" y="660" width="208" height="42" class="endpoint"/>
+  <text x="277" y="686" class="small" text-anchor="middle">Private Endpoints</text>
+  <path d="M 277 643 L 277 657" class="flow"/>
+
+  <rect x="570" y="608" width="298" height="120" class="spoke"/>
+  <text x="719" y="637" class="label" text-anchor="middle">Product B Dev Spoke</text>
+  <rect x="615" y="660" width="208" height="42" class="endpoint"/>
+  <text x="719" y="686" class="small" text-anchor="middle">Private Endpoints</text>
+  <path d="M 719 643 L 719 657" class="flow"/>
+
+  <rect x="1012" y="608" width="298" height="120" class="spoke"/>
+  <text x="1161" y="637" class="label" text-anchor="middle">Shared Services Spoke</text>
+  <rect x="1057" y="660" width="208" height="42" class="endpoint"/>
+  <text x="1161" y="686" class="small" text-anchor="middle">Private Endpoints</text>
+  <path d="M 1161 643 L 1161 657" class="flow"/>
+
+  <path d="M 861 320 L 861 526 L 277 526 L 277 608" class="link"/>
+  <path d="M 1065 320 L 1065 542 L 719 542 L 719 608" class="link"/>
+  <path d="M 1269 320 L 1269 558 L 1161 558 L 1161 608" class="link"/>
+  <text x="520" y="519" class="arrow-label" text-anchor="middle">selective VNet link</text>
+  <text x="886" y="536" class="arrow-label" text-anchor="middle">selective VNet link</text>
+  <text x="1208" y="552" class="arrow-label" text-anchor="middle">selective VNet link</text>
+
+  <rect x="356" y="816" width="728" height="50" class="callout"/>
+  <text x="720" y="847" class="note" text-anchor="middle">Selective VNet links reduce DNS blast radius</text>
+</svg>
