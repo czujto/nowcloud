@@ -44,15 +44,15 @@ Typical symptoms appear quickly:
 
 A pod is a stable platform unit used to group namespace, connectivity and ownership. It might represent a region, country, environment, cloud-provider boundary, product platform shard, regulated or sovereign boundary, or an operational ownership boundary.
 
-A pod is not necessarily a Kubernetes pod. In this design it is an enterprise platform construct. For example, `gb100` may describe a United Kingdom platform boundary with a defined landing-zone pattern, resolver path and operating team. It remains meaningful even when applications, clusters or subscriptions are replaced.
+A pod is not necessarily a Kubernetes pod. In this design it is an enterprise platform construct. For example, `zone1` may describe a platform boundary with a defined landing-zone pattern, resolver path and operating team. It remains meaningful even when applications, clusters or subscriptions are replaced.
 
 A good pod label has a lifecycle longer than an individual workload. If the label must change whenever a project is renamed or a deployment slot moves, it is not a strong foundation for global DNS.
 
 ## Why DNS should follow platform boundaries
 
-DNS names should communicate stable control boundaries rather than temporary projects. Operators investigating `api.product-a.gb100.svcs.nowcloud.pl` can infer a product, a platform pod and a service namespace without being exposed to subscription IDs or implementation detail.
+DNS names should communicate stable control boundaries rather than temporary projects. Operators investigating `api.app1.zone1.nowcloud.pl` can infer an application and a platform zone without being exposed to subscription IDs or implementation detail.
 
-Ownership should follow the same structure. A central platform team can own `svcs.nowcloud.pl`, the pod capability and standard private endpoint zones. A delegated product team can manage approved records within its product scope through automation and limited RBAC. This gives autonomy without granting every workload the ability to build an unrelated DNS architecture.
+Ownership should follow the same structure. A central platform team can own `zone1.nowcloud.pl`, the pod capability and standard private endpoint zones. A delegated application team can manage approved records within its application scope through automation and limited RBAC. This gives autonomy without granting every workload the ability to build an unrelated DNS architecture.
 
 > **Architecture takeaway:** Design DNS around boundaries that remain stable during application change: platform, pod, product, resolution visibility and operational ownership.
 
@@ -62,22 +62,20 @@ Consider a public hierarchy:
 
 ```text
 nowcloud.pl
-|-- az01.nowcloud.pl
-|-- aws01.nowcloud.pl
-`-- svcs.nowcloud.pl
-    |-- gb100.svcs.nowcloud.pl
-    |   `-- product-a.gb100.svcs.nowcloud.pl
-    `-- eu100.svcs.nowcloud.pl
+|-- zone1.nowcloud.pl
+|   `-- app1.zone1.nowcloud.pl
+|-- zone2.nowcloud.pl
+`-- zone3.nowcloud.pl
 ```
 
-`nowcloud.pl` is the parent domain in this example. The domain owner may keep it with its registrar or existing public DNS provider. The parent can delegate `svcs.nowcloud.pl` to an Azure DNS public zone by publishing NS records that identify the authoritative Azure DNS name servers for the child zone. Further child zones can be delegated when there is a real ownership or operating boundary.
+`nowcloud.pl` is the parent domain in this example. The domain owner may keep it with its registrar or existing public DNS provider. The parent can delegate `zone1.nowcloud.pl` to an Azure DNS public zone by publishing NS records that identify the authoritative Azure DNS name servers for the child zone. `zone2` and `zone3` illustrate other neutral platform or hyperscaler boundaries without exposing provider-specific naming.
 
 Azure DNS hosts authoritative public DNS zones and their records; it is not the registrar that sells or registers `nowcloud.pl`. The platform therefore needs both ownership of the registered parent domain and a controlled process for adding delegations.
 
 Public DNS is the correct place for public endpoints, public ingress, internet-facing service discovery and domain ownership validation. For example, an intentionally public API could use:
 
 ```text
-api.product-a.gb100.svcs.nowcloud.pl
+api.app1.zone1.nowcloud.pl
 ```
 
 > **Architecture takeaway:** Use public DNS delegation for public ownership boundaries. Do not use public DNS as a substitute for Private DNS resolution.
@@ -93,7 +91,7 @@ This distinction matters:
 - Linking a private zone does not publicly delegate it.
 - Delegating a public child zone does not make private records resolvable from landing-zone networks.
 
-Split-horizon must be deliberate. If `product-a.gb100.svcs.nowcloud.pl` exists as both a public and a private zone, clients with access to the private zone consult the private view for that namespace. They do not automatically fall back to the public zone for a missing `api` record. The platform must either publish an appropriate `api` record in both views or place private-only records in a narrower zone such as `internal.product-a.gb100.svcs.nowcloud.pl`.
+Split-horizon must be deliberate. If `app1.zone1.nowcloud.pl` exists as both a public and a private zone, clients with access to the private zone consult the private view for that namespace. They do not automatically fall back to the public zone for a missing `api` record. The platform must either publish an appropriate `api` record in both views or place private-only records in a narrower zone such as `internal.app1.zone1.nowcloud.pl`.
 
 ## Pod namespace example
 
@@ -102,12 +100,11 @@ The following model separates identity from connectivity:
 | Purpose | Namespace example |
 | --- | --- |
 | Parent public domain | `nowcloud.pl` |
-| Cloud/platform public zones | `az01.nowcloud.pl`, `aws01.nowcloud.pl` |
-| Shared service namespace | `svcs.nowcloud.pl` |
-| Pod boundary | `gb100.svcs.nowcloud.pl` |
-| Product boundary | `product-a.gb100.svcs.nowcloud.pl` |
-| Public application name | `api.product-a.gb100.svcs.nowcloud.pl` |
-| Private application names | `internal.product-a.gb100.svcs.nowcloud.pl`, `db.product-a.gb100.svcs.nowcloud.pl` |
+| Neutral platform zones | `zone1.nowcloud.pl`, `zone2.nowcloud.pl`, `zone3.nowcloud.pl` |
+| Pod boundary used in this pattern | `zone1.nowcloud.pl` |
+| Application boundary | `app1.zone1.nowcloud.pl` |
+| Public application name | `api.app1.zone1.nowcloud.pl` |
+| Private application names | `internal.app1.zone1.nowcloud.pl`, `db.app1.zone1.nowcloud.pl` |
 | Azure SQL Private Link zone | `privatelink.database.windows.net` |
 | Storage blob Private Link zone | `privatelink.blob.core.windows.net` |
 | Key Vault Private Link zone | `privatelink.vaultcore.azure.net` |
@@ -123,9 +120,9 @@ This is a reference implementation, not a copy-paste production design. It shows
 In this model:
 
 - `nowcloud.pl` remains under registrar or parent DNS-provider control.
-- `svcs.nowcloud.pl` is delegated to an Azure DNS public zone.
-- `api.product-a.gb100.svcs.nowcloud.pl` exists publicly only when the API is intentionally public.
-- `product-a.gb100.svcs.nowcloud.pl` is an Azure Private DNS split-horizon zone for internal client resolution.
+- `zone1.nowcloud.pl` is delegated to an Azure DNS public zone.
+- `api.app1.zone1.nowcloud.pl` exists publicly only when the API is intentionally public.
+- `app1.zone1.nowcloud.pl` is an Azure Private DNS split-horizon zone for internal client resolution.
 - Microsoft `privatelink.*` zones remain separate Azure Private DNS zones for Azure private endpoints.
 - Azure DNS Private Resolver provides controlled hybrid resolution paths through the connectivity hub.
 
@@ -136,28 +133,28 @@ Create the public service zone in a platform-owned resource group. Azure DNS ass
 ```bash
 az group create \
   --name rg-dns-public-platform \
-  --location uksouth
+  --location <azure-region>
 
 az network dns zone create \
   --resource-group rg-dns-public-platform \
-  --name svcs.nowcloud.pl
+  --name zone1.nowcloud.pl
 
 az network dns record-set ns show \
   --resource-group rg-dns-public-platform \
-  --zone-name svcs.nowcloud.pl \
+  --zone-name zone1.nowcloud.pl \
   --name @
 ```
 
-Record the returned Azure name servers in the change request for the parent zone and delegate `svcs.nowcloud.pl` from `nowcloud.pl`. Do not copy sample Azure name-server values from a document; each created zone receives its authoritative values.
+Record the returned Azure name servers in the change request for the parent zone and delegate `zone1.nowcloud.pl` from `nowcloud.pl`. Do not copy sample Azure name-server values from a document; each created zone receives its authoritative values.
 
 Once delegation is effective, a deliberately public application name can be published in the delegated zone. A CNAME might point to a governed public ingress hostname, for example:
 
 ```bash
 az network dns record-set cname set-record \
   --resource-group rg-dns-public-platform \
-  --zone-name svcs.nowcloud.pl \
-  --record-set-name api.product-a.gb100 \
-  --cname ingress.az01.nowcloud.pl \
+  --zone-name zone1.nowcloud.pl \
+  --record-set-name api.app1 \
+  --cname ingress.zone1.nowcloud.pl \
   --ttl 300
 ```
 
@@ -167,28 +164,28 @@ For a deliberate split-horizon design, create a private zone for the product nam
 
 ```bash
 az group create \
-  --name rg-dns-private-gb100 \
-  --location uksouth
+  --name rg-dns-private-zone1 \
+  --location <azure-region>
 
 az network private-dns zone create \
-  --resource-group rg-dns-private-gb100 \
-  --name product-a.gb100.svcs.nowcloud.pl
+  --resource-group rg-dns-private-zone1 \
+  --name app1.zone1.nowcloud.pl
 
 az network private-dns link vnet create \
-  --resource-group rg-dns-private-gb100 \
-  --zone-name product-a.gb100.svcs.nowcloud.pl \
-  --name link-product-a-spoke \
-  --virtual-network /subscriptions/<subscription-id>/resourceGroups/rg-net-product-a/providers/Microsoft.Network/virtualNetworks/vnet-product-a-spoke \
+  --resource-group rg-dns-private-zone1 \
+  --zone-name app1.zone1.nowcloud.pl \
+  --name link-app1-spoke \
+  --virtual-network /subscriptions/<subscription-id>/resourceGroups/rg-net-app1/providers/Microsoft.Network/virtualNetworks/vnet-app1-spoke \
   --registration-enabled false
 
 az network private-dns record-set a add-record \
-  --resource-group rg-dns-private-gb100 \
-  --zone-name product-a.gb100.svcs.nowcloud.pl \
+  --resource-group rg-dns-private-zone1 \
+  --zone-name app1.zone1.nowcloud.pl \
   --record-set-name internal \
   --ipv4-address 10.42.10.20
 ```
 
-Because this private zone covers the entire `product-a` branch, linked networks will need an intentional answer for `api.product-a.gb100.svcs.nowcloud.pl` if they must reach the public API by that name. Publish the appropriate internal-view record, or choose a narrower private zone such as `internal.product-a.gb100.svcs.nowcloud.pl` when only internal names need private resolution.
+Because this private zone covers the entire `app1` branch, linked networks will need an intentional answer for `api.app1.zone1.nowcloud.pl` if they must reach the public API by that name. Publish the appropriate internal-view record, or choose a narrower private zone such as `internal.app1.zone1.nowcloud.pl` when only internal names need private resolution.
 
 ### Step 3: Add Private Link DNS zones separately
 
@@ -196,15 +193,15 @@ Private endpoints for Azure PaaS services should integrate with the relevant Mic
 
 ```bash
 az network private-dns zone create \
-  --resource-group rg-dns-private-gb100 \
+  --resource-group rg-dns-private-zone1 \
   --name privatelink.database.windows.net
 
 az network private-dns zone create \
-  --resource-group rg-dns-private-gb100 \
+  --resource-group rg-dns-private-zone1 \
   --name privatelink.blob.core.windows.net
 
 az network private-dns zone create \
-  --resource-group rg-dns-private-gb100 \
+  --resource-group rg-dns-private-zone1 \
   --name privatelink.vaultcore.azure.net
 ```
 
@@ -218,7 +215,7 @@ A typical operating path is:
 
 ```text
 On-premises DNS
-  -> conditional forward product-a.gb100.svcs.nowcloud.pl
+  -> conditional forward app1.zone1.nowcloud.pl
   -> Private Resolver inbound endpoint in the Azure hub
   -> private zone linked to the hub
 
@@ -233,11 +230,11 @@ Keep resolver rules explicit. Forward the namespaces that require hybrid handlin
 
 An application can be reachable privately while still requiring public proof that the organization controls a custom domain. Azure App Service custom-domain mapping is a useful example: validation is performed through public DNS, not an Azure Private DNS zone.
 
-For an App Service subdomain such as `api.product-a.gb100.svcs.nowcloud.pl`, the service may require:
+For an App Service subdomain such as `api.app1.zone1.nowcloud.pl`, the service may require:
 
 ```text
-CNAME  api.product-a.gb100  <app-service-default-hostname>
-TXT    asuid.api.product-a.gb100  <domain-verification-id>
+CNAME  api.app1  <app-service-default-hostname>
+TXT    asuid.api.app1  <domain-verification-id>
 ```
 
 For an apex mapping, the pattern uses an A record and an `asuid` TXT record. The exact record values come from the Azure resource configuration. Publish only the public records required for the intended public binding or verification; an `asuid` TXT record proves domain control and does not create private network reachability.
