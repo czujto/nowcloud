@@ -24,7 +24,7 @@ As enterprise Azure estates grow, DNS moves from being an application configurat
 
 Pod-based global DNS organises an enterprise DNS namespace around stable platform units such as region, pod, environment, cloud provider or product boundary. It prevents each workload from inventing names independently and gives the platform a governed model for public and private resolution across Azure, hybrid networks and product teams.
 
-The pattern is not about adding labels for their own sake. It is about making delegation, RBAC, automation, troubleshooting and recovery align with the way the platform is actually operated.
+The pattern makes delegation, RBAC, automation and troubleshooting align with platform operation.
 
 ## Problem
 
@@ -46,7 +46,7 @@ A pod is a stable platform unit used to group namespace, connectivity and owners
 
 A pod is not necessarily a Kubernetes pod. In this design it is an enterprise platform construct. For example, `zone1` may describe a platform boundary with a defined landing-zone pattern, resolver path and operating team. It remains meaningful even when applications, clusters or subscriptions are replaced.
 
-A good pod label has a lifecycle longer than an individual workload. If the label must change whenever a project is renamed or a deployment slot moves, it is not a strong foundation for global DNS.
+A good pod label outlives an individual workload or deployment slot.
 
 ## Why DNS should follow platform boundaries
 
@@ -111,7 +111,7 @@ The following model separates identity from connectivity:
 
 Custom platform names and the Microsoft-recommended `privatelink.*` zones address different needs. A custom name communicates product and pod identity and can represent an internal application contract. A `privatelink.*` private zone enables standard Azure PaaS hostnames to resolve to private endpoint addresses for the corresponding Azure service.
 
-Do not replace the required Azure Private Link service-zone pattern with a custom alias and assume service resolution is complete. Applications often connect using the service's Azure hostname, and that resolution path must be designed correctly.
+Do not replace the required Azure Private Link service-zone pattern with a custom alias; applications often connect using the Azure service hostname.
 
 ## Hands-on implementation pattern
 
@@ -146,6 +146,17 @@ az network dns record-set ns show \
 ```
 
 Record the returned Azure name servers in the change request for the parent zone and delegate `zone1.nowcloud.pl` from `nowcloud.pl`. Do not copy sample Azure name-server values from a document; each created zone receives its authoritative values.
+
+At the external DNS provider that hosts the parent `nowcloud.pl` zone, the delegation would look like this:
+
+| Record name in `nowcloud.pl` | Type | Value supplied by Azure DNS |
+| --- | --- | --- |
+| `zone1` | `NS` | `ns1-01.azure-dns.com.` |
+| `zone1` | `NS` | `ns2-01.azure-dns.net.` |
+| `zone1` | `NS` | `ns3-01.azure-dns.org.` |
+| `zone1` | `NS` | `ns4-01.azure-dns.info.` |
+
+These name-server hostnames are illustrative only. Enter the exact four NS targets assigned to the created Azure DNS zone. Public queries below `zone1.nowcloud.pl` are then referred to Azure DNS, while `nowcloud.pl` remains with its existing provider.
 
 Once delegation is effective, a deliberately public application name can be published in the delegated zone. A CNAME might point to a governed public ingress hostname, for example:
 
@@ -264,7 +275,7 @@ A namespace only remains governed when its delivery model is clear:
 - Network operations own monitored resolver paths and hybrid forwarding runbooks.
 - Security and governance functions review public exposure, privileged DNS changes and regulated-boundary exceptions.
 
-Infrastructure as code should encode zones, links, endpoints, rules and role assignments, with each pod recording its owner, permitted public names, linked networks and recovery expectations.
+Infrastructure as code should encode zones, links, endpoints, rules and role assignments, including pod ownership and permitted public names.
 
 ## Common failure modes
 
