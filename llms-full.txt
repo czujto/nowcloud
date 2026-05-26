@@ -40,7 +40,7 @@ Explains how landing zones should operate as a platform product: management grou
 
 ### Private Endpoints Need Private DNS Zones
 
-Canonical URL: https://nowcloud.pl/azure/networking/2026/05/27/private-endpoints-need-private-dns-zones.html
+Canonical URL: https://nowcloud.pl/azure/networking/2026/05/26/private-endpoints-need-private-dns-zones.html
 
 Explains why a Private Endpoint is incomplete without the correct Azure Private DNS zone, VNet link or resolver path, with an implementation and troubleshooting pattern for landing zones.
 
