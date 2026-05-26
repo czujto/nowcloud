@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="diagram-title diagram-description">
   <title id="diagram-title">Pod-Based Global DNS for Azure Landing Zones</title>
-  <desc id="diagram-description">Architecture diagram showing nowcloud.pl at an external DNS provider, zone1 delegated through NS records to Azure DNS, a public API name, and private resolution through Azure DNS Private Resolver, Azure Private DNS and Private Link zones to an application spoke virtual network. Zone2 and zone3 show additional neutral platform boundaries.</desc>
+  <desc id="diagram-description">Architecture diagram showing example.com at an external DNS provider, zone1 delegated through NS records to Azure DNS, a public API name, and private resolution through Azure DNS Private Resolver, Azure Private DNS and Private Link zones to an application spoke virtual network. Zone2 and zone3 show additional neutral platform boundaries.</desc>
   <defs>
     <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
       <path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/>
@@ -37,17 +37,17 @@
   <text class="lane" x="52" y="132">PUBLIC DNS OWNERSHIP</text>
   <rect class="external" x="52" y="158" rx="12" width="272" height="108"/>
   <text class="box-title" x="74" y="193">External DNS provider</text>
-  <text class="box-copy" x="74" y="224">nowcloud.pl parent zone</text>
+  <text class="box-copy" x="74" y="224">example.com parent zone</text>
   <text class="box-small" x="74" y="246">Retains parent-domain control</text>
 
   <rect class="public" x="414" y="158" rx="12" width="280" height="108"/>
   <text class="box-title" x="436" y="193">Azure DNS public zone</text>
-  <text class="box-copy" x="436" y="224">zone1.nowcloud.pl</text>
+  <text class="box-copy" x="436" y="224">zone1.example.com</text>
   <text class="box-small" x="436" y="246">Delegated platform boundary</text>
 
   <rect class="public" x="790" y="158" rx="12" width="348" height="108"/>
   <text class="box-title" x="812" y="193">Public API endpoint</text>
-  <text class="box-copy" x="812" y="224">api.app1.zone1.nowcloud.pl</text>
+  <text class="box-copy" x="812" y="224">api.app1.zone1.example.com</text>
   <text class="box-small" x="812" y="246">Only when intentionally public</text>
 
   <path class="solid" d="M324 212 H414"/>
@@ -56,9 +56,9 @@
   <text class="label" x="714" y="197">CNAME / A</text>
 
   <rect class="boundary" x="1180" y="158" rx="10" width="206" height="48"/>
-  <text class="box-small" x="1202" y="188">zone2.nowcloud.pl</text>
+  <text class="box-small" x="1202" y="188">zone2.example.com</text>
   <rect class="boundary" x="1180" y="218" rx="10" width="206" height="48"/>
-  <text class="box-small" x="1202" y="248">zone3.nowcloud.pl</text>
+  <text class="box-small" x="1202" y="248">zone3.example.com</text>
   <path class="dashed" d="M324 238 H362 V297 H1150 V182 H1180"/>
   <path class="dashed" d="M1150 182 V242 H1180"/>
   <text class="label-muted" x="931" y="289">optional sibling delegations</text>
@@ -77,7 +77,7 @@
 
   <rect class="private" x="770" y="376" rx="12" width="334" height="112"/>
   <text class="box-title" x="792" y="414">Private application zone</text>
-  <text class="box-copy" x="792" y="444">app1.zone1.nowcloud.pl</text>
+  <text class="box-copy" x="792" y="444">app1.zone1.example.com</text>
   <text class="box-small" x="792" y="466">Internal service names</text>
 
   <rect class="private" x="770" y="518" rx="12" width="334" height="146"/>
