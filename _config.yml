@@ -102,4 +102,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - _templates
+  - docs/
   - "_config - backup.yml"
