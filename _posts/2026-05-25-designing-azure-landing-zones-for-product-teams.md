@@ -152,7 +152,7 @@ Another mistake is presenting governance and developer experience as opposites. 
 
 ## Related architecture notes
 
-- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %})
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-27-private-endpoints-need-private-dns-zones %})
 - [Identity & Security](/identity-security/)
 - [Platform Engineering](/platform-engineering/)
 
