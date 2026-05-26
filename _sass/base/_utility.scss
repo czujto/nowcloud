@@ -1,26 +1,23 @@
 // Mix-ins
 %padding-small {
-  padding: $padding-x-small $padding-x-small * 2;
-  @media (max-width: 1000px) {
-    padding: $padding-x-small $padding-x-small;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  @media (max-width: 600px) {
+    padding: 0.9rem 1rem;
   }
 }
 %padding-regular {
-  padding: $padding-small $padding-large;
-  @media (max-width: 1000px) {
-    padding: $padding-small * 1.5 $padding-large / 1.6;
-  }
-  @media (max-width: 576px) {
-    padding: $padding-small;
+  padding: clamp(1.5rem, 4vw, $padding-large) clamp(1rem, 4vw, $padding-large);
+  @media (max-width: 600px) {
+    padding: 1.4rem 1rem;
   }
 }
 // Buttons
 .button {
-  border-radius: 0.3em;
-  border: 1px solid;
+  border-radius: 0.45rem;
+  border: 1px solid $border-strong-color;
   display: inline-block;
   margin: 1em 0;
-  padding: 0.5em 0.75em;
+  padding: 0.55em 0.9em;
 }
 a.button {
   @extend .button-link;
@@ -29,7 +26,7 @@ a.button {
   &:hover {
     background: $link-color;
     border: 1px solid $link-color;
-    color: $background-color;
+    color: $surface-color;
     text-decoration: none;
   }
 }

@@ -1,56 +1,91 @@
 .site-header {
-  @extend %padding-small;
   background: $brand-color;
   border-bottom: 1px solid $border-color;
-  display: inline-block;
-  float: left;
   width: 100%;
+
+  .header-inner {
+    align-items: center;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: $site-width;
+    padding: 0.95rem clamp(1rem, 4vw, 2rem);
+  }
+
+  .branding {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+  }
 
   a {
     color: $header-link-color;
   }
 
   .avatar {
-    height: 2em;
-    width: 2em;
-    float: left;
-    margin-top: -3px;
-    border-radius: 0.2em;
-    margin-right: 1em;
+    border-radius: 50%;
+    display: block;
+    height: 2.25rem;
+    margin-right: 0.75rem;
+    width: 2.25rem;
   }
 
   .site-title {
-    float: left;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.05em;
     line-height: 1.5;
   }
 
   .site-nav {
     ul {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.15rem 1.1rem;
       margin: 0;
       padding: 0;
       list-style: none;
       line-height: 1.5;
-      float: right;
-      text-align: right;
     }
     li {
-      display: inline;
-      margin-right: 1em;
-      vertical-align: middle;
-      &:last-of-type {
-        margin-right: 0;
+      display: block;
+      margin: 0;
+    }
+    .page-link {
+      display: inline-block;
+      padding: 0.35rem 0;
+    }
+    .page-link:hover {
+      color: $link-color;
+    }
+    .nav-divider {
+      background: $border-strong-color;
+      height: 1.35rem;
+      margin-left: 0.35rem;
+      width: 1px;
+    }
+    .social-link a {
+      color: $muted-text-color;
+      display: block;
+      padding: 0.35rem 0;
+    }
+    .social-link a:hover {
+      color: $link-color;
+    }
+    @media (max-width: 760px) {
+      width: 100%;
+      ul {
+        gap: 0.2rem 1rem;
       }
     }
-    @media (max-width: 1100px) {
-      ul {
-        display: inline-block;
-        float: left;
-        padding-top: $padding-small;
-        text-align: left;
-        width: 100%;
-      }
+  }
+
+  @media (max-width: 760px) {
+    .header-inner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.7rem;
     }
   }
 
