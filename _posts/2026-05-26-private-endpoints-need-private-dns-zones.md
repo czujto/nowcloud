@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Private Endpoints Need Private DNS Zones"
-date: 2026-05-27
+date: 2026-05-26
 description: "A practical Azure landing zone note explaining why private endpoints are incomplete without correct Private DNS zones, VNet links and resolver paths."
 categories:
   - azure
@@ -12,7 +12,7 @@ tags:
   - azure-dns
   - azure-landing-zones
   - platform-engineering
-permalink: /azure/networking/2026/05/27/private-endpoints-need-private-dns-zones.html
+permalink: /azure/networking/2026/05/26/private-endpoints-need-private-dns-zones.html
 ---
 
 Private connectivity is not complete when an endpoint resource exists in the portal. It is complete when the intended clients can resolve the service name correctly and use the private path reliably.
@@ -35,9 +35,9 @@ Private Endpoint plus broken DNS is incomplete private connectivity. The resourc
 
 This is Part 1 of the **Azure DNS for Landing Zones** series.
 
-- Part 1: **Private Endpoints Need Private DNS Zones**
-- Part 2: **Private DNS at Scale in Azure Landing Zones** - coming next
-- Part 3: **Designing Pod-Based Global DNS for Azure Landing Zones** - coming after that
+- Part 1: Private Endpoints Need Private DNS Zones
+- Part 2: Private DNS at Scale in Azure Landing Zones — coming next
+- Part 3: Designing Pod-Based Global DNS for Azure Landing Zones — coming after that
 
 Part 1 focuses on the smallest useful design decision: whenever a workload is expected to use a private endpoint, its name-resolution path must be designed and tested with the endpoint.
 

@@ -50,7 +50,7 @@ A landing zone is succeeding when teams can obtain compliant environments predic
 ## Recommended Next Reading
 
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %}) explains subscription vending, policy baselines and platform ownership.
-- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-27-private-endpoints-need-private-dns-zones %}) addresses private endpoint resolution as a shared platform capability.
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %}) addresses private endpoint resolution as a shared platform capability.
 - Private DNS at Scale in Azure Landing Zones - coming next.
 - Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
 - [Infrastructure as Code](/infrastructure-as-code/) describes repeatable Terraform and policy-as-code delivery.

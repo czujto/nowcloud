@@ -24,7 +24,7 @@ Enterprise desktop platforms, secure access, profiles, networking and repeatable
 
 ## Azure Networking
 
-Secure connected landing zones, private endpoints and private name resolution. Read [Azure Networking](/azure-networking/) and [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-27-private-endpoints-need-private-dns-zones %}).
+Secure connected landing zones, private endpoints and private name resolution. Read [Azure Networking](/azure-networking/) and [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %}).
 
 Private DNS at Scale in Azure Landing Zones - coming next. Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
 

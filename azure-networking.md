@@ -47,7 +47,7 @@ A network foundation is working when new workloads consume standard connectivity
 
 ## Recommended Next Reading
 
-- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-27-private-endpoints-need-private-dns-zones %}) explains why a private endpoint must include the correct DNS resolution path.
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %}) explains why a private endpoint must include the correct DNS resolution path.
 - Private DNS at Scale in Azure Landing Zones - coming next.
 - Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
 - [Azure Landing Zones](/azure-landing-zones/) explains the surrounding governance and subscription foundation.
