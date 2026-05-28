@@ -18,6 +18,14 @@ Private endpoints are straightforward to demonstrate in one virtual network. Acr
 
 Private DNS at Azure landing-zone scale is a shared platform capability that ensures private endpoint names resolve consistently from workload, hub and hybrid networks through centrally governed zones and resolution paths.
 
+## Series context
+
+This is Part 2 of the **Azure DNS for Landing Zones** series.
+
+- Part 1: [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
+- Part 2: Private DNS at Scale in Azure Landing Zones
+- Part 3: Designing Pod-Based Global DNS for Azure Landing Zones - coming after that
+
 ## Architecture decision
 
 Centralise ownership of approved Azure Private DNS zones and resolver patterns, while enabling product teams to provision supported private endpoints through automated platform interfaces.
@@ -185,9 +193,11 @@ Diagnostics should be included for resolver components and relevant networking c
 
 ## Related architecture notes
 
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
 - [Infrastructure as Code](/infrastructure-as-code/)
 - [Sovereign Cloud](/sovereign-cloud/)
+- Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
 
 ## Summary
 
