@@ -46,7 +46,7 @@ Explains why a Private Endpoint is incomplete without the correct Azure Private 
 
 ### Private DNS at Scale in Azure Landing Zones
 
-Canonical URL: https://nowcloud.pl/azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html
+Canonical URL: https://nowcloud.pl/azure/networking/2026/05/29/private-dns-at-scale-in-azure-landing-zones.html
 
 Explains why Private DNS becomes a central platform capability as private endpoints grow across subscriptions and networks, including central zones, Azure DNS Private Resolver, hybrid forwarding, ownership and failure modes.
 

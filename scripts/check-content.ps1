@@ -108,7 +108,7 @@ foreach ($topic in $topicPages) {
 $publishedPillarPosts = @(
     "2026-05-25-designing-azure-landing-zones-for-product-teams.md",
     "2026-05-26-private-endpoints-need-private-dns-zones.md",
-    "2026-05-25-private-dns-at-scale-in-azure-landing-zones.md"
+    "2026-05-29-private-dns-at-scale-in-azure-landing-zones.md"
 )
 
 foreach ($pillarPost in $publishedPillarPosts) {

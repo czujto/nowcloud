@@ -20,7 +20,7 @@ nowcloud.pl is the personal Azure architecture blog of Kamil Lygas, a Senior Ent
 
 - Designing Azure Landing Zones for Product Teams: https://nowcloud.pl/azure/landing-zones/2026/05/25/designing-azure-landing-zones-for-product-teams.html
 - Private Endpoints Need Private DNS Zones: https://nowcloud.pl/azure/networking/2026/05/26/private-endpoints-need-private-dns-zones.html
-- Private DNS at Scale in Azure Landing Zones: https://nowcloud.pl/azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html
+- Private DNS at Scale in Azure Landing Zones: https://nowcloud.pl/azure/networking/2026/05/29/private-dns-at-scale-in-azure-landing-zones.html
 - Azure Files SMB Multichannel: https://nowcloud.pl/azure/storage/2021/06/04/ConfigureAZStorageSMBMulti.html
 - Universal Print: https://nowcloud.pl/microsoft%20365/2021/06/04/UniversalPrint.html
 

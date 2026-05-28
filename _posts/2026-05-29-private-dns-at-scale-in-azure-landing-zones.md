@@ -1,13 +1,13 @@
 ---
 layout: post
-date: 2026-05-25
-permalink: /azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html
+date: 2026-05-29
+permalink: /azure/networking/2026/05/29/private-dns-at-scale-in-azure-landing-zones.html
 title: "Private DNS at Scale in Azure Landing Zones"
 description: "An architecture approach to Azure Private DNS, private endpoints and hybrid name resolution across enterprise landing zones."
 categories: [Azure, Networking]
 tags: [Azure, Private DNS, Private Endpoints, Azure Landing Zones, Networking]
 excerpt_separator: <!--more-->
-last_modified_at: 2026-05-25
+last_modified_at: 2026-05-28
 ---
 
 Private endpoints are straightforward to demonstrate in one virtual network. Across many subscriptions, products, environments and connected networks, private DNS becomes one of the most important shared services in an Azure platform.
