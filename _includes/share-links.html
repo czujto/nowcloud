@@ -1,13 +1,14 @@
+{% assign public_article_url = site.public_url | append: site.baseurl | append: page.url %}
 <section class="share-links" aria-label="Share this article">
   <h2>Share this article</h2>
   <p>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | url_encode }}&amp;title={{ page.title | url_encode }}"
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ public_article_url | url_encode }}&amp;title={{ page.title | url_encode }}"
       aria-label="Share {{ page.title }} on LinkedIn">LinkedIn</a>
     {% if site.theme_settings.twitter %}
     &middot;
-    <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url | url_encode }}&amp;text={{ page.title | url_encode }}"
+    <a href="https://twitter.com/intent/tweet?url={{ public_article_url | url_encode }}&amp;text={{ page.title | url_encode }}"
       aria-label="Share {{ page.title }} on X">X/Twitter</a>
     {% endif %}
   </p>
-  <p>Direct link: <a href="{{ page.url | absolute_url }}">{{ page.url | absolute_url }}</a></p>
+  <p>Direct link: <a href="{{ public_article_url }}">{{ public_article_url }}</a></p>
 </section>

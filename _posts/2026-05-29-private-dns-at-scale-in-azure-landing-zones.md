@@ -1,13 +1,13 @@
 ---
 layout: post
-date: 2026-05-25
-permalink: /azure/networking/2026/05/25/private-dns-at-scale-in-azure-landing-zones.html
+date: 2026-05-29
+permalink: /azure/networking/2026/05/29/private-dns-at-scale-in-azure-landing-zones.html
 title: "Private DNS at Scale in Azure Landing Zones"
 description: "An architecture approach to Azure Private DNS, private endpoints and hybrid name resolution across enterprise landing zones."
 categories: [Azure, Networking]
 tags: [Azure, Private DNS, Private Endpoints, Azure Landing Zones, Networking]
 excerpt_separator: <!--more-->
-last_modified_at: 2026-05-25
+last_modified_at: 2026-05-28
 ---
 
 Private endpoints are straightforward to demonstrate in one virtual network. Across many subscriptions, products, environments and connected networks, private DNS becomes one of the most important shared services in an Azure platform.
@@ -17,6 +17,14 @@ Private endpoints are straightforward to demonstrate in one virtual network. Acr
 ## Short answer
 
 Private DNS at Azure landing-zone scale is a shared platform capability that ensures private endpoint names resolve consistently from workload, hub and hybrid networks through centrally governed zones and resolution paths.
+
+## Series context
+
+This is Part 2 of the **Azure DNS for Landing Zones** series.
+
+- Part 1: [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
+- Part 2: Private DNS at Scale in Azure Landing Zones
+- Part 3: Designing Pod-Based Global DNS for Azure Landing Zones - coming after that
 
 ## Architecture decision
 
@@ -185,9 +193,11 @@ Diagnostics should be included for resolver components and relevant networking c
 
 ## Related architecture notes
 
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
 - [Infrastructure as Code](/infrastructure-as-code/)
 - [Sovereign Cloud](/sovereign-cloud/)
+- Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
 
 ## Summary
 

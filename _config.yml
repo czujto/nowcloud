@@ -1,6 +1,7 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://nowcloud.pl"
+public_url: "https://nowcloud.pl"
 title: "nowcloud.pl"
 author: "Kamil Lygas"
 description: "Azure platform architecture insights on landing zones, sovereign cloud, Azure Virtual Desktop, identity, security and infrastructure as code."

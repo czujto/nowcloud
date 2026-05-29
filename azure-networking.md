@@ -47,7 +47,9 @@ A network foundation is working when new workloads consume standard connectivity
 
 ## Recommended Next Reading
 
-- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %}) provides a governed enterprise pattern for private endpoint resolution.
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %}) explains why a private endpoint must include the correct DNS resolution path.
+- [Private DNS at Scale in Azure Landing Zones](/azure/networking/2026/05/29/private-dns-at-scale-in-azure-landing-zones.html) provides a governed enterprise pattern for private endpoint resolution.
+- Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
 - [Azure Landing Zones](/azure-landing-zones/) explains the surrounding governance and subscription foundation.
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %}) discusses networked Azure storage performance and configuration.
 - [Configuring Infrastructure using Ansible]({% post_url 2023-03-26-Ansible %}) includes Azure Virtual WAN, firewall and virtual network context.

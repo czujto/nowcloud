@@ -57,6 +57,7 @@ foreach ($file in $textFiles) {
 }
 
 $postsPath = Join-Path $repositoryRoot "_posts"
+$draftsPath = Join-Path $repositoryRoot "_drafts"
 foreach ($post in Get-ChildItem -LiteralPath $postsPath -Filter "*.md" -File) {
     $frontMatter = Get-FrontMatter -Path $post.FullName
     if ($null -eq $frontMatter) {
@@ -106,14 +107,31 @@ foreach ($topic in $topicPages) {
 
 $publishedPillarPosts = @(
     "2026-05-25-designing-azure-landing-zones-for-product-teams.md",
-    "2026-05-25-private-dns-at-scale-in-azure-landing-zones.md"
+    "2026-05-26-private-endpoints-need-private-dns-zones.md",
+    "2026-05-29-private-dns-at-scale-in-azure-landing-zones.md"
 )
 
 foreach ($pillarPost in $publishedPillarPosts) {
     $path = Join-Path $postsPath $pillarPost
+    if (-not (Test-Path -LiteralPath $path)) {
+        Add-Failure "Missing published pillar post: $path"
+        continue
+    }
+
     $frontMatter = Get-FrontMatter -Path $path
     if ($null -ne $frontMatter -and $frontMatter.Yaml -match '(?m)^published:\s*false\s*$') {
         Add-Failure "Published pillar post is marked as draft: $path"
+    }
+}
+
+$dnsSeriesDrafts = @(
+    "designing-pod-based-global-dns-for-azure-landing-zones.md"
+)
+
+foreach ($dnsSeriesDraft in $dnsSeriesDrafts) {
+    $path = Join-Path $draftsPath $dnsSeriesDraft
+    if (-not (Test-Path -LiteralPath $path)) {
+        Add-Failure "Missing DNS series draft: $path"
     }
 }
 

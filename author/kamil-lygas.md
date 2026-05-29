@@ -35,7 +35,8 @@ Kamil Lygas is an Azure platform architect focused on designing secure, scalable
 ## Selected Articles
 
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
-- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %})
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
+- [Private DNS at Scale in Azure Landing Zones](/azure/networking/2026/05/29/private-dns-at-scale-in-azure-landing-zones.html)
 - [Enable Continuous Access Evaluation in Microsoft Entra ID]({% post_url 2021-06-05-ContinuosAccessEvaluation %})
 - [Azure Files SMB Multichannel: Performance, Requirements and Configuration]({% post_url 2021-06-04-ConfigureAZStorageSMBMulti %})
 
