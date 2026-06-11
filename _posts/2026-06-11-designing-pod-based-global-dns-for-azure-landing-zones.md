@@ -72,6 +72,8 @@ example.com
 
 `example.com` is the parent domain in this example. The domain owner may keep it with its registrar or existing public DNS provider. The parent can delegate `zone1.example.com` to an Azure DNS public zone by publishing NS records that identify the authoritative Azure DNS name servers for the child zone. `zone2` and `zone3` illustrate other neutral platform or hyperscaler boundaries without exposing provider-specific naming.
 
+In a true multi-cloud namespace, `zone2.example.com` or `zone3.example.com` could equally be delegated via NS records to a different provider's DNS service (for example AWS Route 53 or Google Cloud DNS), using the same parent-domain delegation mechanism shown for `zone1.example.com`. This article focuses on the Azure-side implementation of one such pod; the same pattern applies to pods hosted on other platforms.
+
 Azure DNS hosts authoritative public DNS zones and their records; it is not the registrar that sells or registers `example.com`. The platform therefore needs both ownership of the registered parent domain and a controlled process for adding delegations.
 
 Public DNS is the correct place for public endpoints, public ingress, internet-facing service discovery and domain ownership validation. For example, an intentionally public API could use:
