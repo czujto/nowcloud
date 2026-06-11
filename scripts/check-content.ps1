@@ -108,7 +108,8 @@ foreach ($topic in $topicPages) {
 $publishedPillarPosts = @(
     "2026-05-25-designing-azure-landing-zones-for-product-teams.md",
     "2026-05-26-private-endpoints-need-private-dns-zones.md",
-    "2026-05-29-private-dns-at-scale-in-azure-landing-zones.md"
+    "2026-05-29-private-dns-at-scale-in-azure-landing-zones.md",
+    "2026-06-11-designing-pod-based-global-dns-for-azure-landing-zones.md"
 )
 
 foreach ($pillarPost in $publishedPillarPosts) {
@@ -124,14 +125,14 @@ foreach ($pillarPost in $publishedPillarPosts) {
     }
 }
 
-$dnsSeriesDrafts = @(
+$publishedDnsSeriesDrafts = @(
     "designing-pod-based-global-dns-for-azure-landing-zones.md"
 )
 
-foreach ($dnsSeriesDraft in $dnsSeriesDrafts) {
-    $path = Join-Path $draftsPath $dnsSeriesDraft
-    if (-not (Test-Path -LiteralPath $path)) {
-        Add-Failure "Missing DNS series draft: $path"
+foreach ($publishedDraft in $publishedDnsSeriesDrafts) {
+    $path = Join-Path $draftsPath $publishedDraft
+    if (Test-Path -LiteralPath $path) {
+        Add-Failure "Published DNS series post still exists as draft: $path"
     }
 }
 

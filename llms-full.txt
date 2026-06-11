@@ -50,6 +50,12 @@ Canonical URL: https://nowcloud.pl/azure/networking/2026/05/29/private-dns-at-sc
 
 Explains why Private DNS becomes a central platform capability as private endpoints grow across subscriptions and networks, including central zones, Azure DNS Private Resolver, hybrid forwarding, ownership and failure modes.
 
+### Designing Pod-Based Global DNS for Azure Landing Zones
+
+Canonical URL: https://nowcloud.pl/azure/networking/2026/06/11/designing-pod-based-global-dns-for-azure-landing-zones.html
+
+Explains how to organise DNS namespaces around durable platform pods, public delegation, Private DNS, split-horizon DNS, Private Link zones and hybrid resolver paths.
+
 ### Azure Files SMB Multichannel: Performance, Requirements and Configuration
 
 Canonical URL: https://nowcloud.pl/azure/storage/2021/06/04/ConfigureAZStorageSMBMulti.html

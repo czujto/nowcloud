@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Designing Pod-Based Global DNS for Azure Landing Zones"
-date: 2026-05-26
+date: 2026-06-11
 description: "A practical architecture pattern for designing global DNS namespaces around platform pods, regions, environments and product teams in Azure landing zones."
 categories:
   - azure
@@ -13,7 +13,7 @@ tags:
   - platform-engineering
   - global-dns
   - hub-and-spoke
-permalink: /azure/networking/2026/05/26/designing-pod-based-global-dns-for-azure-landing-zones.html
+permalink: /azure/networking/2026/06/11/designing-pod-based-global-dns-for-azure-landing-zones.html
 ---
 
 As enterprise Azure estates grow, DNS moves from being an application configuration item to being a platform control plane. A useful namespace should express durable ownership and resolution boundaries across public services, private endpoints, hybrid networks and product landing zones.
@@ -339,7 +339,8 @@ Infrastructure as code should encode zones, links, endpoints, rules and role ass
 
 ## Related architecture notes
 
-- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %})
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
+- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-29-private-dns-at-scale-in-azure-landing-zones %})
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
 - [Azure Networking](/azure-networking/)
 
