@@ -299,7 +299,7 @@ Private endpoint migrations need the same discipline. If a storage account, Key 
 
 DNS should be observable before it becomes an incident. At minimum, the platform should know which zones are linked, which resolver paths are used, which private endpoint records exist, and which teams own them.
 
-For enterprise operations, enable diagnostic settings where supported on the DNS and resolver components used by the platform, send logs to the central Log Analytics workspace, and include DNS checks in network troubleshooting runbooks. Azure DNS Private Resolver query logging is especially useful when a workload reports that it cannot reach a private endpoint but the private endpoint resource itself looks healthy.
+For enterprise operations, enable diagnostic settings where supported on the DNS and resolver components used by the platform, send logs to the central Log Analytics workspace, and include DNS checks in network troubleshooting runbooks. Azure DNS Private Resolver does not currently provide native DNS query logs. Where query-level visibility is required, consider Azure DNS Security Policies, which can send captured queries - including their resolution path (for example, private DNS resolution) - to a Log Analytics workspace ([Secure and view DNS traffic](https://learn.microsoft.com/en-us/azure/dns/dns-traffic-log-how-to)), or route relevant DNS traffic through Azure Firewall DNS Proxy and use its diagnostic logs as the query-level evidence source.
 
 Operational dashboards should answer practical questions:
 
@@ -393,6 +393,7 @@ Infrastructure as code should encode zones, links, endpoints, rules, role assign
 - [Azure Private DNS virtual network links](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
 - [Azure DNS Private Resolver endpoints and rulesets](https://learn.microsoft.com/en-us/azure/dns/private-resolver-endpoints-rulesets)
 - [Azure DNS Private Resolver overview](https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
+- [Secure and view DNS traffic (DNS Security Policy)](https://learn.microsoft.com/en-us/azure/dns/dns-traffic-log-how-to)
 - [Azure Firewall DNS settings](https://learn.microsoft.com/en-us/azure/firewall/dns-settings)
 - [Azure Private Endpoint DNS configuration](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns)
 - [Azure App Service custom domain mapping](https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain)
