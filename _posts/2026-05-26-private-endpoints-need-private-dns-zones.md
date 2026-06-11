@@ -37,7 +37,7 @@ This is Part 1 of the **Azure DNS for Landing Zones** series.
 
 - Part 1: Private Endpoints Need Private DNS Zones
 - Part 2: [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-29-private-dns-at-scale-in-azure-landing-zones %})
-- Part 3: Designing Pod-Based Global DNS for Azure Landing Zones — coming after that
+- Part 3: [Designing Pod-Based Global DNS for Azure Landing Zones]({% post_url 2026-06-11-designing-pod-based-global-dns-for-azure-landing-zones %})
 
 Part 1 focuses on the smallest useful design decision: whenever a workload is expected to use a private endpoint, its name-resolution path must be designed and tested with the endpoint.
 
@@ -353,7 +353,7 @@ Each failure can be prevented through a platform module, policy checks, ownershi
 
 - [Azure Networking](/azure-networking/)
 - [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-29-private-dns-at-scale-in-azure-landing-zones %})
-- Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
+- [Designing Pod-Based Global DNS for Azure Landing Zones]({% post_url 2026-06-11-designing-pod-based-global-dns-for-azure-landing-zones %})
 
 ## Summary
 

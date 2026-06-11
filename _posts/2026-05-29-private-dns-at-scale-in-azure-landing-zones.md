@@ -24,7 +24,7 @@ This is Part 2 of the **Azure DNS for Landing Zones** series.
 
 - Part 1: [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
 - Part 2: Private DNS at Scale in Azure Landing Zones
-- Part 3: Designing Pod-Based Global DNS for Azure Landing Zones - coming after that
+- Part 3: [Designing Pod-Based Global DNS for Azure Landing Zones]({% post_url 2026-06-11-designing-pod-based-global-dns-for-azure-landing-zones %})
 
 ## Architecture decision
 
@@ -197,7 +197,7 @@ Diagnostics should be included for resolver components and relevant networking c
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
 - [Infrastructure as Code](/infrastructure-as-code/)
 - [Sovereign Cloud](/sovereign-cloud/)
-- Designing Pod-Based Global DNS for Azure Landing Zones - coming after that.
+- [Designing Pod-Based Global DNS for Azure Landing Zones]({% post_url 2026-06-11-designing-pod-based-global-dns-for-azure-landing-zones %})
 
 ## Summary
 
