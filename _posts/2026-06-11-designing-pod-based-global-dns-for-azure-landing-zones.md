@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Designing Pod-Based Global DNS for Azure Landing Zones"
-date: 2026-05-26
+date: 2026-06-11
 description: "A practical architecture pattern for designing global DNS namespaces around platform pods, regions, environments and product teams in Azure landing zones."
 categories:
   - azure
@@ -13,7 +13,7 @@ tags:
   - platform-engineering
   - global-dns
   - hub-and-spoke
-permalink: /azure/networking/2026/05/26/designing-pod-based-global-dns-for-azure-landing-zones.html
+permalink: /azure/networking/2026/06/11/designing-pod-based-global-dns-for-azure-landing-zones.html
 ---
 
 As enterprise Azure estates grow, DNS moves from being an application configuration item to being a platform control plane. A useful namespace should express durable ownership and resolution boundaries across public services, private endpoints, hybrid networks and product landing zones.
@@ -48,6 +48,8 @@ A pod is not necessarily a Kubernetes pod. In this design it is an enterprise pl
 
 A good pod label outlives an individual workload or deployment slot.
 
+The neutral labels in this article are intentionally generic. In a real platform, a pod label might encode a durable boundary such as region, environment or regulatory scope. Examples could include `ukp01` for a UK production pod, `eun01` for a North Europe non-production pod, or `sovereign01` for a regulated boundary. The exact code matters less than the rule behind it: the label should represent a boundary the platform can operate, govern and troubleshoot for years.
+
 ## Why DNS should follow platform boundaries
 
 DNS names should communicate stable control boundaries rather than temporary projects. Operators investigating `api.app1.zone1.example.com` can infer an application and a platform zone without being exposed to subscription IDs or implementation detail.
@@ -69,6 +71,8 @@ example.com
 ```
 
 `example.com` is the parent domain in this example. The domain owner may keep it with its registrar or existing public DNS provider. The parent can delegate `zone1.example.com` to an Azure DNS public zone by publishing NS records that identify the authoritative Azure DNS name servers for the child zone. `zone2` and `zone3` illustrate other neutral platform or hyperscaler boundaries without exposing provider-specific naming.
+
+In a true multi-cloud namespace, `zone2.example.com` or `zone3.example.com` could equally be delegated via NS records to a different provider's DNS service (for example AWS Route 53 or Google Cloud DNS), using the same parent-domain delegation mechanism shown for `zone1.example.com`. This article focuses on the Azure-side implementation of one such pod; the same pattern applies to pods hosted on other platforms.
 
 Azure DNS hosts authoritative public DNS zones and their records; it is not the registrar that sells or registers `example.com`. The platform therefore needs both ownership of the registered parent domain and a controlled process for adding delegations.
 
@@ -123,6 +127,8 @@ Do not replace the required Azure Private Link service-zone pattern with a custo
 ## Hands-on implementation pattern
 
 This is a reference implementation, not a copy-paste production design. It shows where public zones, private zones, resolver paths and validation records fit.
+
+The CLI commands below are deliberately small so the control planes are visible. In an enterprise landing zone, the same intent should usually be delivered through infrastructure as code, Azure Policy guardrails and approved deployment modules rather than through manual portal or CLI changes.
 
 In this model:
 
@@ -180,6 +186,8 @@ az network dns record-set cname set-record \
 
 For a deliberate split-horizon design, create a private zone for the product namespace and link only networks that need its private view:
 
+In a CAF-style platform, application or product-specific private zones may be owned by the product platform or by a delegated product boundary, while shared Azure Private Link zones normally belong with the connectivity or DNS platform subscription. Avoid mixing ownership accidentally just because a demonstration uses one short resource group name.
+
 ```bash
 az group create \
   --name rg-dns-private-zone1 \
@@ -211,19 +219,23 @@ Private endpoints for Azure PaaS services should integrate with the relevant Mic
 
 ```bash
 az network private-dns zone create \
-  --resource-group rg-dns-private-zone1 \
+  --resource-group rg-dns-privatelink-connectivity \
   --name privatelink.database.windows.net
 
 az network private-dns zone create \
-  --resource-group rg-dns-private-zone1 \
+  --resource-group rg-dns-privatelink-connectivity \
   --name privatelink.blob.core.windows.net
 
 az network private-dns zone create \
-  --resource-group rg-dns-private-zone1 \
+  --resource-group rg-dns-privatelink-connectivity \
   --name privatelink.vaultcore.azure.net
 ```
 
-Link these zones to the VNet that is the approved resolution point, often the connectivity hub when central resolution is used. Private endpoint deployment modules should create the endpoint and its DNS zone-group association as one supported action. A private endpoint without tested DNS resolution is not operationally complete.
+Link these zones to the VNet that is the approved resolution point, often the connectivity hub or DNS platform VNet when central resolution is used. In many enterprise landing zones, these zones live in the connectivity subscription rather than in the workload subscription. That ownership model reduces duplicate `privatelink.*` zones and gives the platform a single place to govern resolver paths, links, RBAC and cleanup.
+
+Private endpoint deployment modules should create the endpoint and its DNS zone-group association as one supported action. At scale, Azure Policy with deployIfNotExists effects is commonly used to enforce or deploy the expected Private DNS zone group association for approved private endpoint types. The policy assignment should point workloads back to the centrally owned zone pattern rather than allowing each product subscription to create its own local copy of `privatelink.blob.core.windows.net` or similar service zones.
+
+> Architecture takeaway: Use policy and platform modules to make the approved Private Link DNS pattern the default. Do not rely on every product team remembering the same DNS steps during each private endpoint deployment.
 
 ### Step 4: Provide hub-and-spoke and hybrid resolution
 
@@ -259,6 +271,48 @@ This optional pattern can align client answers with firewall FQDN rules while av
 
 > Architecture takeaway: Azure Firewall DNS Proxy can reduce Private DNS zone link sprawl by making spokes use a central DNS path, but only when the firewall's upstream resolver can actually resolve the linked Private DNS zones.
 
+### Cross-pod private resolution
+
+Pod boundaries should reduce accidental coupling, but enterprise platforms still need controlled cross-pod resolution. For example, a workload in `zone1.example.com` may need to call a shared private API in `zone2.example.com`, or a recovery design may require temporary name resolution across regions.
+
+Do not solve this by linking every private zone to every VNet. That removes the operating boundary the pod model was meant to create. Prefer an explicit resolver path:
+
+```text
+Workload in zone1
+  -> approved DNS path in zone1 hub
+  -> conditional rule for selected zone2 namespace
+  -> zone2 resolver or DNS platform endpoint
+  -> private record in zone2-approved private zone
+```
+
+This can be implemented with Azure DNS Private Resolver forwarding rulesets, central DNS forwarders or a hub DNS service, depending on the platform. The important point is that cross-pod visibility is intentional, documented and testable. Treat it like network connectivity: approved namespaces, known owners, monitored paths and a rollback plan.
+
+Avoid broad forwarding such as all of `example.com` unless that is genuinely the governance boundary. A narrower rule for `api.shared.zone2.example.com` or `shared.zone2.example.com` is easier to reason about than a rule that makes every private name in another pod visible.
+
+### TTL, cache and cutover strategy
+
+DNS design also needs a change strategy. A low TTL such as 300 seconds can be useful during planned cutovers, public ingress changes or service migration windows, but it is not a magic instant switch. Client resolvers, enterprise DNS forwarders, browser caches and application connection pools may hold answers or connections longer than the authoritative record TTL.
+
+For important changes, lower TTLs before the migration window, wait for the previous TTL to age out, make the change, then raise TTLs again once the new path is stable. Document which records are safe to lower temporarily and which records should remain stable because they sit on a shared platform boundary.
+
+Private endpoint migrations need the same discipline. If a storage account, Key Vault or database endpoint moves between patterns, test the `privatelink.*` answer from the actual workload network and from any hybrid resolver path before changing production traffic.
+
+### Monitoring and diagnostics
+
+DNS should be observable before it becomes an incident. At minimum, the platform should know which zones are linked, which resolver paths are used, which private endpoint records exist, and which teams own them.
+
+For enterprise operations, enable diagnostic settings where supported on the DNS and resolver components used by the platform, send logs to the central Log Analytics workspace, and include DNS checks in network troubleshooting runbooks. Azure DNS Private Resolver does not currently provide native DNS query logs. Where query-level visibility is required, consider Azure DNS Security Policies, which can send captured queries - including their resolution path (for example, private DNS resolution) - to a Log Analytics workspace ([Secure and view DNS traffic](https://learn.microsoft.com/en-us/azure/dns/dns-traffic-log-how-to)), or route relevant DNS traffic through Azure Firewall DNS Proxy and use its diagnostic logs as the query-level evidence source.
+
+Operational dashboards should answer practical questions:
+
+- Which private endpoint records were created or removed recently?
+- Which VNets or resolver paths can see a private zone?
+- Are DNS queries reaching the expected resolver endpoint?
+- Are clients receiving the private endpoint IP or a public answer?
+- Are stale records left behind after endpoint decommissioning?
+
+Without this evidence, teams often debug routes, firewall rules or application credentials before proving the name that the client actually resolved.
+
 ### Step 5: Publish public validation records when a service requires them
 
 An application can be reachable privately while still requiring public proof that the organization controls a custom domain. Azure App Service custom-domain mapping is a useful example: validation is performed through public DNS, not an Azure Private DNS zone.
@@ -292,12 +346,13 @@ For each pod onboarding, test:
 A namespace only remains governed when its delivery model is clear:
 
 - The enterprise domain owner governs parent public-domain registration and delegation approval.
-- The platform team defines pod naming, Azure DNS zones, Private Resolver deployment, Private Link zone patterns, RBAC and automation modules.
+- The connectivity or DNS platform subscription owns shared `privatelink.*` zones, resolver components and central VNet links where that model is used.
+- The platform team defines pod naming, Azure DNS zones, Private Resolver deployment, Private Link zone patterns, RBAC, Azure Policy assignments and automation modules.
 - Product teams request namespaces and endpoints through supported interfaces and validate application behaviour.
 - Network operations own monitored resolver paths and hybrid forwarding runbooks.
 - Security and governance functions review public exposure, privileged DNS changes and regulated-boundary exceptions.
 
-Infrastructure as code should encode zones, links, endpoints, rules and role assignments, including pod ownership and permitted public names.
+Infrastructure as code should encode zones, links, endpoints, rules, role assignments, diagnostics and policy assignments, including pod ownership and permitted public names.
 
 ## Common failure modes
 
@@ -306,8 +361,11 @@ Infrastructure as code should encode zones, links, endpoints, rules and role ass
 - Assuming an Azure Private DNS zone is delegated through internet DNS.
 - Linking a private split-horizon zone and accidentally hiding a required public name.
 - Replacing `privatelink.*` service zones with custom aliases without completing the Azure PaaS resolution path.
-- Allowing each product subscription to create duplicate Private Link zones.
+- Allowing each product subscription to create duplicate Private Link zones instead of using the centrally governed connectivity pattern.
 - Adding private endpoints without DNS zone-group and resolver-path testing.
+- Assigning deployIfNotExists DNS policies without checking that they target the intended central zones and subscriptions.
+- Using broad cross-pod forwarding that exposes more private namespace than the consuming application needs.
+- Changing records during migration without lowering TTLs and testing client-side cache behaviour.
 - Building hybrid forwarding late, after products already depend on private resolution.
 - Giving broad DNS administrative roles where pod- or workflow-scoped rights are sufficient.
 - Publishing internal topology in public DNS when only validation or public ingress records are needed.
@@ -320,10 +378,14 @@ Infrastructure as code should encode zones, links, endpoints, rules and role ass
 - Split-horizon zones define how public names behave from linked private networks.
 - Private DNS zone links and Private Resolver paths are designed together.
 - Microsoft-recommended `privatelink.*` zones are used for Azure PaaS private endpoints.
+- Shared `privatelink.*` zones are owned by the connectivity or DNS platform subscription where central resolution is the standard pattern.
+- Azure Policy and platform modules deploy or enforce expected private endpoint DNS zone-group associations.
 - Hub-and-spoke and hybrid queries are tested through approved resolver paths.
+- Cross-pod resolution is explicit, narrow and monitored.
 - RBAC, infrastructure as code and product onboarding reflect DNS ownership boundaries.
+- TTL strategy is documented for migration and cutover scenarios.
 - Public TXT or CNAME/A verification records are managed as public-domain controls.
-- Monitoring and runbooks cover resolution, endpoint lifecycle and recovery.
+- Diagnostic settings, resolver query logs and runbooks cover resolution, endpoint lifecycle and recovery.
 
 ## Further reading
 
@@ -333,13 +395,15 @@ Infrastructure as code should encode zones, links, endpoints, rules and role ass
 - [Azure Private DNS virtual network links](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
 - [Azure DNS Private Resolver endpoints and rulesets](https://learn.microsoft.com/en-us/azure/dns/private-resolver-endpoints-rulesets)
 - [Azure DNS Private Resolver overview](https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
+- [Secure and view DNS traffic (DNS Security Policy)](https://learn.microsoft.com/en-us/azure/dns/dns-traffic-log-how-to)
 - [Azure Firewall DNS settings](https://learn.microsoft.com/en-us/azure/firewall/dns-settings)
 - [Azure Private Endpoint DNS configuration](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns)
 - [Azure App Service custom domain mapping](https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain)
 
 ## Related architecture notes
 
-- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-25-private-dns-at-scale-in-azure-landing-zones %})
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
+- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-29-private-dns-at-scale-in-azure-landing-zones %})
 - [Designing Azure Landing Zones for Product Teams]({% post_url 2026-05-25-designing-azure-landing-zones-for-product-teams %})
 - [Azure Networking](/azure-networking/)
 
