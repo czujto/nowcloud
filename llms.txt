@@ -2,6 +2,7 @@
 layout: null
 permalink: /llms.txt
 ---
+
 # nowcloud.pl
 
 nowcloud.pl is the personal Azure architecture blog of Kamil Lygas, a Senior Enterprise Architect Manager and Azure platform architect focused on Azure Landing Zones, sovereign cloud, Azure Virtual Desktop, enterprise networking, Microsoft Entra ID, Private DNS, Terraform, infrastructure as code and platform engineering.
