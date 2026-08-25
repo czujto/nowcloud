@@ -2,6 +2,7 @@
 layout: null
 permalink: /llms-full.txt
 ---
+
 # nowcloud.pl: Azure Platform Architecture
 
 ## Site summary
