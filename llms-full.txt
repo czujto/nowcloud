@@ -13,7 +13,7 @@ Canonical URL: https://nowcloud.pl/
 
 ## Author
 
-Kamil Lygas is a Senior Enterprise Architect Manager and Azure platform architect with experience in Azure, Microsoft 365 and Citrix Cloud. His focus includes global multi-tenant Azure platforms, regulated landing zones, secure cloud governance, platform engineering and repeatable delivery through infrastructure as code.
+Kamil Lygas is a Senior Enterprise Architect Manager and Lead Azure Architect working where enterprise architecture meets technical delivery. His focus includes Azure Landing Zones, regulated cloud platforms, secure cloud governance, platform engineering, private DNS, networking and repeatable delivery through infrastructure as code.
 
 Canonical author page: https://nowcloud.pl/author/kamil-lygas/
 
@@ -29,6 +29,7 @@ Canonical author page: https://nowcloud.pl/author/kamil-lygas/
 - Infrastructure as Code: https://nowcloud.pl/infrastructure-as-code/ - Terraform, policy-as-code and repeatable delivery.
 - Platform Engineering: https://nowcloud.pl/platform-engineering/ - Governed self-service for Azure product teams.
 - Topics: https://nowcloud.pl/topics/ - Topic index and recommended reading.
+- Work With Me: https://nowcloud.pl/work-with-me/ - Focused Azure architecture reviews for enterprise cloud platforms.
 - Contact: https://nowcloud.pl/contact/ - LinkedIn and GitHub contact routes.
 
 ## Important articles

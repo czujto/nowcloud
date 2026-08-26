@@ -1,35 +1,100 @@
 ---
 layout: page
-title: About
-description: "About Kamil Lygas, Senior Enterprise Architect Manager and Lead Azure Architect focused on enterprise platform architecture."
+title: About Kamil Lygas
+description: "About Kamil Lygas, Senior Enterprise Architect Manager and Lead Azure Architect working where enterprise architecture meets technical delivery."
 permalink: /about/
 image: /assets/img/aboutfeature.jpg
+last_modified_at: 2026-08-25
 ---
 
 ![Kamil Lygas](/assets/img/avatar1.jpg)
 
-I am Kamil Lygas, a Senior Enterprise Architect Manager with more than 19 years in IT. My background spans Microsoft Azure, Microsoft 365 and Citrix Cloud, with a sustained focus on designing cloud foundations that are secure, supportable and useful to delivery teams.
+I work where enterprise architecture meets technical delivery.
 
-As a Lead Azure Architect, I have worked on enterprise platform architecture for global, multi-tenant Azure platforms and product environments. That work involves making deliberate decisions about landing zones, subscription and management group design, network connectivity, identity, policy, operational ownership and the boundaries that allow multiple teams to work safely on a shared platform.
+Most of that work is not just drawing Azure diagrams. It is turning complex security, regulatory and business requirements into platform designs that executives can approve, engineers can build, and product teams can use.
 
-My current architectural interests include Azure Landing Zones for sovereign and regulated workloads, platform engineering, enterprise Azure networking and private DNS at scale, Azure Virtual Desktop, and infrastructure as code with Terraform. I am particularly interested in governance that is implemented as repeatable engineering: policy-as-code, automated controls, auditable deployments and clear platform contracts.
+I am a Senior Enterprise Architect Manager and Lead Azure Architect with 19+ years of experience across cloud architecture, enterprise platforms, regulated environments and transformation. My current focus includes sovereign and global Azure platforms, Azure Landing Zones, governance, identity, networking, security controls, Infrastructure as Code and technical delivery assurance.
 
-Previously, experience across Azure, Microsoft 365 and Citrix Cloud provided a practical view of user services, identity and hybrid enterprise environments. It continues to inform how I approach secure cloud governance and operational reality rather than architecture in isolation.
+I usually work between architecture boards and design authorities, security, network governance, programme and project management, and DevOps or engineering teams. The useful work is often in the translation: taking an architecture decision or HLD through PoC, implementation, engineering handover and operational support.
 
-This site is where I document implementation lessons, architecture considerations and useful technical details from the Azure platform domain.
+I still value hands-on validation. Terraform PoCs and MVPs are useful ways to prove key design decisions before a full implementation makes those decisions expensive to change.
 
-## Certifications
+## Areas of Expertise
 
-- Microsoft Certified: Azure Solutions Architect Expert
-- Microsoft Certified: Azure Security Engineer Associate
-- Microsoft Certified: Azure Administrator Associate
-- Microsoft Certified: Azure Network Engineer Associate
-- Microsoft Certified: Identity and Access Administrator Associate
-- Microsoft Certified: Azure Virtual Desktop Specialty
-- Microsoft 365 Certified: Teams Administrator Associate
-- Microsoft Certified Trainer (MCT)
-- Citrix Virtual Apps and Desktops Service on Citrix Cloud and Microsoft Azure
-- ITIL V3
+- Azure Landing Zones and platform architecture
+- Sovereign and regulated cloud
+- Azure networking, Private Link and Private DNS
+- Identity and security architecture
+- Azure Virtual Desktop
+- Terraform and Infrastructure as Code
+- Platform Engineering and governed self-service
+- Architecture Governance / Technical Design Authority
+- Technical Delivery Assurance
+
+## Architecture Focus
+
+My focus is architecture that has to survive contact with the real world.
+
+That means considering security and regulatory requirements, resilience and availability, scalability, RTO / RPO, data residency and sovereignty, operational ownership, deployment sequencing, dependencies, engineering implementation and supportability.
+
+Important assumptions should be proved early rather than discovered during production deployment. A design that looks clean in a slide deck still needs to work when networking, identity, policy, cost, support and delivery constraints arrive together.
+
+## Selected Experience
+
+Selected public-safe experience includes:
+
+- Global Azure Landing Zone patterns across the UK, US, Singapore and Western Europe
+- Citrix to Azure Virtual Desktop transformation
+- Azure HPC and GPU-enabled engineering workloads
+- Well-Architected Reviews
+- AI-assisted Terraform PoCs
+
+These examples are intentionally high-level. I do not use this site to disclose confidential customer details, internal project names or non-public delivery information.
+
+## How I Work
+
+I am at my best where I can challenge assumptions constructively rather than repeat what people expect to hear. Enterprise environments need governance and process, but the architecture still needs to work, scale and meet the requirement.
+
+I treat certifications a little like PoCs: not as proof that someone is automatically good at the job, but as a way to validate knowledge, expose gaps and keep learning.
+
+## Architecture Notes
+
+nowcloud.pl contains practical architecture notes covering Azure Landing Zones, Private Endpoints and Private DNS, Sovereign Cloud, Azure Networking, Azure Virtual Desktop, Identity and Security, Infrastructure as Code and Platform Engineering.
+
+The aim is practical architecture rather than product marketing:
+
+- what the design decision is
+- why it matters
+- how it can be implemented
+- how to verify it
+- where it normally breaks
+
+Useful starting points:
+
+- [Azure Landing Zones](/azure-landing-zones/)
+- [Azure Networking](/azure-networking/)
+- [Private Endpoints Need Private DNS Zones]({% post_url 2026-05-26-private-endpoints-need-private-dns-zones %})
+- [Private DNS at Scale in Azure Landing Zones]({% post_url 2026-05-29-private-dns-at-scale-in-azure-landing-zones %})
+- [Designing Pod-Based Global DNS for Azure Landing Zones]({% post_url 2026-06-11-designing-pod-based-global-dns-for-azure-landing-zones %})
+- [Sovereign Cloud](/sovereign-cloud/)
+- [Azure Virtual Desktop](/azure-virtual-desktop/)
+- [Identity & Security](/identity-security/)
+- [Infrastructure as Code](/infrastructure-as-code/)
+- [Platform Engineering](/platform-engineering/)
+
+## Work With Me
+
+I provide focused Azure architecture reviews for teams designing or improving enterprise cloud platforms.
+
+Typical review areas include Azure Landing Zones, Private Endpoint / Private DNS design, Azure Networking, Azure Virtual Desktop, Platform Governance and Terraform / IaC patterns.
+
+[Discuss an Azure architecture review](/work-with-me/?utm_source=about&utm_medium=cta&utm_campaign=architecture_review)
+
+## Outside Architecture
+
+Outside architecture, I like being near wind and movement: windsurfing, kitesurfing, mountain biking, and family travel.
+
+There is also the occasional habit of turning a family road trip across Europe into something suspiciously close to a delivery plan.
 
 ## Connect
 
@@ -39,4 +104,4 @@ Public writing and reference links are collected on the [Featured and Public Act
 
 ## Disclaimer
 
-The material on this site is provided for general information. It is not a substitute for architecture review, security assessment or advice appropriate to a particular organization.
+The material on this site is provided for general information. It is not a substitute for architecture review, security assessment or advice appropriate to a particular organisation.
