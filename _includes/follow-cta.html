@@ -1,7 +1,14 @@
 <section class="follow-cta" aria-label="Follow Azure architecture notes">
+  {% assign architecture_review_source = "site" %}
+  {% if page.layout == "post" %}
+    {% assign architecture_review_source = "blog" %}
+  {% elsif page.url == "/contact/" %}
+    {% assign architecture_review_source = "contact" %}
+  {% endif %}
   <h2>Follow Azure architecture notes</h2>
   <p>
     Follow new Azure architecture notes via <a href="{{ "/feed.xml" | relative_url }}">RSS</a> or connect with me on <a href="https://www.linkedin.com/in/kamil-lygas-5804528/">LinkedIn</a>.
     Public technical work is also available on <a href="https://github.com/czujto">GitHub</a>.
+    For focused platform feedback, see <a href="{{ "/work-with-me/" | relative_url }}?utm_source={{ architecture_review_source }}&amp;utm_medium=cta&amp;utm_campaign=architecture_review">Azure architecture reviews</a>.
   </p>
 </section>
